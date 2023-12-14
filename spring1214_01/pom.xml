@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.java.www</groupId>
-	<artifactId>spring1213_06</artifactId>
+	<artifactId>spring1214_01</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring1213_06</name>
+	<name>spring1214_01</name>
 	<description>실습</description>
 	<properties>
 		<java.version>17</java.version>
@@ -39,7 +39,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- JSP 템플릿 엔진 -->
+			<!-- JSP 템플릿 엔진 -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>

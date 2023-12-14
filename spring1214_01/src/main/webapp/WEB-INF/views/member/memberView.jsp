@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>게시글보기</title>
+		<title>회원정보보기</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style>
 		   *{margin:0; padding:0;}
@@ -19,46 +18,47 @@
 		   button{width:150px; height:40px; margin-top:30px; }
 		</style>
 		<script>
-			  
+		  
 		</script>
 	</head>
 	<body>
- 
+	  
 	  <div>
-	   <h1>게시글보기</h1>
+	
+	   <h1>회원정보보기</h1>
 		   <table>
 		     <colgroup>
 		       <col width="20%">
 		       <col width="80%">
 		     </colgroup>
 		     <tr>
-		       <th>번호</th>
-		       <td>dto : ${bdto.bno} </td>
+		       <th>아이디</th>
+		       <td><input type="text" name="id" value="${mdto.id}"></td>
 		     </tr>
 		     <tr>
-		       <th>작성자</th>
-		       <td>dto : ${bdto.id} / </td>
+		       <th>패스워드</th>
+		       <td>${mdto.pw}</td>
 		     </tr>
 		     <tr>
-		       <th>날짜</th>
-		       <td>dto : ${bdto.bdate}</td>
+		       <th>이름</th>
+		       <td>${mdto.name}</td>
 		     </tr>
 		     <tr>
-		       <th>제목</th>
-		       <td>dto : ${bdto.btitle} / insert: ${btitle}</td>
+		       <th>전화번호</th>
+		       <td>${mdto.phone}</td>
 		     </tr>
 		     <tr>
-		       <th>내용</th>
-		       <td>dto : ${bdto.bcontent } / insert: ${bcontent}</td>
+		       <th>성별</th>
+		       <td>${mdto.gender}</td>
 		     </tr>
 		     <tr>
-		       <th>이미지 이름</th>
-		       <td>dto : ${bdto.bfile } / insert: ${bfile}</td>
+		       <th>취미</th>
+		       <td>${mdto.hobby}</td>
 		     </tr>
 		   </table>
-		   <a href="noticeUpdate"><button type="button" id="fbtn">게시글수정</button></a>
-		   <a href="noticeDelete"><button type="button" id="fbtn">게시글삭제</button></a>
-		   <a href="noticeList"><button type="button">게시글리스트</button></a>
+		   <a href="mUpdate?id=${mdto.id}&pw=${mdto.pw}&name=${mdto.name}&phone=${mdto.phone}&gender=${mdto.gender}&hobby=${mdto.hobby}"><button type="button" id="fbtn">회원정보수정</button></a>
+		   <a href=""><button type="button" id="fbtn">회원삭제</button></a>
+		   <a href="/"><button type="button">메인페이지</button></a>
 	  </div>
 	
 	</body>
