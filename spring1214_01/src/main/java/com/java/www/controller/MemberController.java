@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.www.dto.BoardDto;
 import com.java.www.dto.MemberDto;
@@ -26,24 +27,15 @@ public class MemberController {
 	
 	@RequestMapping("doMInsert")
 	public String doMInsert(MemberDto mdto, HttpServletRequest request,
-			String id, 
-			String pw,
-			String name,
-			String phone,
-			String gender,
 			Model model) {
-		Timestamp mdate = new Timestamp(System.currentTimeMillis());
-		
-		String[] hobbys = request.getParameterValues("hobby");
-		
-		for(int i=0; i<hobbys.length;i++) {
-			String hobby = hobbys[0];
-			hobby += ","+hobbys[i];
-			
-			mdto = new MemberDto(id, pw, name, phone, gender, hobby, mdate);
 		model.addAttribute("mdto",mdto);
-		}
-		return "member/memberView";
+		
+	
+		
+		//----------데이터 받는 방법
+		//1.HttpServletRequest, 2.@RequestParam, 3. 변수, 4. 객체
+		
+	return "member/memberView";
 	}
 	
 	@RequestMapping("mView")
