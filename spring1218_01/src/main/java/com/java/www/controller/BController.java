@@ -87,6 +87,8 @@ public class BController {
 			System.out.println("Bcontroller f : "+f);
 
 			// 파일 이름 저장
+			
+			
 			bdto.setBfile(newFileName);
 			System.out.println("Bcontroller newFileName : "+newFileName);
 
