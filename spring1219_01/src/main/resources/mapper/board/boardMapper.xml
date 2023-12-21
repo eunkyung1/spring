@@ -7,10 +7,14 @@
 <!-- MemberMapper.java 연결  (인터페이스)-->
 <mapper namespace="com.java.www.mapper.BoardMapper">
 
-	<!-- 게시글 전체 가져오기  -->	
+	<!-- 게시글 전체 가져오기 -->
 	<select id="selectAll" resultType="com.java.www.dto.BoardDto">
-		select * from (select rownum rnum,a.*from (select * from board order by bgroup desc, bstep asc) a)
-		where rnum between 1 and 20
+		<![CDATA[select * from(select rownum rnum,a.* from(select * from board order by bgroup desc,bstep asc) a)where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+			
+	<!-- 게시글 총 개수  -->	
+	<select id="selectCountAll" resultType="int"> <!-- select는 resultType이 필요함. 그 외에는 필요없음.  -->
+		select count(*) from board
 	</select>		
 	
 	

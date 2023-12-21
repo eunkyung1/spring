@@ -48,40 +48,51 @@
         <th>조회수</th>
       </tr>
       
-      <!-- 내용부분 -->
-      
-      <!-- 게시글이 없을 경우  -->
-      <c:if test= "${fn:length(list) == 0}">
-      <tr>
-        <td colspan='4'> 게시글이 없습니다.</td>
-      </tr>
-      </c:if>
-      
-      <c:forEach var="bdto" items="${list}">
-      <tr>
-        <td><span class="table-notice">${bdto.bno}</span></td>
-        <td class="table-title">
-        <a href="bView?bno=${bdto.bno}">
-        <c:forEach var="i" begin="1" end="${bdto.bindent}" step="1">▶</c:forEach>
-        ${bdto.btitle}
-        </a>
-        </td>
-        <td>${bdto.bdate}</td>
-        <td>${bdto.bhit}</td>
-      </tr>
-      </c:forEach>
-      
-      
-      
-      
-    </table>
+      <!-- 내용부분 --><!-- 내용부분 -->
+			<c:if test="${map.list.size()==0}">
+				<tr>
+					<td colspan='4'>게시글이 존재하지 않습니다.</td>
+				</tr>
+			</c:if>
+			<c:forEach var="bdto" items="${map.list}">
+				<tr>
+					<td><span class="table-notice">${bdto.bno}</span></td>
+					<td class="table-title"><a href="bView?bno=${bdto.bno}"> <c:forEach
+								var="i" begin="1" end="${bdto.bindent}" step="1">▶</c:forEach>
+							${bdto.btitle}
+					</a></td>
+					<td>${bdto.bdate}</td>
+					<td>${bdto.bhit}</td>
+				</tr>
+			</c:forEach>
+		</table>
 
     <ul class="page-num">
-      <li class="first"></li>
-      <li class="prev"></li>
-      <li class="num"><div>1</div></li>
-      <li class="next"></li>
-      <li class="last"></li>
+    	
+      <a href="bList?page=1"><li class="first"></li></a>
+      <c:if test="${map.page>1 }">
+       <a href="bList?page=${map.page-1}"><li class="prev"></li></a>
+       </c:if>
+      <c:if test="${map.page<=1 }">
+       <li class="prev"></li>
+       </c:if>
+      <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
+      	<c:if test="${map.page==i}">
+      	<li class="num on"><div>${i}</div></li>
+      	</c:if>
+      	<c:if test="${map.page!=i}">
+      	<a href="bList?page=${i}">
+    	  <li class="num"><div>${i}</div></li>
+      	</a>
+      	</c:if>
+      </c:forEach>
+      <c:if test="${map.page<maxPage}">
+       <a href="bList?page=${map.page+1 }"><li class="next"></li></a>
+     </c:if>
+      <c:if test="${map.page>=maxPage}">
+       <li class="next"></li>
+     </c:if>
+     	<a href="bList?page=${map.maxPage}"><li class="last"></li></a>
     </ul>
 
     <a href="bInsert"><div class="write">쓰기</div></a>

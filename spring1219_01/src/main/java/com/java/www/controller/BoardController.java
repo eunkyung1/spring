@@ -28,13 +28,14 @@ public class BoardController {
 	
 	//--------------------게시글 전체 가져오기
 	@GetMapping("bList")
-	public String bList(Model model) {
+	public String bList(@RequestParam(defaultValue = "1") int page, Model model) {
 		//db에서 가져오기
-		ArrayList<BoardDto> list = bService.selectAll();
+		Map<String,Object> map = bService.selectAll(page);
 		
 		//model 저장
-		model.addAttribute("list",list);
-		System.out.println("list개수 : "+list.size());
+		model.addAttribute("map",map);
+		System.out.println("list개수 : "+((List)map.get("list")).size());
+		//System.out.println("게시글 총 개수 : " +(int)map.get("countAll"));
 		
 		
 		return "board/bList";
@@ -205,14 +206,14 @@ public class BoardController {
 	//-----------          다중업로드        ----------------------
 	//----------------------------------------------------------
 	@GetMapping("bList2")
-	public String bList2(Model model) {
+	public String bList2(@RequestParam(defaultValue = "1")int page ,Model model) {
 		//db에서 가져오기
-		ArrayList<BoardDto> list = bService.selectAll();
-		
-		//model 저장
-		model.addAttribute("list",list);
-		System.out.println("list개수 : "+list.size());
-		
+				Map<String,Object> map = bService.selectAll(page);
+				
+				//model 저장
+				model.addAttribute("map",map);
+				System.out.println("list개수 : "+((List)map.get("list")).size());
+				System.out.println("게시글 총 개수 : " +(int)map.get("countAll"));
 		
 		return "board/bList2";
 	}//bList
