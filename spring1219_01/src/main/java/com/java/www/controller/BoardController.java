@@ -1,6 +1,7 @@
 package com.java.www.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +123,84 @@ public class BoardController {
 		
 		return "board/doBInsert";
 	}
+	
+	//-----게시글 삭제하기
+	@PostMapping("bDelete")
+	public String bDelete(@RequestParam(defaultValue = "1")int bno) {
+		System.out.println("BController bDelete bno : "+bno);
+		bService.bDelete(bno);
+		return "board/bDelete";
+	}
+	
+	//-----게시글 수정페이지 보기
+	@PostMapping("bUpdate")
+	public String bUpdate(@RequestParam(defaultValue = "1")int bno, Model model) {
+		System.out.println("BController bUpdate bno : "+bno);
+		Map<String,Object> map = bService.selectOne(bno);
+		
+		model.addAttribute("map",map);
+		return "board/bUpdate";
+	}
+	
+	//-----게시글 수정페이지 저장
+	@PostMapping("doBUpdate")
+	public String doBUpdate(BoardDto bdto, @RequestPart MultipartFile files ) throws Exception {
+		System.out.println("bController doBUpate bno : "+ bdto.getBno());
+		String orgName= "";
+		String newName = "";
+		if(!files.isEmpty()) {						//파일업로드가 되어있으면
+			orgName= files.getOriginalFilename();
+			long time = System.currentTimeMillis();
+			newName = time+"_"+orgName;
+			//newName = String.format("%s_%d",orgName,time);
+			String upload = "C:/upload/";			//파일업로드 위치
+			File f= new File(upload+newName);		//파일생성
+			files.transferTo(f);					//파일을 저장위치에 저장시킴.
+			bdto.setBfile(newName);					//dto파일이름 저장
+		}
+		
+		//db전송
+		bService.doBUpdate(bdto);					//파일 업로드가 없으면 기존파일이름 그대로 사용
+		
+		return "board/doBUpdate";
+	}
+	
+	//-----게시글 답변달기페이지 보기
+		@PostMapping("bReply")
+		public String bReply(@RequestParam(defaultValue = "1")int bno, Model model) {
+			System.out.println("BController bUpdate bno : "+bno);
+			Map<String,Object> map = bService.selectOne(bno);
+			
+			model.addAttribute("map",map);
+			return "board/bReply";
+		}
+		//답변달기 저
+		@PostMapping("doBReply")
+		public String doBReply(@RequestPart MultipartFile files, BoardDto bdto ,Model model) throws Exception {
+			//files - input type="file" name="files" 여야 함.
+			//답변달기 - bgroup , bstep, bindent 값은 bdto에 담겨져 있음. 필수적으로 필요함.
+			if(!files.isEmpty()) { //파일첨부를 했으면
+				String orgName = files.getOriginalFilename();
+				System.out.println("BController doBReply 파일첨부 이름 : "+orgName);
+				long time = System.currentTimeMillis();
+				String newName = time + "_" + orgName; //중복방지를 위해 새로운 이름 변경
+				String upload = "C:/upload/";			//파일업로드 위치
+				File f= new File(upload+newName);
+				files.transferTo(f);					//파일을 저장위치에 저장시킴.
+				bdto.setBfile(newName); 				//파일이름을 BoardDto에 저장시킴.
+			}else { //파일첨부가 없으면			
+				bdto.setBfile("");
+				System.out.println("doBReply 파일 첨부가 없습니다.");
+			}
+			
+			//db로 전송
+			bService.doBReply(bdto);
+			
+			return "board/doBReply";
+		}//bInsert	
+	
+	
+	
 	//----------------------------------------------------------
 	//-----------          다중업로드        ----------------------
 	//----------------------------------------------------------

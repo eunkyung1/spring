@@ -18,51 +18,49 @@
     <h1>게시글수정</h1>
     <hr>
 
-    <form action="doBUpdate" name="updateFrm" method="post" enctype="multipart/form-data">
+    <form action="doBReply" name="replyFrm" method="post" enctype="multipart/form-data">
       <table>
-      <input type="hidden" name="bfile" value="${map.bdto.bfile }">
-      <input type="hidden" name="bno" value="${map.bdto.bno}">
-      
+      <input type="hidden" name="id" value="${session_id}">
+      <input type="hidden" name="bgroup" value="${map.bdto.bgroup}">
+      <input type="hidden" name="bstep" value="${map.bdto.bstep}">
+      <input type="hidden" name="bindent" value="${map.bdto.bindent}">
+      <input type="hidden" name="bhit" value="${map.bdto.bhit}">
         <colgroup>
           <col width="15%">
           <col width="85%">
         </colgroup>
         <tr>
           <th>작성자</th>
-          <td>${map.bdto.id}</td>
+          <td>${session_id}</td>
         </tr>
         <tr>
           <th>제목</th>
-          <td>
-            <input type="text" name="btitle" value="${map.bdto.btitle}">
-          </td>
+            <td>
+            <input type="text" name="btitle" value="<답변> ${map.bdto.btitle}">
+          </td>p
         </tr>
         <tr>
           <th>내용</th>
           <td>
-            <textarea name="bcontent" cols="50" rows="10">${map.bdto.bcontent}</textarea>
+<textarea name="bcontent" cols="50" rows="10">
+
+---------------------------
+[답글]
+${map.bdto.bcontent}
+</textarea>
           </td>
         </tr>
         <tr>
-          <th>조회수</th>
-          <td>${map.bdto.bhit}</td>
-        </tr>
-        <tr>
-          <th>이미지</th>
-          <td>${map.bdto.bfile} <img src="/upload/${map.bdto.bfile}" style="width:20%; vertical-align:middle; padding-left:20px;"></td>
-        </tr>
-
-        <tr>
-          <th>파일 첨부</th>
+          <th>이미지 표시</th>
           <td>
-            <input type="file" name="files" id="bfile">
+            <input type="file" name="files" id="file">
           </td>
         </tr>
       </table>
       <hr>
       <div class="button-wrapper">
-        <button type="submit" class="write">수정완료</button>
-        <button type="button" class="cancel" onclick="javascript:location.href='/'">취소</button>
+        <button type="submit" class="write">답변완료</button>
+        <button type="button" class="cancel" onclick="javascript:location.href='list.do'">취소</button>
       </div>
     </form>
 

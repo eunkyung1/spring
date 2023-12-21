@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,8 +17,9 @@
 </head>
 <body>
 <section>
-    <h1><a href="/">NOTICE</a></h1>
+    <h1>NOTICE</h1>
     <div class="wrapper">
+    
       <form action="/search" name="search" method="post">
         <select name="category" id="category">
           <option value="0">전체</option>
@@ -47,17 +49,8 @@
         <th>작성일</th>
         <th>조회수</th>
       </tr>
-      
       <!-- 내용부분 -->
-      
-      <!-- 게시글이 없을 경우  -->
-      <c:if test= "${fn:length(list) == 0}">
-      <tr>
-        <td colspan='4'> 게시글이 없습니다.</td>
-      </tr>
-      </c:if>
-      
-      <c:forEach var="bdto" items="${list}">
+      	<c:forEach var="bdto" items="${list}">
       <tr>
         <td><span class="table-notice">${bdto.bno}</span></td>
         <td class="table-title">
@@ -69,10 +62,7 @@
         <td>${bdto.bdate}</td>
         <td>${bdto.bhit}</td>
       </tr>
-      </c:forEach>
-      
-      
-      
+		</c:forEach>
       
     </table>
 

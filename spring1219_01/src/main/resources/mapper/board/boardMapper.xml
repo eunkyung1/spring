@@ -41,16 +41,41 @@
 	(select row_number() over(order by bgroup desc, bstep asc)rnum,a.* from
 	board a)
 	where bno = #{bno}
-	)-1
+	)-
 
 	</select>
 	
-	<!-- 게시글 1개 가져오기 : 다음글 -->
+	<!--조회수 1 증가  -->
+	<update id="bhitUp">
+		update board set bhit=bhit+1 where bno=#{bno}
+	</update>
+	
+	<!-- 게시글 1개 저장 -->
 	<insert id="bInsert">
 		insert into board values (board_seq.nextval,#{btitle},#{bcontent},sysdate,#{id},
 		board_seq.currval,0,0,1,#{bfile}) 
+	</insert>
 	
-
+	<!-- 게시글 삭제 -->
+	<delete id="bDelete">
+		delete board where bno=#{bno}
+	</delete>
+	
+	<!-- 게시글 수정저장 -->
+	<update id="doBUpdate">
+		update board set btitle=#{btitle}, bcontent=#{bcontent}, bdate=sysdate, bfile=#{bfile} 
+		where bno=#{bno}
+	</update>
+	
+	<!-- 다른게시글 bstep 1증가 -->
+	<update id="bstepUp">
+		update board set bstep=bstep+1 where bgroup=#{bgroup} and bstep>#{bstep}
+	</update>
+	
+	<!-- 답변달기 저장-->
+	<insert id="doBReply">
+		insert into board values(board_seq.nextval,#{btitle},#{bcontent},sysdate,
+		#{id},#{bgroup},#{bstep}+1,#{bindent}+1,1,#{bfile})
 	</insert>
 	
 

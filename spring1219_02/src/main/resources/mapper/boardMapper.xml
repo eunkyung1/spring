@@ -25,7 +25,7 @@
 	(select rnum from
 	(select row_number() over(order by bgroup desc, bstep asc)rnum,a.* from
 	board a)
-	where bno = #{bno}
+	where bno =#{bno}
 	)-1
 
 	</select>	

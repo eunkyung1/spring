@@ -20,16 +20,18 @@
 
     <form action="doBUpdate" name="updateFrm" method="post" enctype="multipart/form-data">
       <table>
-      <input type="hidden" name="bfile" value="${map.bdto.bfile }">
       <input type="hidden" name="bno" value="${map.bdto.bno}">
-      
+      <input type="hidden" name="bfile" value="${map.bdto.bfile}">
+      <input type="hidden" name="id" value="${session_id}">
         <colgroup>
           <col width="15%">
           <col width="85%">
         </colgroup>
         <tr>
           <th>작성자</th>
-          <td>${map.bdto.id}</td>
+          <td>
+            ${session_id}
+          </td>
         </tr>
         <tr>
           <th>제목</th>
@@ -44,25 +46,22 @@
           </td>
         </tr>
         <tr>
-          <th>조회수</th>
-          <td>${map.bdto.bhit}</td>
-        </tr>
-        <tr>
-          <th>이미지</th>
-          <td>${map.bdto.bfile} <img src="/upload/${map.bdto.bfile}" style="width:20%; vertical-align:middle; padding-left:20px;"></td>
-        </tr>
-
-        <tr>
-          <th>파일 첨부</th>
+          <th>이미지 표시</th>
           <td>
-            <input type="file" name="files" id="bfile">
+            ${map.bdto.bfile}<img src="/upload/${map.bdto.bfile}">
+          </td>
+        </tr>
+        <tr>
+          <th>수정 첨부파일</th>
+          <td>
+            <input type="file" name="files" id="file">
           </td>
         </tr>
       </table>
       <hr>
       <div class="button-wrapper">
         <button type="submit" class="write">수정완료</button>
-        <button type="button" class="cancel" onclick="javascript:location.href='/'">취소</button>
+        <button type="button" class="cancel" onclick="javascript:location.href='list.do'">취소</button>
       </div>
     </form>
 
