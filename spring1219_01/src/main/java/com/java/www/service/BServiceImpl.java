@@ -16,16 +16,17 @@ public class BServiceImpl implements BService {
 
 	@Autowired
 	BoardMapper boardMapper;
-	
-	//게시글 전체 가져오기
+
+	//게시글 검색 
 	@Override
-	public Map<String,Object> selectAll(int page) {
+	public Map<String, Object> selectSearch(int page, String category, String searchWord) {
 		//게시글전체 가져오기
-		
 		//하단넘버링-page,rowPerPage-1페이지당 게시글개수, countAll, startPage, endPage, maxPage
+		if(page<=0) page=1;
 		int countPerPage = 10; //1페이지당 게시글수
 		int bottomPerNum  = 10; //하단넘버링 개수
-		int countAll = boardMapper.selectCountAll(); //게시글 총 개수
+		int countAll = boardMapper.selectSearchCount(category,searchWord); //게시글 검색 총개수
+		System.out.println("BServiceImpl BServiceImpl countAll: "+ countAll);
 		//따로 외워두기
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
 		//maxPage = 45개 -> 45/10 = 4.5 (올림)-> 5
@@ -38,7 +39,42 @@ public class BServiceImpl implements BService {
 		//startPage:1 - endPage:10일 때 maxPager가 5이면
 		//endPage에 maxPage를 넣어서 1-10나오는 것이 아니라 1-5까지만 나타나도록 함.
 		if(endPage>maxPage) endPage = maxPage;
-		ArrayList<BoardDto> list = boardMapper.selectAll(startRow,endRow);
+		ArrayList<BoardDto> list = boardMapper.selectSearch(startRow,endRow,category,searchWord);
+		System.out.println("BServiceImpl selectSearch list :"+list);
+		//데이터전송 - list,page,maxPage,startPage,endPage
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("countAll", countAll);
+		map.put("page", page);
+		map.put("maxPage", maxPage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		
+		return map;
+	}
+	
+	//게시글 전체 가져오기
+	@Override
+	public Map<String,Object> selectAll(int page, String category, String searchWord) {
+		//게시글전체 가져오기
+		//하단넘버링-page,rowPerPage-1페이지당 게시글개수, countAll, startPage, endPage, maxPage
+		if(page<=0) page=1;
+		int countPerPage = 10; //1페이지당 게시글수
+		int bottomPerNum  = 10; //하단넘버링 개수
+		int countAll = boardMapper.selectCountAll(category,searchWord); //게시글 총 개수
+		//따로 외워두기
+		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
+		//maxPage = 45개 -> 45/10 = 4.5 (올림)-> 5
+		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1; // 5-1=4/10 -> 0*10+1
+		int endPage = (startPage+bottomPerNum)+-1;
+		
+		int startRow = (page-1)*countPerPage+1; //1, 11, 21, 31, 41
+		int endRow = startRow + countPerPage-1; //10,20,30,40
+		
+		//startPage:1 - endPage:10일 때 maxPager가 5이면
+		//endPage에 maxPage를 넣어서 1-10나오는 것이 아니라 1-5까지만 나타나도록 함.
+		if(endPage>maxPage) endPage = maxPage;
+		ArrayList<BoardDto> list = boardMapper.selectAll(startRow,endRow,category,searchWord);
 		
 		//데이터전송 - list,page,maxPage,startPage,endPage
 		Map<String,Object> map = new HashMap<>();
@@ -111,5 +147,8 @@ public class BServiceImpl implements BService {
 		
 		
 	}
+
+
+	
 
 }

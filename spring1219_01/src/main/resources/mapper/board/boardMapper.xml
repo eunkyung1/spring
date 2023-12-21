@@ -9,15 +9,33 @@
 
 	<!-- 게시글 전체 가져오기 -->
 	<select id="selectAll" resultType="com.java.www.dto.BoardDto">
-		<![CDATA[select * from(select rownum rnum,a.* from(select * from board order by bgroup desc,bstep asc) a)where rnum>=#{startRow} and rnum<=#{endRow}]]>
+		
+		select * from(select rownum rnum,a.* from
+		(select * from board 
+		
+		<if test="category == 'btitle' or category == 'bcontent'">
+		where ${category} like '%'||#{searchWord}||'%'
+		</if>
+		<if test="category == 'all'">
+		where btitle like '%'||#{searchWord}||'%' or bcontent like '%'||#{searchWord}||'%' 
+		</if>
+		
+		order by bgroup desc,bstep asc) a)
+		where rnum between #{startRow} and #{endRow}
 	</select>
+	
 			
-	<!-- 게시글 총 개수  -->	
+	<!-- 게시글 총 개수 category -> null, all, btitle, bcontent -->	
 	<select id="selectCountAll" resultType="int"> <!-- select는 resultType이 필요함. 그 외에는 필요없음.  -->
-		select count(*) from board
-	</select>		
-	
-	
+	select count(*) from board
+	<if test="category == 'btitle' or category =='bcontent'">
+		where ${category} like '%'||#{searchWord}||'%'
+	</if>
+	<if test="category == 'all'">
+		where btitle like '%'||#{searchWord}||'%' or bcontent like '%'||#{searchWord}||'%'
+	</if>
+	</select>	
+			
 	<!-- 게시글 1개 가져오기 : 현재글  -->	
 	<select id="selectOne" resultType="com.java.www.dto.BoardDto">
 		
@@ -45,7 +63,7 @@
 	(select row_number() over(order by bgroup desc, bstep asc)rnum,a.* from
 	board a)
 	where bno = #{bno}
-	)-
+	)
 
 	</select>
 	

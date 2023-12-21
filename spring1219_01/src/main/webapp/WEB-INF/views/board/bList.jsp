@@ -18,21 +18,23 @@
 <section>
     <h1><a href="/">NOTICE</a></h1>
     <div class="wrapper">
-      <form action="/search" name="search" method="post">
+      <form action="bList" name="search" method="get">
         <select name="category" id="category">
-          <option value="0">전체</option>
-          <option value="title">제목</option>
-          <option value="content">내용</option>
+          <option value="all">전체</option>
+          <option value="btitle">제목</option>
+          <option value="bcontent">내용</option>
         </select>
 
         <div class="title">
-          <input type="text" size="16">
+          <input type="text" size="16" name="searchWord" id="searchWord">
         </div>
   
         <button type="submit"><i class="fas fa-search"></i></button>
       </form>
     </div>
-
+	
+	<div class="boardcount">게시글 개수 : ${map.countAll}</div>
+	
     <table>
       <colgroup>
         <col width="18%">

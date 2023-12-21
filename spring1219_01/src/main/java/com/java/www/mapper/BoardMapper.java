@@ -10,10 +10,13 @@ import com.java.www.dto.BoardDto;
 public interface BoardMapper {
 
 	//게시글 전체 가져오기
-	ArrayList<BoardDto> selectAll(int startRow, int endRow);
+	ArrayList<BoardDto> selectAll(int startRow, int endRow, String category, String searchWord);
+	ArrayList<BoardDto> selectSearch(int startRow, int endRow, String category, String searchWord);
 
-	//게시글 총개수
-	int selectCountAll();
+	//게시글 총개수,게시글 검색개수
+	int selectCountAll(String category, String searchWord);
+	
+	int selectSearchCount(String category, String searchWord);
 
 	//게시글 1개 현재글 가져오기 
 	BoardDto selectOne(int bno);
@@ -41,6 +44,10 @@ public interface BoardMapper {
 	//답변달기 저장
 	void bstepUp(BoardDto bdto);//다른게시글 bstep 1증가 
 	int doBReply(BoardDto bdto);
+
+
+
+	
 
 
 

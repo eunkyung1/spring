@@ -1,0 +1,97 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MemberMapper.java 연결 -->
+<mapper namespace="com.java.www.mapper.EmpMapper">
+
+	<select id="selectAll" resultType="com.java.www.dto.EmpDto">
+		select * from employees order by employee_id
+	</select>
+	
+	
+	<!-- empDepDto -->
+	<select id="selectAll2" resultMap="empDepDto"><!--3.합친 것에 대한 id  -->
+	select a.* ,
+	b.department_id,b.department_name,b.parent_id,b.create_date
+	from employees a, departments b
+	where a.department_id = b.department_id
+
+	</select>
+	
+	<!-- memBoardDto -->
+	<select id="selectAll3" resultMap="memBoardDto"><!--3.합친 것에 대한 id  -->
+	select a.*,b.bno,b.btitle,b.id,b.bdate
+	from member a, board b
+	where a.id = b.id
+
+	</select>
+	
+	<!-- resultMap 1.employees 선언 2.departments 선언 3. 합친 것 선언 -->
+	<!-- 3. 합친 것 선언 -->
+	<resultMap id="empDepDto" type="com.java.www.dto.EmpDepDto">
+		<collection property="empDto" resultMap="empDtoMap" />
+		<collection property="depDto" resultMap="depDtoMap" />
+	</resultMap>
+	
+	<!-- 1. employees 선언 -->
+	<resultMap id="empDtoMap" type="com.java.www.dto.EmpDto"><!-- 3.합친 것에 대한 empDto의 resultMap 값  -->
+		<result column="employee_id" property="employee_id" /> 
+		<result column="emp_name" property="emp_name" /> 
+		<result column="email" property="email" /> 
+		<result column="phone_number" property="phone_number" /> 
+		<result column="hire_date" property="hire_date" /> 
+		<result column="salary" property="salary" /> 
+		<result column="manager_id" property="manager_id" /> 
+		<result column="commission_pct" property="commission_pct" /> 
+		<result column="retire_date" property="retire_date" /> 
+		<result column="department_id" property="department_id" /> 
+		<result column="job_id" property="job_id" /> 
+		<result column="create_date" property="create_date" /> 
+		<result column="update_date" property="update_date" /> 
+		<!-- property는 이름 아무거나 지어도 됨  -->
+		<!-- 필요한 것들만 넣어도 됨. 무조건 다 선언 안해도 됨. -->
+	</resultMap>
+		
+	<!-- 2.departments 선언 -->	
+	<resultMap id="depDtoMap" type="com.java.www.dto.DepDto"><!-- 3.합친 것에 대한 empDto의 resultMap 값  -->
+		<result column="department_id" property="department_id" /> 
+		<result column="department_name" property="department_name" /> 
+		<result column="parent_id" property="parent_id" /> 
+		<result column="manager_id" property="manager_id" /> 
+		<result column="create_date" property="create_date" /> 
+		<result column="update_date" property="update_date" /> 
+	</resultMap> 
+	
+	
+	
+	
+	<!-- 3. 합침 memBoardDto  -->
+	<resultMap id="memBoardDto" type="com.java.www.dto.MemBoardDto">
+		<collection property="memberDto" resultMap="memberDtoMap" />
+		<collection property="boardDto" resultMap="boardDtoMap" />
+	</resultMap>
+	
+	<!-- 1번 member  -->
+	<resultMap id="memberDtoMap" type="com.java.www.dto.MemberDto"><!-- 3.합친 것에 대한 empDto의 resultMap 값  -->
+		<result column="id" property="43" /> 
+		<result column="pw" property="pw" /> 
+		<result column="name" property="name" /> 
+		<result column="phone" property="phone" /> 
+		<result column="gender" property="gender" /> 
+		<result column="hobby" property="hobby" /> 
+	</resultMap>
+	
+	<!-- 2번 board -->	
+	<resultMap id="boardDtoMap" type="com.java.www.dto.BoardDto"><!-- 3.합친 것에 대한 empDto의 resultMap 값  -->
+		<result column="bno" property="bno" /> 
+		<result column="btitle" property="btitle" /> 
+		<result column="bdate" property="bdate" /> 
+		<result column="id" property="id" /> 
+	</resultMap> 
+	
+	
+	
+	
+	
+</mapper>
