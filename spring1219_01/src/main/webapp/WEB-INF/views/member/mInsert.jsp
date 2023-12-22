@@ -10,77 +10,21 @@
 		<meta charset="UTF-8">
 		<title>회원가입</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<style>
-		   *{margin:0; padding:0;}
-		   div{width:600px; margin:30px auto; text-align: center;}
-		   h1{margin-bottom:30px; }
-		   table,th,td{border:1px solid black; border-collapse: collapse;
-		   font-size: 16px; }
-		   th{width:200px; height:40px; }
-		   td{width:400px; }
-		   button{width:200px; height:60px; margin-top:30px; }
-		   td * { vertical-align: middle; }
-		   #idCheck{ width:100px; height:20px; margin-top:0; }
-		</style>
-		<script>
-		   $(function(){
-			   $("#idCheck").click(function(){
-				  alert("아이디를 중복체크를 진행합니다.");
-				  //alert($("#id").val());
-				  $.ajax({
-					 url:"idCheck",
-					 type:"post",
-					 data:{"id":$("#id").val()},
-					 dataType:"json", 		//ajax받는 파일형태
-					 contentType: "json" 	//ajax에서 보내는 파일형태 @RequestBody 필수로 기재해야함.
-					 success:function(data){
-						alert("성공");
-						alert(data);
-						if(data.result=='fail'){
-							alert("아이디가 존재합니다. 다른 아이디를 입력하세요.");
-							$("#id").val("");
-							$("#id").focus();
-							$("#chkTxt").text("아이디 사용불가");
-							$("#chkTxt").css({"color":"red","font-weight":"900"})
-							return false;
-						}else{
-							alert("아이디 사용가능합니다.")
-							$("#chkTxt").text("아이디 사용가능");
-							$("#chkTxt").css({"color":"blue","font-weight":"900"})
-							
-						}//if
-						console.log("data result : "+data.result);
-						
-					 },//success
-					 error:function(){
-						 alert("실패");
-					 }//error
-				  });//ajax
-			   });//idCheck.click
-			   
-			  $("#fbtn").click(function(){
-				 if($("#id").val().length<2){
-					 alert("아이디를 입력하셔야 합니다.");
-					 $("#id").focus();
-					 return false;
-				 }
-				  
-				 alert("회원정보를 저장합니다.");  
-				 m_frm.submit();
-			  });
-		   });
-		</script>
+		<script src="/js/mInsert.js" ></script>
+		<link href="/css/mInsert.css" rel="stylesheet" />
+
 	</head>
 	<body>
 	  <div>
 	   <h1>회원가입</h1>
-	   <form name="m_frm" method="post" action="doMInsert">
+	   <form name="memberFrm" id="memberFrm" method="post" action="#">
+	   <!-- action은 페이지가 넘어감. -->
 		   <table>
 		     <tr>
 		       <th>아이디</th>
 		       <td>
 				   <input type="text" name="id" id="id" > <!-- pom.xml에 선언했기 때문에 jstl 사용가능 -->
-		           <button type="button" id="idCheck">아이디 확인</button>
+		           <button type="button" id="idCheckBtn">아이디 확인</button>
 		           <br>
 		           <span id="chkTxt"></span>
 		       </td>
@@ -126,7 +70,7 @@
 		       </td>
 		     </tr>
 		   </table>
-		   <button type="button" id="fbtn">저장</button>
+		   <button type="button" id="savebtn">저장</button>
 		   <button type="button" onclick="javascript:location.href='/'">취소</button>
 	   </form>
 	  </div>
