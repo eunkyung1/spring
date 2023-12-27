@@ -22,6 +22,7 @@ public class BServiceImpl implements BService {
 	@Override
 	public ArrayList<BoardDto> selectAll() {
 		ArrayList<BoardDto> list = boardMapper.selectAll();
+		
 		return list;
 	}
 
@@ -45,7 +46,7 @@ public class BServiceImpl implements BService {
 	@Override
 	public BCommentDto bCommentInsert(BCommentDto cdto) {
 		//댓글 1개 저장
-		boardMapper.bCommentInsert(cdto);
+		boardMapper.bCommentInsert(cdto);//Insert
 		System.out.println("BServiceImpl bCommentInsert getCno : "+cdto.getCno());
 		
 		//저장된 댓글 1개 가져오기

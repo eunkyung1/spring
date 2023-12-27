@@ -24,4 +24,6 @@ public interface BoardMapper {
 	//저장된 댓글 1개 가져오기
 	BCommentDto BCommentSelectOne(int cno);
 
+
+
 }
