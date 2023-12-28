@@ -372,11 +372,6 @@ $(document).ready(function() {
 						
 					
 					
-					
-					
-					
-					
-					
 					</script>
 					<!-- 댓글-->
 					<div class="replyWrite">

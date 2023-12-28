@@ -57,7 +57,7 @@ public class BController {
 	public BCommentDto BCommentInsert(BCommentDto cdto) {
 		
 		System.out.println("BController BCommentInsert getBno : "+cdto.getBno());
-		System.out.println("BController BCommentInsert getBno : "+cdto.getCcontent());
+		System.out.println("BController BCommentInsert getCcontent : "+cdto.getCcontent());
 		//service연결- 저장시간, cno 가져오기
 		BCommentDto bCommentDto = bService.bCommentInsert(cdto);
 		
