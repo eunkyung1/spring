@@ -20,10 +20,33 @@ public class BServiceImpl implements BService {
 
 	//-------------게시글 전체
 	@Override
-	public ArrayList<BoardDto> selectAll() {
-		ArrayList<BoardDto> list = boardMapper.selectAll();
+	public Map<String, Object> selectAll(int page) {
+		if(page<=0) page=1;
+		int countPerPage = 10; //1페이지당 게시글 수
+		int bottomPerNum = 10;
+		int countAll = boardMapper.selectCountAll();
 		
-		return list;
+		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
+		
+		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
+		int endPage = (startPage+bottomPerNum)-1;
+		
+		int startRow = (page-1)*countPerPage+1;
+		int endRow = startRow+ countPerPage-1;
+		
+		if(endPage>maxPage) endPage = maxPage;
+		ArrayList<BoardDto> list = boardMapper.selectAll(startRow,endRow);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list",list);
+		map.put("countAll",countAll);
+		map.put("page",page);
+		map.put("maxPage",maxPage);
+		map.put("startPage",startPage);
+		map.put("endPage",endPage);
+		
+		
+		return map;
 	}
 
 	//-----------게시글 1개
@@ -42,7 +65,7 @@ public class BServiceImpl implements BService {
 		
 		return map;
 	}
-
+	
 	@Override
 	public BCommentDto bCommentInsert(BCommentDto cdto) {
 		//댓글 1개 저장

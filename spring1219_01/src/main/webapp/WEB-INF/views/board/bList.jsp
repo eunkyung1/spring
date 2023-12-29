@@ -78,6 +78,7 @@
       <c:if test="${map.page<=1 }">
        <li class="prev"></li>
        </c:if>
+       
       <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
       	<c:if test="${map.page==i}">
       	<li class="num on"><div>${i}</div></li>
@@ -88,13 +89,14 @@
       	</a>
       	</c:if>
       </c:forEach>
-      <c:if test="${map.page<maxPage}">
+      
+      <c:if test="${map.page<map.maxPage}">
        <a href="bList?page=${map.page+1 }"><li class="next"></li></a>
      </c:if>
-      <c:if test="${map.page>=maxPage}">
+      <c:if test="${map.page>=map.maxPage}">
        <li class="next"></li>
      </c:if>
-     	<a href="bList?page=${map.maxPage}"><li class="last"></li></a>
+     	<a href="bList?page=${map.endPage}"><li class="last"></li></a>
     </ul>
 
     <a href="bInsert"><div class="write">쓰기</div></a>

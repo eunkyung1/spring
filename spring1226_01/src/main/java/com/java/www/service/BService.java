@@ -8,7 +8,7 @@ import com.java.www.dto.BoardDto;
 
 public interface BService {
 
-	ArrayList<BoardDto> selectAll();
+	Map<String, Object> selectAll(int page);
 
 	Map<String, Object> selectOne(int bno);
 

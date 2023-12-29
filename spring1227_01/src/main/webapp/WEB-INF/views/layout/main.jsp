@@ -162,8 +162,8 @@ $(document).ready(function() {
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
 				<ul>
 					<li><a href="/layout/chart">CHART EVENT</a></li>
-					<li><a href="customer/notice">CUSTOMER</a></li>
-					<li><a href="#">COMMUNITY</a></li>
+					<li><a href="/customer/notice">CUSTOMER</a></li>
+					<li><a href="/layout/publicData">data COMMUNITY</a></li>
 				</ul>
 			</div>
 			<div id="snb">
@@ -183,8 +183,8 @@ $(document).ready(function() {
 					<li><a href="/member/logout">LOGOUT</a></li>
 					</c:if>
 					
-					<li><a href="#">MY PAGE</a></li>
-					<li><a href="#">CART</a></li>
+					<li><a href="/layout/bikeData">MY PAGE</a></li>
+					<li><a href="/layout/screenData">SCREEN CART</a></li>
 				</ul>
 				
 				<div id="search">

@@ -1,6 +1,7 @@
 package com.java.www.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,12 @@ public class BController {
 	
 	
 	@GetMapping("notice")
-	public String notice(Model model) {
-		//page 가지고 와야함.
+	public String notice(@RequestParam(defaultValue = "1") int page, Model model) {
 		
 		//service연결
-		ArrayList<BoardDto> list = bService.selectAll();
-		
+		Map<String, Object> map = bService.selectAll(page);
 		//model전송
-		model.addAttribute("list", list);
-		
+		model.addAttribute("map", map);
 		
 		
 		

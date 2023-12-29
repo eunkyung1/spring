@@ -11,9 +11,13 @@
 	<select id="selectAll" resultType="com.java.www.dto.BoardDto">
 		select * from(
 		select row_number() over(order by bgroup desc, bstep asc) rnum, a.* from board a)
-		where rnum between 1 and 10
+		where rnum between #{startRow} and #{endRow}
 	</select>
 
+	
+	<select id="selectCountAll" resultType="int">
+		select count(*) from board 
+	</select>
 	
 	<select id="selectOne" resultType="com.java.www.dto.BoardDto">
 		select * from board where bno=#{bno}
