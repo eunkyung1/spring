@@ -252,10 +252,11 @@ $(document).ready(function() {
 				
 				<script>
 				$(function(){
+					let temp =0;
 					$(".nbtnMini2").click(function(){
 						alert("이메일을 발송합니다.");
 						let email = $("#email").val();
-						alert(email);
+						//alert(email);
 						
 						$.ajax({
 							url:"/member/email"
@@ -263,20 +264,52 @@ $(document).ready(function() {
 							,data:{"email":email}
 							,dataType:"text" 
 							,success:function(data){
-								alert("성공");
+								alert("이메일이 발송되었습니다.");
 								console.log("이메일 인증코드 : "+data);
-								}
+								temp=1;
+								}//success
 							,error:function(){
 								alert("실패");
 								}
 							})//ajax끝
-							
-						$(".sbtnMini2").click(function(){
-							alert("test");
-						});
-						
 					});//nbtnMini click
 					
+					$(".sbtnMini2").click(function(){
+						let cert_pw = $("#cert_pw").val();
+						//alert(cert_pw);
+						
+						$.ajax({
+							url:"/member/PWsearch",
+							type:"post",
+							data:{"cert_pw":cert_pw},
+							//contentType:"", //내가보내는 파일형태
+							dataType:"text", //받는파일형태 : text,json,xml
+							success:function(data){
+							alert("비밀번호 인증을 체크합니다.");
+							
+							//이메일 인증번호 발송을 했는지 확인
+							if(temp==0){
+								alert("이메일 발송을 하셔야 비밀번호 인증이 가능합니다.");
+								$("#email").focus();
+								return false;
+							};
+							
+							console.log(data);
+							if(data=="success"){
+								alert("인증이 완료되었습니다.");
+								temp=0;
+								location.href="/member/step02"
+							}else{
+								alert("인증번호가 일치하지 않습니다. 다시 확인하시기 바랍니다.");
+								 return false;
+							}
+							},
+							error:function(){
+							alert("실패");
+							}
+						})//ajax끝
+						
+					});//click
 					
 				});//jquery
 				</script>
@@ -288,8 +321,8 @@ $(document).ready(function() {
 								<li class="r10"><input type="text" id="email" class="w200" /></li>
 								<li><a class="nbtnMini2" style="cursor: pointer;">이메일발송</a></li>
 								<li class="w201"><hr></li>
-								<li class="r10"><input type="text" class="w200" /></li>
-								<li><a href="step03"class="sbtnMini2">비밀번호인증</a></li>
+								<li class="r10"><input type="text" id="cert_pw" class="w200" /></li>
+								<li><a class="sbtnMini2 c_pointer"  style="cursor: pointer;">비밀번호인증</a></li>
 							</ul>
 						</div>
 					</div>

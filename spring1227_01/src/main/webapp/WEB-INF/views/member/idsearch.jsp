@@ -232,7 +232,7 @@ $(document).ready(function() {
 							</ul>
 							<script>
 							$(function(){
-								$(".gbtn").click(function(){
+								$("#idBtn").click(function(){
 									alert("아이디 찾기를 시작합니다.");
 									let name = $("#name").val();
 									let email = $("#email").val();
@@ -247,7 +247,7 @@ $(document).ready(function() {
 										success:function(data){
 											alert("성공");
 											console.log(data);
-											location.href="id";
+											location.href="id?="+data;
 										
 										},
 										error:function(){
@@ -262,22 +262,58 @@ $(document).ready(function() {
 							
 							</script>
 
-							<div class="btn"><a class="gbtn">아이디 찾기</a></div>
+							<div class="btn"><a id="idBtn" class="gbtn idBtn">아이디 찾기</a></div>
 						</div>
 					</div>
 					</form>
-
+					
+					<script>
+						$(function(){
+							$("#pwBtn").click(()=>{
+								alert("패스워드 찾기를 시작합니다.");		
+								let id= $("#id2").val();
+								let email = $("#email2").val();
+								//alert(id);
+								//alert(email);
+								
+								$.ajax({
+									url:"/member/pwsearch",
+									type:"post",
+									data:{"id":id,"email":email},
+									//contentType:"", //내가보내는 파일형태
+									dataType:"text", //받는파일형태 : text,json,xml
+									success:function(data){
+										if(data=="success"){
+											alert("메일이 발송되었습니다.");
+											console.log(data);
+											$("#id2").val("");
+											$("#email2").val("");
+											
+										}else{
+											alert("아이디 또는 이메일주소가 틀립니다. 다시 입력하시기 바랍니다.");
+										}
+									},
+									error:function(){
+										alert("실패");
+									}
+								})//ajax끝
+								
+							});//click(pwBtn)
+						});//jquery
+					
+					
+					</script>
 
 
 					<h3>비밀번호 찾기</h3>
 					<div class="informbox">
 						<div class="inform">
 							<ul>
-								<li><input type="text" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" /></li>
-								<li><input type="text" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" /></li>
+								<li><input type="text" class="loginType" id="id2" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" /></li>
+								<li><input type="text" class="emailType" id="email2" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" /></li>
 							</ul>
 
-							<div class="btn"><a href="#" class="gbtn">비밀번호 찾기</a></div>
+							<div class="btn"><a id="pwBtn" class="gbtn c_pointer">비밀번호 찾기</a></div>
 						</div>
 					</div>
 

@@ -7,20 +7,30 @@
 <!-- MemberMapper.java 연결  (인터페이스)-->
 <mapper namespace="com.java.www.mapper.MemberMapper">
 
-	<!-- 게시글 전체 가져오기 -->
-	<select id="login" resultType="com.java.www.dto.MemberDto">
-		select * from member where id=#{id} and pw=#{pw}
+	<!-- 로그인 -->
+	<select id="login" resultType="com.java.www.dto.MemberDto2">
+		select * from member2 where id=#{id} and pw=#{pw}
 	</select>
 	
 	<!-- id 중복체크 -->
-	<select id="idCheck" resultType="com.java.www.dto.MemberDto">
-		select * from member where id=#{id}
+	<select id="idCheck" resultType="com.java.www.dto.MemberDto2">
+		select * from member2 where id=#{id}
 	</select>
 	
-	<!-- memberSearch -->
-	<select id="memberSearch" resultType="com.java.www.dto.MemberDto">
+	<!-- 아이디 찾기 -->
+	<select id="memberSearch" resultType="com.java.www.dto.MemberDto2">
 		select * from member2 where name=#{name} and email=#{email}
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pwsearch" resultType="com.java.www.dto.MemberDto2">
+		select * from member2 where id=#{id} and email=#{email}
+	</select>
+	
+	<!-- 패스워드 변경  -->
+	<update id="update_pw">
+		update member2 set pw=#{pwcode} where id=#{id} 
+	</update>
 
 
 
