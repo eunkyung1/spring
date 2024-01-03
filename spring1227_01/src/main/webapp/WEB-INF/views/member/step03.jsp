@@ -1,3 +1,8 @@
+<%@page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
@@ -257,12 +262,51 @@ $(document).ready(function() {
 									<th scope="row"><span>이름 *</span></th>
 									<td>김슬기</td>
 								</tr>
+								<script>
+									$(function(){
+										$(".nbtnMini").click(function(){
+											alert("아이디 중복확인합니다.");
+											//alert($("#id").val());
+											let id=$("#id").val();
+											
+											$.ajax({
+												url:"/member/idCheck",
+												type:"post",
+												data:{"id":id},
+												//contentType:"", //내가보내는 파일형태
+												dataType:"text", //받는파일형태 : text,json,xml
+												success:function(data){
+													alert("성공");
+													console.log(data);
+													if(data=="0"){
+														alert("사용불가능한 아이디입니다.");
+														$("#id").val("");
+														$("#id").focus();
+														return false;
+													}else{
+														alert("사용할 수 있는 아이디 입니다.")
+													}
+														
+												},
+													error:function(){
+													alert("실패");
+												}
+												})//ajax끝
+											
+											
+											
+										});//click(nbtnMini)
+									});//jquery
+									
+								
+								
+								</script>
 								<tr>
 									<th scope="row"><span>아이디 *</span></th>
 									<td>
 										<ul class="pta">
-											<li class="r10"><input type="text" class="w134" /></li>
-											<li><a href="#" class="nbtnMini">중복확인</a></li>
+											<li class="r10"><input type="text" id="id" name="id" class="w134" /></li>
+											<li><a class="nbtnMini">중복확인</a></li>
 											<li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
 										</ul>
 									</td>

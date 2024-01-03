@@ -33,4 +33,37 @@ public class MServiceImpl implements MService {
 		return result;
 	}
 
+	@Override
+	public String idCheck(String id) {
+		int result = 0;
+		
+		MemberDto memberDto = memberMapper.idCheck(id);
+		if(memberDto==null) {
+			result= 1;
+			
+		}
+		return result+"";
+	}
+	
+	//이름과 이메일로 아이디 찾기
+	@Override
+	public String memberSearch(String name, String email) {
+		System.out.println("MServiceImpl memberSearch name : "+name);
+		System.out.println("MServiceImpl memberSearch email : "+email);
+		
+		String result = "불일치";
+		MemberDto memberDto = memberMapper.memberSearch(name,email);
+		
+		
+		if(memberDto != null) {
+			result = "인증완료";
+			session.setAttribute("memberID", memberDto.getId());
+			System.out.println("memberID : "+memberDto.getId());
+			System.out.println("result :"+result);
+		}
+		return result;
+	}
+
+
+
 }

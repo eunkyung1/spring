@@ -171,7 +171,7 @@ $(document).ready(function() {
 				<ul>
 					<c:if test="${session_id==null}">
 					<li><a href="/member/login">LOGIN</a></li>
-					<li><a href="#">JOIN</a></li>
+					<li><a href="/member/step01">JOIN</a></li>
 					</c:if>
 					
 					<c:if test="${session_id!=null }">

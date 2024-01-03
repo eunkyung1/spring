@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
@@ -227,11 +227,42 @@ $(document).ready(function() {
 					<div class="informbox">
 						<div class="inform">
 							<ul>
-								<li><input type="text" class="nameType" id="id" name="id" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='nameType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
-								<li><input type="password" id="email" name="email" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="text" class="nameType" id="name" name="name" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='nameType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="text" id="email" name="email" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 							</ul>
+							<script>
+							$(function(){
+								$(".gbtn").click(function(){
+									alert("아이디 찾기를 시작합니다.");
+									let name = $("#name").val();
+									let email = $("#email").val();
+									//alert(name);
+									//alert(email);
+									$.ajax({
+										url:"/member/memberSearch",
+										type:"post",
+										data:{"name":name,"email":email},
+										//contentType:"", //내가보내는 파일형태
+										dataType:"text", //받는파일형태 : text,json,xml
+										success:function(data){
+											alert("성공");
+											console.log(data);
+											location.href="id";
+										
+										},
+										error:function(){
+											alert("실패");
+										}
+									})//ajax끝
+																			
+									
+								});//click(gbtn)
+								
+							});
+							
+							</script>
 
-							<div class="btn"><a href="#" class="gbtn">아이디 찾기</a></div>
+							<div class="btn"><a class="gbtn">아이디 찾기</a></div>
 						</div>
 					</div>
 					</form>

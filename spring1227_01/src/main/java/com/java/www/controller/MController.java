@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.www.dto.MemberDto;
+import com.java.www.service.EmailService;
 import com.java.www.service.MService;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,16 +18,87 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("member")
 public class MController {
 	
-	@Autowired
-	MService mService;
+	@Autowired MService mService;
 	
-	@Autowired
-	HttpSession session;
+	@Autowired HttpSession session;
+	
+	@Autowired EmailService emailService;
 
+	//--------아이디 찾기
+	@GetMapping("id")
+	public String id() {
+		return "member/id";
+	}
+	
+	@GetMapping("idsearch")
+	public String idsearch() {
+		return "member/idsearch";
+	}
+	
+	@PostMapping("memberSearch")
+	@ResponseBody
+	public String memberSearch(String name, String email) {
+		
+		System.out.println("MController memberSearch name :"+name);
+		System.out.println("MController memberSearch email :"+email);
+		String result = mService.memberSearch(name,email);
+		session.setAttribute("result", result);
+		
+		
+		return result;
+	}
+	//----------------------------
+	
+	
+	
+	@GetMapping("step01")
+	public String step01() {
+		return "member/step01";
+	}
+	@GetMapping("step03")
+	public String step03() {
+		return "member/step03";
+	}
+
+	
+	@PostMapping("email")
+	@ResponseBody
+	public String email(String email) {
+		System.out.println("MController email : "+email);
+		
+		//service연결-이메일주소 보냄.
+		String result = emailService.mailSend(email);
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	//-----login부분
+	
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
 	}
+	
+	@PostMapping("idCheck")
+	@ResponseBody
+	public String idCheck(String id) {
+		String result = mService.idCheck(id);
+		if(result!="1") {
+			
+			
+			
+		}
+	
+		
+		
+		
+		return result;
+	}
+	
 	
 	@GetMapping("logout")
 	public String logout() {
@@ -34,11 +106,6 @@ public class MController {
 		return "member/logout";
 	}
 	
-	@GetMapping("idsearch")
-	public String idsearch() {
-		session.invalidate();
-		return "member/idsearch";
-	}
 	
 	//---로그인 확인부분---------
 	//ajax 로그인 //데이터를 직접 보내는 방법
@@ -71,6 +138,9 @@ public class MController {
 		return "member/doLogin";
 	}
 	//---로그인 확인부분 끝---------
+	
+	
+	
 	
 	
 	

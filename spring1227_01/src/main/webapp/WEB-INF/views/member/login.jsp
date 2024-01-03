@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
@@ -286,19 +286,9 @@ $(document).ready(function() {
 
 							<div class="btn"><a class="sbtn" name="sbtn" style="cursor:pointer;">로그인</a></div>
 							<div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							
-							<script>
-							$(function(){
-								
-							$(".idsearch").click(function(){
-								location.href="idsearch"
-								
-								});
-							});
-							
-							</script>
 							<div class="point">
 								<p>아이디와 비밀번호를 잊으셨나요?</p>
-								<a href="#" class="nbtn idsearch">아이디/비밀번호 찾기</a>
+								<a href="/member/idsearch" class="nbtn idsearch">아이디/비밀번호 찾기</a>
 							</div>
 						</div>
 					</div>

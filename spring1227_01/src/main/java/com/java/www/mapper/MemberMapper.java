@@ -8,6 +8,10 @@ import com.java.www.dto.MemberDto;
 public interface MemberMapper {
 
 	MemberDto login(MemberDto mdto);
+
+	MemberDto idCheck(String id);
+
+	MemberDto memberSearch(String name, String email);
 	
 
 }
