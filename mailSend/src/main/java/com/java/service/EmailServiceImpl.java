@@ -55,8 +55,6 @@ public class EmailServiceImpl implements EmailService {
 			}else {
 				pwcode += charSet[idx];
 			}
-			
-			
 		}
 		System.out.println("비밀번호 인증코드 :"+pwcode);		
 				
@@ -86,7 +84,6 @@ public class EmailServiceImpl implements EmailService {
 					+ "						</td>\r\n"
 					+ "					</tr>\r\n"
 					+ "				</table>";
-			
 			message.setText(htmlData,"utf-8","html");								//내용
 			message.setFrom(new InternetAddress("angelajh101@naver.com")); 			//보내는 사람
 			message.addRecipient(RecipientType.TO, new InternetAddress(email)); 	//받는사람 
