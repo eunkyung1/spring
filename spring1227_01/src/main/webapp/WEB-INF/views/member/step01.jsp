@@ -254,6 +254,7 @@ $(document).ready(function() {
 				$(function(){
 					let temp =0;
 					$(".nbtnMini2").click(function(){
+						
 						alert("이메일을 발송합니다.");
 						let email = $("#email").val();
 						//alert(email);

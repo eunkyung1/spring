@@ -271,6 +271,7 @@
 											let id = $("#id").val();
 											//alert($("#id").val());
 											$.ajax({
+												
 												url:"/member/idCheck",
 												type:"post",
 												data:{"id":id},
