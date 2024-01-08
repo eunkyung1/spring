@@ -17,7 +17,7 @@
 	 		<div id="nav_up">
 	 			<ul>
 	 				<li>회원가입</li>
-	 				<li>로그인</li>
+	 				<li><a href="#">로그인</a></li>
 	 				<li><a href="/blist">고객행복센터</a></li>
 	 				<li><a href="/map">다음지도보기</a></li>
 	 				<li>기프트카드 등록</li>
