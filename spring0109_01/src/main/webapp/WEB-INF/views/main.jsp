@@ -21,11 +21,11 @@
 	 				<li><a href="/login" style="color:white;">로그인</a></li>
 	 				</c:if>
 	 				<c:if test="${session_id !=null}">
-	 				<li>${session_name}</li>
+	 				<li>${session_name}님</li>
 	 				<li><a href="/logout" style="color:white;">로그아웃</a></li>
 	 				</c:if>
 	 				
-	 				<li>고객행복센터</li>
+	 				<li><a href="ddd" style="color:white;">ddd</a></li>
 	 				<li>배송정보검색</li>
 	 				<li>기프트카드 등록</li>
 	 			</ul>

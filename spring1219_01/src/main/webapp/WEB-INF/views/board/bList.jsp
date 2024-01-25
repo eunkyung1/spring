@@ -63,7 +63,7 @@
 								var="i" begin="1" end="${bdto.bindent}" step="1">▶</c:forEach>
 							${bdto.btitle}
 					</a></td>
-					<td>${bdto.bdate}</td>
+				<td>${bdto.bdate}</td>
 					<td>${bdto.bhit}</td>
 				</tr>
 			</c:forEach>

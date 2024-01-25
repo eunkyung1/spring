@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.dto.KakaoDto;
+import com.java.dto.LogoutDto;
 import com.java.dto.TokenDto;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,12 +30,66 @@ public class FController {
 	public String main() {
 		return"main";
 	}
+	@GetMapping("ddd")
+	public String ddd() {
+		return"ddd";
+	}
 	
 	@GetMapping("login")
 	public String login() {
 		return"login";
 	}
-	@GetMapping("kakao/oauth")
+	
+	@GetMapping("logout")
+	public String logout(Model model) {
+		
+		//access_token 가져오기
+		System.out.println("logout session token :"+session.getAttribute("session_token"));
+		
+		//2. token키 요청
+		String logoutUrl = "https://kapi.kakao.com/v1/user/logout";
+		//header
+		String content_type = "application/x-www-form-urlencoded;charset=utf-8";
+		String authorization = "Bearer "+session.getAttribute("session_token");
+	
+		//url전송
+		RestTemplate rt = new RestTemplate();
+		//header생성
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-type", content_type);
+		headers.add("Authorization", authorization);
+		
+		
+		//header,body합치기
+		HttpEntity<MultiValueMap<String, String>> logoutRequest = new HttpEntity<>(headers);
+		
+		//url,전송방식:post,데이터,String타입
+		ResponseEntity<String> response = rt.exchange(logoutUrl,HttpMethod.POST,logoutRequest,String.class);
+		System.out.println("logout response : "+response);
+		System.out.println("logout body : "+response.getBody());
+		
+		//json data를 java객체로 변환
+		ObjectMapper objectMapper = new ObjectMapper();
+		//tokenDto객체
+		LogoutDto logoutDto = null;
+		try {
+			logoutDto = objectMapper.readValue(response.getBody(), LogoutDto.class);
+		} catch (Exception e) {e.printStackTrace();}
+		System.out.println("로그아웃 값 :"+logoutDto.getId());
+		
+		
+		
+		//Model
+		model.addAttribute("result",logoutDto.getId());
+		
+		//session 종료
+		session.invalidate();
+		
+		return"logout";
+	}
+	
+	//-----------------------카카오 로그인
+	@GetMapping("kakao/oauth") 
 	public String oauth(String code) {
 		//1. code값 리턴
 		System.out.println("kakao code : "+code);
