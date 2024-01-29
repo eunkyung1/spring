@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- MemberMapper.java 연결  (인터페이스)-->
+<mapper namespace="com.java.www.mapper.NBoardMapper">
+
+	<!-- 게시글 전체 가져오기 -->
+	<select id="selectAll" resultType="com.java.www.dto.NBoardDto">
+		select * from (
+		select row_number() over(order by n_bno desc) rnum , a.* from n_board a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="selectCountAll" resultType="int">
+		select count(*) from n_board
+	</select>
+	
+	<select id="selectOne" resultType="com.java.www.dto.NBoardDto">
+		select * from n_board where n_bno=#{n_bno}
+	</select>
+	
+	<insert id="bWrite">
+		insert into n_board values (n_board_seq.nextval,#{id},#{n_btype},#{n_btitle},#{n_bcontent},sysdate,0,#{n_bfile})
+	</insert>
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+</mapper>
+

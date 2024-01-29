@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- MemberMapper.java 연결  (인터페이스)-->
+<mapper namespace="com.java.www.mapper.UsedMapper">
+
+	<!-- 게시글 trade1 가져오기 -->
+	<select id="selectAll" resultType="com.java.www.dto.UsedDto">
+	select * from(
+	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_btype = 'trade1') 
+	where rnum between 1 and 8
+	</select>
+	
+	<!-- 게시글 transfer2 가져오기 -->
+	<select id="selectAll2" resultType="com.java.www.dto.UsedDto">
+	select * from(
+	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_btype = 'transfer2') 
+	where rnum between 1 and 8
+	</select>
+	
+
+	
+	
+	
+	
+
+
+
+
+
+
+
+</mapper>
+
