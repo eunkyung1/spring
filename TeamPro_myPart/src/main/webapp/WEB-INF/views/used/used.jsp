@@ -100,7 +100,7 @@
 							<div class="bbs-table-list">
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="shname" value="ok" class="MS_input_checkbox" >거래가능내역보기
+									<input type="checkbox" name="shname" class="MS_input_checkbox" id="showCompleted" >거래가능내역보기
 									</label>
 								</div>
 								<table summary="제목, 작성일, 조회수, 동영상">
@@ -117,8 +117,7 @@
 								</table>
 								<div class="fixed-img-collist">
 									<ul class="clear">
-										<c:forEach var="udto" items="${list}">
-										
+										<c:forEach var="udto" items="${map.list}">
 										<li>
 											<a href="usedcontent?u_bno=${udto.u_bno}"> 
 												<span><img src="/upload/${udto.u_bfile}"></span> 
@@ -126,7 +125,8 @@
 												<strong>${udto.u_btitle}</strong>
 												</div>
 											</a> 
-											<br> 
+											<strong>${udto.u_bprice}원</strong>
+											<br>
 											<c:if test="${udto.u_bstatus=='1'}">
 											<span class="used-exchange">거래완료</span>
 											</c:if>
@@ -136,68 +136,25 @@
 											</c:if>
 											<p><fmt:formatDate value="${udto.u_bdate}" pattern="yyyy-MM-dd"/></p>
 											<p>HITS :${udto.u_bhit}</p>
-										</li>
-										
-										
+										</li><!--li  -->
 										</c:forEach>
+										
+										
 									</ul>
+
 								</div>
 								<!-- fixed-img-collist   -->
 							</div>
 							<!-- bbs-table-list  -->
 						</div>
 						<!-- consolebox  -->
-						<script>
-						$(function(){
-							$("#tabview2").click(function(){
-							
-						$.ajax({
-							url:"/used/used_transfer",
-							type:"post",
-							data:{u_btype:"transfer2"},
-							dataType:"json", //받는파일형태 : text,json,xml
-							success:function(data){
-							alert("성공");
-							console.log(data);
-							
-							hdata ='';
-							hdata +='<c:forEach var="udto" items="'+${list}+'">';
-							hdata +='<li>';
-							hdata +='<a href="usedcontent?u_bno="'+${udto.u_bno}+"'> ';
-							hdata +='<span><img src="/upload/'+${udto.u_bfile}+'"></span> ';
-							hdata +='<div class="used_title">';
-							hdata +='<strong>'+${udto.u_btitle}+'</strong>';
-							hdata +='</div></a><br>';
-							hdata +='<c:if test="'+${udto.u_bstatus==1}+'">';
-							hdata +='<span class="used-exchange">거래완료</span>';
-							hdata +='</c:if>';
-							hdata +='<c:if test="'+${udto.u_bstatus==0}+'">';
-							hdata +='<span class="used-buy">거래중</span>';
-							hdata +='</c:if>';
-							hdata +='<p><fmt:formatDate value="'+${udto.u_bdate}+'" pattern="yyyy-MM-dd"/></p>';
-							hdata +='<p>HITS :'+${udto.u_bhit}+'</p>';
-							hdata +='</li>';
-							
-							$(".consolebox2 .fixed-img-collist .clear").html(hdata);
-							
-							},
-							error:function(){
-							alert("실패");
-							}
-							})//ajax끝
-						
-							});//click
-						});//jquery
-						</script>
-						
-						
 						
 						<!--중고양도 -->
 						<div class="consolebox2">
 							<div class="bbs-table-list">
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="shname" value="ok" class="MS_input_checkbox" checked>거래가능내역보기
+									<input type="checkbox" name="shname" value="ok" class="MS_input_checkbox" id="showCompleted2" >거래가능내역보기
 									</label>
 								</div><!-- End view-complete -->
 								<table summary="제목, 작성일, 조회수, 동영상">
@@ -215,22 +172,23 @@
 								<div class="fixed-img-collist">
 									<ul class="clear">
 									<li>
-										<a href="usedcontent?u_bno=${udto.u_bno}"> 
-											<span><img src="/upload/${udto.u_bfile}"></span> 
+										<a href="usedcontent?u_bno=${map.udto.u_bno}"> 
+											<span><img src="/upload/${map.udto.u_bfile}"></span> 
 											<div class="used_title">
-											<strong>${udto.u_btitle}</strong>
+											<strong>${map.udto.u_btitle}</strong>
 											</div>
 										</a> 
-										<br> 
-										<c:if test="${udto.u_bstatus=='1'}">
+										<strong>${map.udto.u_bprice}원</strong>
+										<br>
+										<c:if test="${map.udto.u_bstatus=='1'}">
 										<span class="used-exchange">거래완료</span>
 										</c:if>
 										
-										<c:if test="${udto.u_bstatus=='0'}">
+										<c:if test="${map.udto.u_bstatus=='0'}">
 										<span class="used-buy">거래중</span>
 										</c:if>
-										<p><fmt:formatDate value="${udto.u_bdate}" pattern="yyyy-MM-dd"/></p>
-										<p>HITS :${udto.u_bhit}</p>
+										<p><fmt:formatDate value="${map.udto.u_bdate}" pattern="yyyy-MM-dd"/></p>
+										<p>HITS :${map.udto.u_bhit}</p>
 										</li>
 									</ul>
 								</div>
@@ -249,21 +207,35 @@
 					<!-- 하단 넘버링  -->
 					<div>
 						<ul class="page-num-used">
-							<li class="first-num"></li>
-							<li class="prev-num"></li>
-							<li class="num-used">1</li>
-							<li class="num-used">2</li>
-							<li class="num-used">3</li>
-							<li class="num-used">4</li>
-							<li class="num-used">5</li>
-							<li class="num-used">6</li>
-							<li class="num-used">7</li>
-							<li class="num-used">8</li>
-							<li class="num-used">9</li>
-							<li class="num-used">10</li>
-							<li class="next-num"></li>
-							<li class="last-num"></li>
-						</ul>
+							<a href="used?page=1"><li class="first-num"></li></a>
+							<c:if test="${map.page>1 }">
+					       <a href="used?page=${map.page-1}"><li class="prev-num"></li></a>
+					       </c:if>
+					      <c:if test="${map.page<=1 }">
+					       <li class="prev-num"></li>
+					       </c:if>
+							
+					      <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
+					      	<c:if test="${map.page==i}">
+					      	<li class="num-used on"><div>${i}</div></li>
+					      	</c:if>
+					      	<c:if test="${map.page!=i}">
+					      	<a href="used?page=${i}">
+					    	  <li class="num"><div>${i}</div></li>
+					      	</a>
+					      	</c:if>
+					      </c:forEach>
+					      
+					      <c:if test="${map.page<map.maxPage}">
+					       <a href="used?page=${map.page+1}"><li class="next-num"></li></a>
+					     </c:if>
+					      <c:if test="${map.page>=map.maxPage}">
+					       <li class="next-num"></li>
+					     </c:if>
+					     	<a href="used?page=${map.endPage}"><li class="last-num"></li></a>
+					    </ul>
+			
+						
 					</div>
 					<!-- //하단 페이징 & 버튼 -->
 

@@ -589,6 +589,7 @@ used-a {
 	padding: 0;
 	cursor: pointer;
 	border-radius: 5px;
+	
 }
 
 .num-used {
@@ -597,6 +598,7 @@ used-a {
 	padding: 0;
 	list-style: none;
 	font-weight: 700;
+	border-radius: 5px;
 }
 
 .num-used:hover {
@@ -610,6 +612,30 @@ used-a {
 	transition: all 0.4s;
 	font-weight: 700;
 }
+
+.num {
+	width: 36px;
+	height: 35px;
+	padding: 0;
+	list-style: none;
+	font-weight: 700;
+	border-radius: 5px;
+}
+
+
+.on {
+	width: 36px;
+	height: 35px;
+	padding: 0;
+	list-style: none;
+	background: #009223;
+	border: 1px solid #009223;
+	color: #ffce32;
+	transition: all 0.4s;
+	font-weight: 700;
+}
+
+
 
 .first-num {
 	background: url(../../img/list/btn_pre00.png) no-repeat;
@@ -627,7 +653,6 @@ used-a {
 	margin-left: 5px;
 	margin-right: 5px;
 	border: 1px #989898 solid;
-	align-items: center;
 	justify-content: center;
 }
 
