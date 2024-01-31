@@ -40,6 +40,7 @@ public class CController {
 		model.addAttribute("map",map);
 		
 		return "/community/nList";
+		
 	}// nList()
 	
 	//1.공지사항 게시글 보기
