@@ -63,6 +63,7 @@
 					       <option value="instapayment">공지사항</option>
 					       <option value="event">이벤트</option>
 					    </select>
+					    
 			        </th>
 			        <th colspan="3" style="text-align: left;"><input type="text" id="n_btitle" name="n_btitle" placeholder=" ※ 게시글 제목을 입력해주세요."> </span></th>
 			      </tr>
