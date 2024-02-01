@@ -30,7 +30,6 @@
 	    <!-- Template Main CSS File -->
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
 		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
 	</head>
 	<body>
@@ -45,46 +44,63 @@
 		    <table>
 		     <colgroup>
 		        <col width="10%">
-		        <col width="63%">
+		        <col width="51%">
 		        <col width="15%">
 		        <col width="12%">
+		        <col width="12%">
    			</colgroup>
-		     <tr>
+		     <tr id="notice_top">
 		        <th style="text-align: center;"><strong>${nbdto.n_bno}</strong></th>
-		        <th style="text-align: left;"><span>${nbdto.n_btitle}</span></th>
+		        
+		        <c:if test="${nbdto.n_btype=='instapayment'}">
+		        <th style="text-align: left;"><span>[공지사항]&nbsp${nbdto.n_btitle}</span></th>
+		        </c:if>
+		        
+		        <c:if test="${nbdto.n_btype=='event'}">
+		        <th style="text-align: left;"><span>[이벤트]&nbsp${nbdto.n_btitle}</span></th>
+		        </c:if>
+		        
 		        <th style="text-align: right;"><strong>작성일</strong></th>
 		        <th>
 				<fmt:formatDate value="${nbdto.n_bdate}" pattern="yyyy-MM-dd"/>
 				</th>
 		      </tr>
-		      <tr style="border-bottom: 2px solid #009223">
-		        <td style="text-align: center;"><strong>작성자</strong style="text-align: center;"></td>
+		      <tr id="notice_top2">
+		        <td style="text-align: center;"><strong>작성자</strong ></td>
 		        <td>${nbdto.id}</td>
 		        <td style="text-align: right;"><strong>조회수</strong></td>
 		        <td>${nbdto.n_bhit}</td>
 		      </tr>
 		      <tr>
-		        <td colspan="4" class="article">${nbdto.n_bcontent}<br><br><br><br><br></td>
+		        <td colspan="4" class="article notice_content" >${nbdto.n_bcontent}</td>
 		      </tr>
-		       <tr style="border-bottom: 2px solid #009223;">
-		        <td class="article" style="text-align: center;"><strong>첨부파일 </strong>
+		       <tr id="notice_bfile">
+		        <td class="article" style="text-align: center;"><strong>첨부파일</strong>
 		        </td>
 		      
 		        <c:if test="${nbdto.n_bfile!=null}">
-		        <td colspan="3">${nbdto.n_bfile}</td>
+		        <td colspan="3">${nbdto.n_bfile} 
+
+		        </td>
 		        </c:if>
 		        
 		        <c:if test="${nbdto.n_bfile==null}">
 		        <td colspan="3">※첨부파일 없음</td>
 		        </c:if>
 		      </tr>
+		    
+		      <tr style="border-bottom: 2px solid #009223;">
+		      	<td><strong>이미지 파일</strong></td>
+		      	<td colspan="3" id="notice_img" ><img src="/upload/${nbdto.n_bfile} " style="width:50%"></td>
+		      </tr>
+		    
 		    </table>
 		    
 		    <!-- 버튼 -->
 		    <div class="listBtn">
-		    	<button class="list">삭제</button>
-		    	<a href="nUpdate"><button class="list">수정</button></a>
 		    	<a href="nList"><button class="list">목록</button></a>
+		    	<button class="list">삭제</button>
+		    	<a href="nUpdate?n_bno=${nbdto.n_bno}"><button class="list">수정</button></a>
 		    </div>
 		    
 		     <!-- 댓글입력-->
@@ -104,7 +120,7 @@
 			  </tr>
 		   	</table>
 		    <!-- 이전글/다음글-->
-		    <table style="margin-top: -150px; ">
+		    <table id="view_title">
 		      <tr>
 		        <td colspan="4"><strong>다음글</strong> <span class="separator">|</span><a href="#"> [키즈잼] 2월 프로그램 안내</a></td>
 		      </tr>

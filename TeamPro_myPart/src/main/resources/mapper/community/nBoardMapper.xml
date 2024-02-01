@@ -10,7 +10,15 @@
 	<!-- 게시글 전체 가져오기 -->
 	<select id="selectAll" resultType="com.java.www.dto.NBoardDto">
 		select * from (
-		select row_number() over(order by n_bno desc) rnum , a.* from n_board a)
+		select row_number() over(order by n_bno desc) rnum , a.* from (
+		select * from n_board
+		<if test="category == 'n_btitle' or category == 'n_bcontent' or category == 'n_btype'">
+			where ${category} like '%'||#{searchWord}||'%'
+		</if>
+		<if test="category == 'all'">
+			where n_btitle like '%'||#{searchWord}||'%' or n_bcontent like '%'||#{searchWord}||'%' or n_btype like '%'||#{searchWord}||'%'
+		</if>
+		order by n_bno desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	
@@ -26,6 +34,10 @@
 		insert into n_board values (n_board_seq.nextval,#{id},#{n_btype},#{n_btitle},#{n_bcontent},sysdate,0,#{n_bfile})
 	</insert>
 	
+	<update id="donUpdate">
+		update n_board set n_btype=#{n_btype}, n_btitle=#{n_btitle},n_bcontent=#{n_bcontent},n_bdate=sysdate,
+      n_bfile=#{n_bfile} where n_bno=#{n_bno}
+	</update>
 	
 	
 	

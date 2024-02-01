@@ -22,7 +22,8 @@ textarea{
 	width: 100%;
 }
 #n_btitle{
-	width: 100%;
+	margin-left:10px;
+	width: 93%;
 }
 
 #p_bType{

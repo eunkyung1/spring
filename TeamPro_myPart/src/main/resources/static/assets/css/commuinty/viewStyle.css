@@ -3,6 +3,7 @@ ssection {
   margin: 150px 50px;
 	
 }
+
 h1 {
   margin: 40px 0 0 700px;
   font-size: 40px;
@@ -14,6 +15,21 @@ table {
 table {
   border-collapse: collapse;
 }
+#notice_top{
+border-top: 2px solid #009223;
+}
+
+#notice_top2{
+border-bottom: 2px solid #009223;
+border-top : 1px solid silver;
+}
+
+#notice_bfile{
+	border-top : 1px solid silver;
+	border-bottom : 1px solid silver;
+	
+}  
+
 th {
   padding: 10px 0 10px 20px;
   border: 1px solid silver;
@@ -32,9 +48,34 @@ td {
 .article {
   padding: 20px 0 20px 20px;
 }
+
+.notice_content{
+	height: 500px;
+}
+
+#bfile_content img{
+	height: 50%;
+	width: 50%
+}
+#notice_img{
+	text-align: left;
+}
+
+#view_title{
+	margin-top: -150px;
+}
+
 .separator {
   padding: 0 20px 0 20px;
   color: #E0E0E0;
+}
+#view_title a{
+	text-decoration: none;
+	color:black;
+}
+#view_title a:hover{
+	text-decoration: none;
+	color:black;
 }
 
 .listBtn{margin-right: 180px;}

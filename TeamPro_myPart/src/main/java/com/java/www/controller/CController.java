@@ -2,7 +2,6 @@ package com.java.www.controller;
 
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +30,15 @@ public class CController {
 	
 	//1.공지사항 리스트
 	@GetMapping("nList")
-	public String nList(Model model,@RequestParam(defaultValue = "1")int page,@RequestParam(required = false) String searchTitle,
+	public String nList(Model model,@RequestParam(defaultValue = "1")int page,@RequestParam(required = false) String category,
 			@RequestParam(required = false) String searchWord) {
 		
 		//service 연결
-		Map<String, Object> map = nbService.selectAll(page);
+		Map<String, Object> map = nbService.selectAll(page,category,searchWord);
 		
 		model.addAttribute("map",map);
 		
 		return "/community/nList";
-		
 	}// nList()
 	
 	//1.공지사항 게시글 보기
@@ -89,10 +87,31 @@ public class CController {
 	
 	//1.공지사항 글수정 페이지
 	@GetMapping("nUpdate")
-	public String nUpdate() {
+	public String nUpdate(@RequestParam(defaultValue = "1")int n_bno, Model model) {
+		NBoardDto nboardDto = nbService.selectOne(n_bno);
+		model.addAttribute("nbdto",nboardDto);
 		return "/community/nUpdate";
 	}// nUpdate()
 	
+	@PostMapping("donUpdate")
+	public String donUpdate(NBoardDto nbdto,@RequestPart MultipartFile files1 ,Model model) throws Exception {
+		String orgName="";
+		String newName="";
+		
+		if(!files1.isEmpty())
+			orgName=files1.getOriginalFilename();
+			long time = System.currentTimeMillis();
+			newName = time+"_"+orgName;
+			String upload ="c:/upload/";
+			File f = new File(upload+newName);
+			files1.transferTo(f);
+			nbdto.setN_bfile(newName);
+			
+			nbService.donUpdate(nbdto);
+		
+		return "/community/donUpdate";
+		
+	}// nUpdate()
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////공지사항 게시판
 

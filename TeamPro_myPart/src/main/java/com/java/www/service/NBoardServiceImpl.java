@@ -18,7 +18,7 @@ public class NBoardServiceImpl implements NBoardService{
 	
 	//게시글 전체가져오기
 	@Override
-	public Map<String, Object> selectAll(int page) {
+	public Map<String, Object> selectAll(int page, String category, String searchWord) {
 		
 		
 		if(page<=0) page=1;
@@ -30,11 +30,11 @@ public class NBoardServiceImpl implements NBoardService{
 		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
 		int endPage = (startPage+bottomPerNum)-1;
 		
-		int startRow = (page-1)*countPerPage+1;
-		int endRow = startRow + countPerPage-1;
+		int startRow = (page-1)*countPerPage+1; 
+		int endRow =startRow+countPerPage-1;
 		
-		if(endPage>maxPage) endPage = maxPage;
-		ArrayList<NBoardDto> list = nbMapper.selectAll(startRow, endRow);
+		if(endPage>maxPage) endPage=maxPage;
+		ArrayList<NBoardDto> list = nbMapper.selectAll(startRow,endRow,category,searchWord);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
@@ -61,6 +61,12 @@ public class NBoardServiceImpl implements NBoardService{
 	@Override
 	public void bWrite(NBoardDto nbdto) {
 		nbMapper.bWrite(nbdto);
+		
+	}
+
+	@Override
+	public void donUpdate(NBoardDto nbdto) {
+		int result = nbMapper.donUpdate(nbdto);
 		
 	}
 

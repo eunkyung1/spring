@@ -46,12 +46,12 @@
 		<h1 style="margin: 10px; font-weight: 700; position: relative; top: 40px; left: -600px; ">공지사항</h1>
 		    <!-- 검색창 -->
 		    <div class="searchDiv">
-			  <form action="bList" method="get" name="nListSearchFrm">
-			    <select name="searchTitle" id="searchTitle" class="searchTitle">
+			  <form action="nList" method="get" name="nListSearchFrm">
+			    <select name="category" id="searchTitle" class="searchTitle">
 			       <option value="all">전체</option>
-			       <option value="btitle">제목</option>
-			       <option value="bcontent">내용</option>
-			       <option value="btype">게시글유형</option>
+			       <option value="n_btitle">제목</option>
+			       <option value="n_bcontent">내용</option>
+			       <option value="n_btype">게시글유형</option>
 			    </select>
 			    	<input type="text" name="searchWord" id="searchWord" class="searchWord" placeholder=" 검색어를 입력해주세요.">
 			    	<button type="button" id="searchBtn" class="searchBtn">검색</button>
@@ -76,14 +76,27 @@
 			        <th>작성일</th>
 			        <th>조회수</th>
 			      </tr>
+			      <script>
+			      	
+			      	
+			      </script>
 			      
 			      <c:forEach var="n_bdto" items="${map.list}">
 			      <tr>
 			        <td id="No">${n_bdto.n_bno }</td>
-			        <td>${n_bdto.n_btype}</td>
+			        <c:if test="${n_bdto.n_btype=='instapayment'}">
+			       	 <td>공지사항</td>
+			        </c:if> 
+			        
+			        <c:if test="${n_bdto.n_btype=='event'}">
+			        	<td>이벤트</td>
+			        </c:if> 
+				
 			        <td class="table-title">
 			        <a href="nView?n_bno=${n_bdto.n_bno}">${n_bdto.n_btitle}</a>
 			        </td>
+			    
+
 			        <td>${n_bdto.id }</td>
 			        <td>
 			        <fmt:formatDate value="${n_bdto.n_bdate}" pattern="yyyy-MM-dd"/>
@@ -93,6 +106,8 @@
 			      </c:forEach>
 		  		</div>
 		    </table>
+		    
+		    <!-- 로그인 안되어 있을 경우, 글쓰기 금지 -->
 			 	<a href="nWrite"><button class="write">글쓰기</button></a>
   			 	<button class="write" onclick="location.href='/'">메인홈</button>
 	    	
@@ -104,16 +119,16 @@
 			      	<a href="nList?page=${map.page-1}"><li class="prev"></li></a>
 			      </c:if>
 					<c:if test="${map.page<=1 }">
-			       <li class="prev"></li>
+			       	<li class="prev"></li>
 			       </c:if>
-			       <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
+			       <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}" step="1">
 			       	<c:if test="${map.page==i}">
-			       	<li class="num on"><div>${i}</div></li>
+			       		<li class="num on"><div>${i}</div></li>
 			       	</c:if>
 			       	<c:if test="${map.page!=i }">
-			       	<a href="nList?page=${i}">
-			       	<li class="num"><div>${i}</div></li>
-			       	</a>
+			       		<a href="nList?page=${i}">
+			       			<li class="num"><div>${i}</div></li>
+			       		</a>
 			       	</c:if>
 			     </c:forEach>
 			     
@@ -123,7 +138,7 @@
 			     <c:if test="${map.page>=map.maxPage}">
 			     	<li class="next"></li>
 			     </c:if>
-			      <a href="nList?page=${map.endPage}"><li class="last"></li></a>
+			      <a href="nList?page=${map.maxPage}"><li class="last"></li></a>
    			 </ul>
    			 
    			 <!-- 하단넘버링 끝 -->

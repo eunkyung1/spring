@@ -11,6 +11,8 @@ section {
 	margin: 0 auto;
 }
 
+
+
 table {
 	width: 75%;
 	margin-top: 100px;
@@ -89,12 +91,22 @@ table {
 
 .table-title {
 	text-align: left;
+	
 }
 
+.table-title a {
+	table-layout:fixed;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+
+	
+}
 
 
 table {
 	border-collapse: collapse;
+
 }
 
 th {
@@ -103,7 +115,11 @@ th {
 }
 
 td {
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
 	border: 1px solid silver;
+	
 }
 
 th, td {
@@ -135,6 +151,18 @@ th, td {
 	height: 35px;
 	padding: 0;
 	list-style: none;
+	font-weight: 700;
+}
+
+.on{
+	width: 36px;
+	height: 35px;
+	padding: 0;
+	list-style: none;
+	background: #009223;
+	border: 1px solid #009223;
+	color: #ffce32;
+	transition: all 0.4s;
 	font-weight: 700;
 }
 

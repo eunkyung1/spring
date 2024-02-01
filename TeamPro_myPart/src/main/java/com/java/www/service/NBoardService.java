@@ -7,10 +7,12 @@ import com.java.www.dto.NBoardDto;
 
 public interface NBoardService {
 
-	Map<String, Object> selectAll(int page);
+	Map<String, Object> selectAll(int page, String category, String searchWord);
 
 	NBoardDto selectOne(int n_bno);
 
 	void bWrite(NBoardDto nbdto);
+
+	void donUpdate(NBoardDto nbdto);
 
 }

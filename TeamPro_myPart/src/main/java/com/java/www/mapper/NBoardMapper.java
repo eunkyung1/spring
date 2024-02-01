@@ -9,7 +9,7 @@ import com.java.www.dto.NBoardDto;
 @Mapper
 public interface NBoardMapper {
 
-	ArrayList<NBoardDto> selectAll(int startRow, int endRow);
+	ArrayList<NBoardDto> selectAll(int startRow, int endRow, String category, String searchWord);
 
 	NBoardDto selectOne(int n_bno);
 
@@ -17,5 +17,7 @@ public interface NBoardMapper {
 
 	//count 총 갯수
 	int selectCountAll();
+
+	int donUpdate(NBoardDto nbdto);
 
 }
