@@ -31,6 +31,7 @@
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
 		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	</head>
 	<body>
 	<!-- ======= Header ======= -->
@@ -50,48 +51,49 @@
 		        <col width="12%">
    			</colgroup>
 		     <tr id="notice_top">
-		        <th style="text-align: center;"><strong>${nbdto.n_bno}</strong></th>
+		        <th style="text-align: center;"><strong>${map.nbdto.n_bno}</strong></th>
 		        
-		        <c:if test="${nbdto.n_btype=='instapayment'}">
-		        <th style="text-align: left;"><span>[공지사항]&nbsp${nbdto.n_btitle}</span></th>
+		        <c:if test="${map.nbdto.n_btype=='instapayment'}">
+		        <th style="text-align: left;"><span>[공지사항]&nbsp${map.nbdto.n_btitle}</span></th>
 		        </c:if>
 		        
-		        <c:if test="${nbdto.n_btype=='event'}">
-		        <th style="text-align: left;"><span>[이벤트]&nbsp${nbdto.n_btitle}</span></th>
+		        <c:if test="${map.nbdto.n_btype=='event'}">
+		        <th style="text-align: left;"><span>[이벤트]&nbsp${map.nbdto.n_btitle}</span></th>
 		        </c:if>
 		        
 		        <th style="text-align: right;"><strong>작성일</strong></th>
 		        <th>
-				<fmt:formatDate value="${nbdto.n_bdate}" pattern="yyyy-MM-dd"/>
+				<fmt:formatDate value="${map.nbdto.n_bdate}" pattern="yyyy-MM-dd"/>
 				</th>
 		      </tr>
 		      <tr id="notice_top2">
 		        <td style="text-align: center;"><strong>작성자</strong ></td>
-		        <td>${nbdto.id}</td>
+		        <td>${map.nbdto.id}</td>
 		        <td style="text-align: right;"><strong>조회수</strong></td>
-		        <td>${nbdto.n_bhit}</td>
+		        <td>${map.nbdto.n_bhit}</td>
 		      </tr>
 		      <tr>
-		        <td colspan="4" class="article notice_content" >${nbdto.n_bcontent}</td>
+		        <td colspan="4" class="article notice_content" >${map.nbdto.n_bcontent}</td>
 		      </tr>
 		       <tr id="notice_bfile">
 		        <td class="article" style="text-align: center;"><strong>첨부파일</strong>
 		        </td>
 		      
-		        <c:if test="${nbdto.n_bfile!=null}">
-		        <td colspan="3">${nbdto.n_bfile} 
-
-		        </td>
+		        <c:if test="${map.nbdto.n_bfile!=null}">
+		        <td colspan="3">${map.nbdto.n_bfile}</td>
+		         <tr style="border-bottom: 2px solid #009223;">
+		      	<td class="notice_noimgfile"><strong>이미지</strong></td>
+		      	<td colspan="3" class="notice_img" ><img src="/upload/${map.nbdto.n_bfile} "></td>
+		      	</tr>
 		        </c:if>
 		        
-		        <c:if test="${nbdto.n_bfile==null}">
-		        <td colspan="3">※첨부파일 없음</td>
-		        </c:if>
+		        <c:if test="${map.nbdto.n_bfile==null}">
+		        <td colspan="3">※첨부파일 없음※</td>
+		          <tr style="border-bottom: 2px solid #009223;">
+		      	<td class="notice_noimgfile"><strong>이미지</strong></td>
+		      	<td colspan="3" class="notice_noimg"><img src="../assets/img/nView/noImage.png "></td>
 		      </tr>
-		    
-		      <tr style="border-bottom: 2px solid #009223;">
-		      	<td><strong>이미지 파일</strong></td>
-		      	<td colspan="3" id="notice_img" ><img src="/upload/${nbdto.n_bfile} " style="width:50%"></td>
+		        </c:if>
 		      </tr>
 		    
 		    </table>
@@ -99,8 +101,8 @@
 		    <!-- 버튼 -->
 		    <div class="listBtn">
 		    	<a href="nList"><button class="list">목록</button></a>
-		    	<button class="list">삭제</button>
-		    	<a href="nUpdate?n_bno=${nbdto.n_bno}"><button class="list">수정</button></a>
+		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}"><button class="list">삭제</button></a>
+		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}"><button class="list">수정</button></a>
 		    </div>
 		    
 		     <!-- 댓글입력-->
@@ -114,71 +116,165 @@
 			 <table style="position: relative; bottom: 200px;">
 			  <tr>
 			  	<td style="display: flex; border: 1px solid white; margin: -80px 0 0 -20px;">
-				  	<textarea placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)" style="width: 1200px; "></textarea>
+				  	<textarea id="reply_ncontent" placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)" style="width: 1200px; "></textarea>
 				  	<button id="replybtn">등록</button>
 			  	</td>
 			  </tr>
 		   	</table>
+		   	<script>
+		   	
+		  
+		   	 $(function(){
+		   		 let n_bno = ${map.nbdto.n_bno};
+		   		 let temp =0;
+		   		 
+		   		/* 댓글 저장하기 */
+		   		 $("#replybtn").click(function(){
+		   			alert("댓글을 저장합니다.");
+		   			let n_cpw = $("#replyIPw").val();
+		   			let n_ccontent = $("#reply_ncontent").val();
+		   			let n_Count = Number($(".n_Count").text());
+		   			
+		   			$.ajax({
+		   				url:"/community/NCommnetInsert",
+		   				type:"post",
+		   				data:{"n_cpw":n_cpw,"n_ccontent":n_ccontent,"n_bno":n_bno},
+		   				dataType:"json", //받는파일형태 : text,json,xml
+		   				success:function(data){
+		   				console.log(data);
+		   				
+		   				let hdata ='';
+		   				hdata += '<tr id="'+data.n_cno+'">';
+		   				hdata += '<td><strong>댓글 작성자</strong> | <strong style="color: blue;">'+data.id+'</strong>&nbsp;&nbsp;[<span>'+moment(data.n_cdate).format("YYYY-MM-DD HH:mm:ss")+'</span>]';
+		   				hdata += '<li id="replyTxt">&nbsp;&nbsp;'+data.n_ccontent+'</li>';
+		   				hdata += '<li id="replyBtn">';
+		   				/* session_id 넣기 
+		   				if("${session_id}" == data.id)
+		   				*/
+		   				hdata += '<button class="rDelBtn">삭제</button>&nbsp';
+		   				hdata += '<button class="rUBtn">수정</button>';
+		   				hdata += '</li>';
+		   				hdata += '</td>';
+		   				hdata += '</tr>';
+		   	
+		   				$(".replyBox").prepend(hdata);
+		   				$(".n_Count").text(n_Count+1); 
+		   				
+		   				$(".reply_ncontent").val(""); 
+						$(".replyIPw").val("");
+		   				
+		   				},
+		   				error:function(){
+		   				alert("실패");
+		   				}
+		   				})//ajax끝
+		   				
+		   			
+		   			
+		   		 });//click
+		   		 
+		   		 /* 댓글 삭제하기  */
+		   		 $(document).on("click",".rDelBtn",function(){
+		   			let n_cno = $(this).parent().parent().parent().attr("id");
+		   			let n_Count = Number($(".n_Count").text());
+		   			
+		   			if(confirm("댓글을 삭제하시겠습니까?")){
+		   				$.ajax({
+			   				url:"/community/NCommnetDelete",
+			   				type:"post",
+			   				data:{"n_cno":n_cno},
+			   				dataType:"text", 
+			   				success:function(data){
+			   				console.log(data);
+							$("#"+n_cno).remove();
+							$(".n_Count").text(n_Count-1);
+			   				
+			   				},
+			   				error:function(){
+			   				alert("실패");
+			   				}
+			   				})//ajax끝
+			   				alert("댓글이 삭제되었습니다.")
+		   			}//if
+		   		 });//click
+		   		 
+		   		 /* 댓글 수정하기 
+		   		 $(document).on("click",".rUBtn",function(){
+		   		
+		   			 alert("댓글 수정합니다.");
+		   			 let n_cno = $(this).parent().parent().parent().attr("id");
+		   			 let n_ccontent = $(this).parent().prev().text(); 
+		   			 let n_cdate = $(this).parent().parent().find("span").text();
+		   			 alert("n_cno"+n_cno);
+		   			 alert("n_ccontent"+n_ccontent);
+		   			 alert("n_cdate"+n_cdate);
+		   		 }
+		   		*/
+		   		 
+		   		 
+		   	 })//jquery
+		   	</script>
+		   	
+		   	
+		   	
 		    <!-- 이전글/다음글-->
 		    <table id="view_title">
 		      <tr>
-		        <td colspan="4"><strong>다음글</strong> <span class="separator">|</span><a href="#"> [키즈잼] 2월 프로그램 안내</a></td>
+		        <td colspan="4">
+			        <strong>이전글</strong> <span class="separator">|</span>
+			        <c:if test="${map.nextdto!=null}">
+			        <a href="nView?n_bno=${map.nextdto.n_bno}"><strong class="pre_next">${map.nextdto.n_bno} || ${map.nextdto.n_btitle}</strong></a>
+			        </c:if>
+			        <c:if test="${map.nextdto ==null}">
+			        다음글 없습니다.
+			        </c:if>
+		        </td>
 		      </tr>
 		      <tr>
-		        <td colspan="4"><strong>이전글</strong> <span class="separator">|</span><a href="#"> [키즈잼] 2020년 1분기 정기 휴관일 안내</a></td>
+		        <td colspan="4">
+			        <strong>다음글</strong> <span class="separator">|</span>
+			        <c:if test="${map.predto!=null}">
+			        <a href="nView?bno=${map.predto.n_bno}"><storng class="pre_next">${map.predto.n_bno} ||${map.predto.n_btitle}</strong></a>
+					</c:if>      
+			     	 <c:if test="${map.predto ==null}">
+			        다음글 없습니다.
+					</c:if>      
+		        </td>
 		      </tr>
 		    </table>
 		    <!-- 이전글/다음글 끝-->
 		    
 		    <!-- 댓글보기-->
 		    <table style="margin-top: 70px;">
-		      <td style="font-weight: 700">총<strong style="color: #009223">&nbsp;&nbsp;5</strong>&nbsp;개의 댓글이 등록되었습니다.</td>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내1용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
+		      <td style="font-weight: 700">총<strong class="n_Count"style="color: #009223">&nbsp;&nbsp;${map.n_list.size()}</strong>&nbsp;개의 댓글이 등록되었습니다.</td>
+			<tbody class="replyBox">
+			<c:forEach var="ncomment" items="${map.n_list}">
+			  <tr id="${ncomment.n_cno}">
+				<td><strong>댓글 작성자</strong> | <strong style="color: blue;">${ncomment.id}</strong>&nbsp;&nbsp;[<span>${ncomment.n_cdate}</span>]
+				<li id="replyTxt">&nbsp;&nbsp;${ncomment.n_ccontent}</li>
 				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
+					<button class="rDelBtn">삭제</button>
+					<button class="rUBtn">수정</button>
 				</li>
 				</td>			
 			  </tr>
 			  
+			   <!-- 댓글 수정입력창  
+			   <tr id="#"> //수정할 댓글의 위치점(n_cno)
+				<td><strong style="color: navy;">댓글 작성자</strong> | <strong style="color: #009223;" class="f_cid">aaa</strong>&nbsp;&nbsp;<span class="f_cdate">[2024-12-31 ]</span>
+				<li style="list-style: none; float: right; line-height: 27px;"><strong>비밀번호 |<strong><input type="text" value="1234" placeholder=" ※입력시 비밀글로 저장" class="f_cpw"></li>
+				<li id="replyTxt"><textarea cols="145%">댓글 수정내용 입력</textarea></li>
+				<li id="replyBtn">
+					<button class="rCanBtn">취소</button>
+					<button class="rSaveBtn">저장</button>
+				</li>
+				</td>			
+			  </tr>
+					-->
+			  
+			</c:forEach>
+			</tbody>
+			
 		    </table>
 		    <!-- 댓글보기 끝-->
  		 </section>

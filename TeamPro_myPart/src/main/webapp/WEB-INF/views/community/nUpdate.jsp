@@ -38,7 +38,12 @@
 		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
 		
 		<!-- Template nWrite JS File -->
+		<script>
+			var sel_Value = '<c:out value="${map.nbdto.n_btype}"/>';
+		</script>
+  		<script src="../assets/js/summernote.js"></script>
   		<script src="../assets/js/nUpdate.js"></script>
+  	
 	</head>
 
 	<body>
@@ -52,8 +57,8 @@
 	    	<h1 style="float: left; margin: 40px; font-weight: 700; position: relative; left:235px; top: 30px;">공지사항 수정</h1>
 		
 			<form action="donUpdate" name="notice_Frm" id="notice_Frm" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="n_bfile" value="${nbdto.n_bfile}">
-				<input type="hidden" name="n_bno" value="${nbdto.n_bno}">
+				<input type="hidden" name="n_bfile" value="${map.nbdto.n_bfile}">
+				<input type="hidden" name="n_bno" value="${map.nbdto.n_bno}">
 			    <table>
 			     <colgroup>
 			        <col width="10%">
@@ -69,21 +74,35 @@
 					       <option value="event">이벤트</option>
 					    </select>
 			        </th>
-			        <th colspan="3" style="text-align: left;"><input type="text" id="n_btitle" name="n_btitle" value="${nbdto.n_btitle }"></span></th>
+			        <th colspan="3" style="text-align: left;"><input type="text" id="n_btitle" name="n_btitle" value="${map.nbdto.n_btitle }"></span></th>
 			      </tr>
 			      <tr style="border-bottom: 2px solid #009223">
 			        <td style="text-align: center;"><strong>작성자 | </strong style="text-align: center;"></td>
-			        <td><input type="text" value="${nbdto.id}" readonly="readonly" style="border: 1px solid transparent;"> </td>
+			        <td><input type="text" value="${map.nbdto.id}" readonly="readonly" style="border: 1px solid transparent;"> </td>
 			      </tr>
 			      <tr>
-			        <td colspan="4" class="article"><textarea rows="9" name="n_bcontent" id="summernote">${nbdto.n_bcontent }</textarea> </td>
+			        <td colspan="4" class="article"><textarea rows="9" name="n_bcontent" id="summernote">${map.nbdto.n_bcontent}</textarea> </td>
 			      </tr>
+			      
+			      <tr style="border-top: 2px solid #009223">
+			      	<td> 이미지 파일 </td>
+			        <c:if test="${map.nbdto.n_bfile!=null}">
+			        <td colspan="3" class="article orifile"><img src="/upload/${map.nbdto.n_bfile}" ></td>
+			        </c:if>
+			        <c:if test="${map.nbdto.n_bfile==null}">
+			        <td colspan="3" class="article notice_noimg"><img src="../assets/img/nView/noImage.png "></td>
+			        </c:if>
+			      </tr>
+			      
 			      <tr style="border-bottom: 2px solid #009223; line-height: 20px;">
-			        <td colspan="4" class="article"><input type="file" name="files1" id="n_bfile" value="${nbdto.n_bfile}"></td>
+			      	<td>수정 이미지</td>
+			        <td colspan="3" class="article1">
+			        <div class="file-preview-container" id="filePreviewContainer"></div>
+			        <input type="file" name="files1" id="n_bfile" >
+			        </td>
 			      </tr>
 			    </table>
 			</form>
-			
 			<div class="listBtn">
 		    	<a><div class="list" id="nUpdateBtn">수정</div></a>
 		    	<a href="nList"><div class="list">취소</div></a>

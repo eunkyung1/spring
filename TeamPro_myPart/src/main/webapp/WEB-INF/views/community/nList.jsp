@@ -51,7 +51,6 @@
 			       <option value="all">전체</option>
 			       <option value="n_btitle">제목</option>
 			       <option value="n_bcontent">내용</option>
-			       <option value="n_btype">게시글유형</option>
 			    </select>
 			    	<input type="text" name="searchWord" id="searchWord" class="searchWord" placeholder=" 검색어를 입력해주세요.">
 			    	<button type="button" id="searchBtn" class="searchBtn">검색</button>

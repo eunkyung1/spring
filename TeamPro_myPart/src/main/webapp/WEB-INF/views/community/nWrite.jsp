@@ -39,6 +39,9 @@
 		
 		<!-- Template nWrite JS File -->
   		<script src="../assets/js/nWrite.js"></script>
+  		<script src="../assets/js/summernote.js"></script>
+  		
+ 
 	</head>
 	<body>
 	<!-- ======= Header ======= -->
@@ -74,9 +77,14 @@
 			        <td colspan="4" class="article"><textarea rows="9" name="n_bcontent" id="summernote" placeholder=" ※ 게시글 내용을 입력해주세요."></textarea> </td>
 			      </tr>
 			      <tr style="border-bottom: 2px solid #009223; line-height: 20px;">
-			        <td colspan="4" class="article"><input type="file" name="files1" ></td>
+			      	<td><strong>첨부파일</strong></td>
+			        <td colspan="3" class="article1">
+				         <div class="file-preview-container" id="filePreviewContainer"></div>
+				        <input type="file" name="files1" id="n_bfile">
+			        </td>
 			      </tr>
 			    </table>
+
 			</form>
 			<div class="listBtn">
 		    	<a><div class="list" id="saveBtn">저장</div></a>

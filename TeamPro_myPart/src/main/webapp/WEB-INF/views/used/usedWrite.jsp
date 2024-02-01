@@ -39,6 +39,7 @@
 		
 		<!-- Template nWrite JS File -->
   		<script src="../assets/js/usedWrite.js"></script>
+  		<script src="../assets/js/summernote.js"></script>
 	</head>
 	<body>
 	<!-- ======= Header ======= -->

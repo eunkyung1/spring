@@ -36,7 +36,7 @@ th {
   border-top: 2px solid #009223;
 }
 td {
-  padding: 5px 0 5px 20px;
+  padding: 15px 0 15px 15.9px;
   border: 1px solid silver;
 }
 th,
@@ -48,17 +48,40 @@ td {
 .article {
   padding: 20px 0 20px 20px;
 }
+.article1 {
+  padding: 20px 0 20px 20px;
+  display:flex;
+  flex-direction:row;
+  border-style: none;
+}
 
 .notice_content{
 	height: 500px;
+}
+
+.orifile img{
+	width:30%
+}
+
+#n_bfile{
+	margin:auto;
+	margin-left:revert-layer;
 }
 
 #bfile_content img{
 	height: 50%;
 	width: 50%
 }
-#notice_img{
+.notice_img img{
 	text-align: left;
+	width:50%
+}
+
+.notice_noimgfile {
+	padding: 20px 0 20px 48px;
+}
+.notice_noimg img{
+	height:30px;
 }
 
 #view_title{
@@ -68,6 +91,10 @@ td {
 .separator {
   padding: 0 20px 0 20px;
   color: #E0E0E0;
+}
+
+.pre_next{
+	font-weight:600;
 }
 #view_title a{
 	text-decoration: none;
@@ -119,10 +146,15 @@ textarea{border-radius:10px; border: 2px solid #009223;}
 #replyPw{line-height: 3px; padding-left: 124px; width: 19%; position: relative; top: -71px; left: 820px;}
 #replyIPw{width: 62%;}
 #replyBorder{float: right;  border: 1px solid transparent;}
-#rUBtn{width: 50px; line-height:25px;  text-align: center; border: 1px solid  #ffce32; border-radius:5px; background:  #ffce32; color:#009223; font-weight: 700;}
-#rDelBtn{width: 50px;  line-height: 25px; border: 1px solid #ffce32; border-radius:5px; background:  #ffce32;  color:#009223; font-weight: 700;}
-#rUBtn:hover{width: 50px; line-height:25px;  text-align: center; border: 1px solid #009223; border-radius:5px; background:  #009223; color:#ffce32; font-weight: 700; transition: all 0.4s;}
-#rDelBtn:hover{width: 50px;  line-height: 25px; border: 1px solid  #ce1212; border-radius:5px; background:  #ce1212;  color:#ffce32; font-weight: 700; transition: all 0.4s;}
+.rUBtn{width: 50px; line-height:25px;  text-align: center; border: 1px solid  #ffce32; border-radius:5px; background:  #ffce32; color:#009223; font-weight: 700;}
+.rDelBtn{width: 50px;  line-height: 25px; border: 1px solid #ffce32; border-radius:5px; background:  #ffce32;  color:#009223; font-weight: 700;}
+.rUBtn:hover{width: 50px; line-height:25px;  text-align: center; border: 1px solid #009223; border-radius:5px; background:  #009223; color:#ffce32; font-weight: 700; transition: all 0.4s;}
+.rDelBtn:hover{width: 50px;  line-height: 25px; border: 1px solid  #ce1212; border-radius:5px; background:  #ce1212;  color:#ffce32; font-weight: 700; transition: all 0.4s;}
+
+.rCanBtn{width: 50px; line-height:25px;  text-align: center; border: 1px solid  #ffce32; border-radius:5px; background:  #ffce32; color:#009223; font-weight: 700;}
+.rSaveBtn{width: 50px;  line-height: 25px; border: 1px solid #ffce32; border-radius:5px; background:  #ffce32;  color:#009223; font-weight: 700;}
+.rSaveBtn:hover{width: 50px; line-height:25px;  text-align: center; border: 1px solid #009223; border-radius:5px; background:  #009223; color:#ffce32; font-weight: 700; transition: all 0.4s;}
+.rCanBtn:hover{width: 50px;  line-height: 25px; border: 1px solid  #ce1212; border-radius:5px; background:  #ce1212;  color:#ffce32; font-weight: 700; transition: all 0.4s;}
 
 .participant{display: flex;  width: 1254px; height: 120px; background: #ffce32; border-radius: 5px; margin: 30px 0 0 275px;}
 .participant_no{width: 301px; height: 100px; background: white; border-radius: 5px; margin: 10px 10px 10px 10px; border: 2px solid #009223;}

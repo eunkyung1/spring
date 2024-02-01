@@ -51,6 +51,7 @@ public class BController {
 		
 		return "customer/notice_view";
 	}
+	
 	//댓글 1개 저장
 	@PostMapping("BCommentInsert") //1개 게시글 가져오기
 	@ResponseBody
