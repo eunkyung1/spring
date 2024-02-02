@@ -1,6 +1,5 @@
 package com.java.www.service;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.java.www.dto.NBoardDto;
@@ -27,5 +26,9 @@ public interface NBoardService {
 	//댓글 삭제하기
 	int NCommnetDelete(int n_cno);
 
+	//댓글 수정 및 저장하기
+	NCommentDto NCommentUpdate(NCommentDto ncdto);
+
+	
 	
 }

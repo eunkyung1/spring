@@ -29,7 +29,7 @@
 	    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 	
 	    <!-- JS File -->
-	    <script src="../assets/js/nList.js"></script>
+	    <script src="../assets/js/community/nList.js"></script>
 	    
 	    <!-- Template Main CSS File -->
 	    <link href="../assets/css/main2.css" rel="stylesheet">
@@ -105,9 +105,9 @@
 			      </c:forEach>
 		  		</div>
 		    </table>
-		    
+		   
 		    <!-- 로그인 안되어 있을 경우, 글쓰기 금지 -->
-			 	<a href="nWrite"><button class="write">글쓰기</button></a>
+			 	<a href="nWrite" id="n_write"><button class="write" >글쓰기</button></a>
   			 	<button class="write" onclick="location.href='/'">메인홈</button>
 	    	
 	    	<!-- 하단넘버링 시작 -->

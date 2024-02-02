@@ -28,12 +28,30 @@ public class CController {
 	NBoardService nbService;
 	@Autowired
 	HttpSession session;
-
+	
+	
+	// 1.공지사항 리스트 session_id 확인하기
+	@GetMapping("session_check")
+	@ResponseBody
+	public String session_check() {
+		
+		String session_id = (String) session.getAttribute("session_id");
+		
+		if("admin".equals(session_id)) {
+			return "possible";
+		}else {
+			return "imposs";
+		}
+		
+	
+	}// nList()
+	
 	// 1.공지사항 리스트
 	@GetMapping("nList")
 	public String nList(Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
-
+		
+		
 		// service 연결
 		Map<String, Object> map = nbService.selectAll(page, category, searchWord);
 
@@ -73,9 +91,8 @@ public class CController {
 	@PostMapping("NCommnetInsert")
 	@ResponseBody
 	public NCommentDto NCommnetInsert(NCommentDto ncdto) {
-		System.out.println("컨트롤러 NCommnetInsert n_ccontent"+ncdto.getN_ccontent());
+		System.out.println("컨트롤러 NCommnetInsert n_ccontent"+ncdto.getN_cno());
 		NCommentDto nCommentDto = nbService.NCommnetInsert(ncdto);
-		
 		
 		return nCommentDto;
 	}// NCommnetInsert
@@ -89,6 +106,25 @@ public class CController {
 		
 		return result+"";
 	}// NCommnetDelete
+	
+	//1. 공지사항 댓글 수정
+	@PostMapping("NCommentUpdate")
+	@ResponseBody
+	public NCommentDto NCommentUpdate(NCommentDto ncdto) {
+		
+		NCommentDto nCommentDto = nbService.NCommentUpdate(ncdto);
+		
+		return nCommentDto;
+	}// NCommentUpdate
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

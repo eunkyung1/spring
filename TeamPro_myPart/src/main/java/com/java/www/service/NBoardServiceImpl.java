@@ -12,11 +12,14 @@ import com.java.www.dto.NBoardDto;
 import com.java.www.dto.NCommentDto;
 import com.java.www.mapper.NBoardMapper;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Service
 public class NBoardServiceImpl implements NBoardService{
 	
 	@Autowired NBoardMapper nbMapper;
+	@Autowired HttpSession session;
 	
 	//게시글 전체가져오기
 	@Override
@@ -127,7 +130,9 @@ public class NBoardServiceImpl implements NBoardService{
 	public NCommentDto NCommnetInsert(NCommentDto ncdto) {
 		
 		//session_id로 변환하기
-		ncdto.setId("bbb");
+		ncdto.setId((String)session.getAttribute("session_id"));
+		
+		
 		
 		nbMapper.NCommnetInsert(ncdto);
 		
@@ -140,6 +145,26 @@ public class NBoardServiceImpl implements NBoardService{
 		int result = nbMapper.NCommnetDelete(n_cno);
 		return result;
 	}
+	
+	//댓글 수정 후 저장하기
+	@Override
+	public NCommentDto NCommentUpdate(NCommentDto ncdto) {
+		
+		//session_id변환하기
+		ncdto.setId((String)session.getAttribute("session_id"));
+		
+		//ncdto.setId("aaa");
+		
+		//댓글저장하기
+		nbMapper.NCommentUpdate(ncdto);
+		//댓글 1개가져오기
+		NCommentDto nCommentDto = nbMapper.nCommentSelectOne(ncdto.getN_cno());
+		
+		return nCommentDto;
+	}
+	
+
+	
 
 
 }

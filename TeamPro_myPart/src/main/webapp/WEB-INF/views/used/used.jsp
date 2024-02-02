@@ -39,7 +39,7 @@
 <link href="../assets/css/review/header2.css" rel="stylesheet" type="text/css">
 
 <!-- Template Main CSS File -->
-<script src="../assets/js/used.js"></script>
+<script src="../assets/js/used/used.js"></script>
 </head>
 <body>
 	<!-- ======= Header ======= -->

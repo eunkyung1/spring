@@ -32,6 +32,14 @@
        	<link href="../assets/css/header.css" rel="stylesheet">
 		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	  
+	    <!--  JS File -->
+	    <script src="../assets/js/community/nView.js"></script>
+	    <script>
+	    	let n_bno = ${map.nbdto.n_bno};
+	    </script>
+	    
+	    
 	</head>
 	<body>
 	<!-- ======= Header ======= -->
@@ -101,8 +109,8 @@
 		    <!-- 버튼 -->
 		    <div class="listBtn">
 		    	<a href="nList"><button class="list">목록</button></a>
-		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}"><button class="list">삭제</button></a>
-		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}"><button class="list">수정</button></a>
+		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="deleteBtn"><button class="list">삭제</button></a>
+		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="updateBtn"><button class="list">수정</button></a>
 		    </div>
 		    
 		     <!-- 댓글입력-->
@@ -121,101 +129,6 @@
 			  	</td>
 			  </tr>
 		   	</table>
-		   	<script>
-		   	
-		  
-		   	 $(function(){
-		   		 let n_bno = ${map.nbdto.n_bno};
-		   		 let temp =0;
-		   		 
-		   		/* 댓글 저장하기 */
-		   		 $("#replybtn").click(function(){
-		   			alert("댓글을 저장합니다.");
-		   			let n_cpw = $("#replyIPw").val();
-		   			let n_ccontent = $("#reply_ncontent").val();
-		   			let n_Count = Number($(".n_Count").text());
-		   			
-		   			$.ajax({
-		   				url:"/community/NCommnetInsert",
-		   				type:"post",
-		   				data:{"n_cpw":n_cpw,"n_ccontent":n_ccontent,"n_bno":n_bno},
-		   				dataType:"json", //받는파일형태 : text,json,xml
-		   				success:function(data){
-		   				console.log(data);
-		   				
-		   				let hdata ='';
-		   				hdata += '<tr id="'+data.n_cno+'">';
-		   				hdata += '<td><strong>댓글 작성자</strong> | <strong style="color: blue;">'+data.id+'</strong>&nbsp;&nbsp;[<span>'+moment(data.n_cdate).format("YYYY-MM-DD HH:mm:ss")+'</span>]';
-		   				hdata += '<li id="replyTxt">&nbsp;&nbsp;'+data.n_ccontent+'</li>';
-		   				hdata += '<li id="replyBtn">';
-		   				/* session_id 넣기 
-		   				if("${session_id}" == data.id)
-		   				*/
-		   				hdata += '<button class="rDelBtn">삭제</button>&nbsp';
-		   				hdata += '<button class="rUBtn">수정</button>';
-		   				hdata += '</li>';
-		   				hdata += '</td>';
-		   				hdata += '</tr>';
-		   	
-		   				$(".replyBox").prepend(hdata);
-		   				$(".n_Count").text(n_Count+1); 
-		   				
-		   				$(".reply_ncontent").val(""); 
-						$(".replyIPw").val("");
-		   				
-		   				},
-		   				error:function(){
-		   				alert("실패");
-		   				}
-		   				})//ajax끝
-		   				
-		   			
-		   			
-		   		 });//click
-		   		 
-		   		 /* 댓글 삭제하기  */
-		   		 $(document).on("click",".rDelBtn",function(){
-		   			let n_cno = $(this).parent().parent().parent().attr("id");
-		   			let n_Count = Number($(".n_Count").text());
-		   			
-		   			if(confirm("댓글을 삭제하시겠습니까?")){
-		   				$.ajax({
-			   				url:"/community/NCommnetDelete",
-			   				type:"post",
-			   				data:{"n_cno":n_cno},
-			   				dataType:"text", 
-			   				success:function(data){
-			   				console.log(data);
-							$("#"+n_cno).remove();
-							$(".n_Count").text(n_Count-1);
-			   				
-			   				},
-			   				error:function(){
-			   				alert("실패");
-			   				}
-			   				})//ajax끝
-			   				alert("댓글이 삭제되었습니다.")
-		   			}//if
-		   		 });//click
-		   		 
-		   		 /* 댓글 수정하기 
-		   		 $(document).on("click",".rUBtn",function(){
-		   		
-		   			 alert("댓글 수정합니다.");
-		   			 let n_cno = $(this).parent().parent().parent().attr("id");
-		   			 let n_ccontent = $(this).parent().prev().text(); 
-		   			 let n_cdate = $(this).parent().parent().find("span").text();
-		   			 alert("n_cno"+n_cno);
-		   			 alert("n_ccontent"+n_ccontent);
-		   			 alert("n_cdate"+n_cdate);
-		   		 }
-		   		*/
-		   		 
-		   		 
-		   	 })//jquery
-		   	</script>
-		   	
-		   	
 		   	
 		    <!-- 이전글/다음글-->
 		    <table id="view_title">
@@ -247,20 +160,30 @@
 		    <!-- 댓글보기-->
 		    <table style="margin-top: 70px;">
 		      <td style="font-weight: 700">총<strong class="n_Count"style="color: #009223">&nbsp;&nbsp;${map.n_list.size()}</strong>&nbsp;개의 댓글이 등록되었습니다.</td>
+			
 			<tbody class="replyBox">
+			
 			<c:forEach var="ncomment" items="${map.n_list}">
 			  <tr id="${ncomment.n_cno}">
 				<td><strong>댓글 작성자</strong> | <strong style="color: blue;">${ncomment.id}</strong>&nbsp;&nbsp;[<span>${ncomment.n_cdate}</span>]
 				<li id="replyTxt">&nbsp;&nbsp;${ncomment.n_ccontent}</li>
+				<c:if test="${session_id == ncomment.id}">
 				<li id="replyBtn">
 					<button class="rDelBtn">삭제</button>
 					<button class="rUBtn">수정</button>
 				</li>
+				</c:if>
+				
+				<c:if test="${session_id != ncomment.id}">
+				<li id="replyBtn">
+
+				</li>
+				</c:if>
 				</td>			
 			  </tr>
 			  
 			   <!-- 댓글 수정입력창  
-			   <tr id="#"> //수정할 댓글의 위치점(n_cno)
+			   <tr id="${ncomment.n_cno}"> //수정할 댓글의 위치점(n_cno)
 				<td><strong style="color: navy;">댓글 작성자</strong> | <strong style="color: #009223;" class="f_cid">aaa</strong>&nbsp;&nbsp;<span class="f_cdate">[2024-12-31 ]</span>
 				<li style="list-style: none; float: right; line-height: 27px;"><strong>비밀번호 |<strong><input type="text" value="1234" placeholder=" ※입력시 비밀글로 저장" class="f_cpw"></li>
 				<li id="replyTxt"><textarea cols="145%">댓글 수정내용 입력</textarea></li>

@@ -42,7 +42,14 @@ public interface NBoardMapper {
 
 	//댓글 1개 삭제
 	int NCommnetDelete(int n_cno);
-	
+
+	//댓글 1개 저장하기
+	void NCommentUpdate(NCommentDto ncdto);
+
+	//댓글 1개 가져오기
+	NCommentDto nCommentSelectOne(int n_cno);
+
+
 
 	
 
