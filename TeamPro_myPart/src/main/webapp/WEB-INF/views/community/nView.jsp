@@ -34,10 +34,12 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	  
 	    <!--  JS File -->
-	    <script src="../assets/js/community/nView.js"></script>
 	    <script>
-	    	let n_bno = ${map.nbdto.n_bno};
+	    	var n_bno = ${map.nbdto.n_bno};
+	    	var id = "${session_id}";
+	    	var authorID = "${map.nbdto.id}";
 	    </script>
+	    <script src="../assets/js/community/nView.js"></script>
 	    
 	    
 	</head>
@@ -105,12 +107,12 @@
 		      </tr>
 		    
 		    </table>
-		    
 		    <!-- 버튼 -->
 		    <div class="listBtn">
 		    	<a href="nList"><button class="list">목록</button></a>
-		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="deleteBtn"><button class="list">삭제</button></a>
-		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="updateBtn"><button class="list">수정</button></a>
+		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="n_deleteBtn"><button class="list" id="n_deleteBtn">삭제</button></a>
+		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="n_updateBtn"><button class="list" id="n_updateBtn">수정</button></a>
+		    	
 		    </div>
 		    
 		     <!-- 댓글입력-->
@@ -173,7 +175,6 @@
 					<button class="rUBtn">수정</button>
 				</li>
 				</c:if>
-				
 				<c:if test="${session_id != ncomment.id}">
 				<li id="replyBtn">
 

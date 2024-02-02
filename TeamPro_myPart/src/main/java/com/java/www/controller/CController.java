@@ -59,7 +59,7 @@ public class CController {
 
 		return "/community/nList";
 	}// nList()
-
+/*
 	// 1.공지사항 리스트 검색
 	@GetMapping("search")
 	public String search(Model model, @RequestParam(defaultValue = "1") int page,
@@ -72,7 +72,7 @@ public class CController {
 
 		return "/community/nList";
 	}// nList()
-
+*/
 	// 1.공지사항 1개 게시글 가져오기 /댓글 모두 가져오기
 	@GetMapping("nView")
 	public String nView(@RequestParam(defaultValue = "1") int n_bno, Model model) {

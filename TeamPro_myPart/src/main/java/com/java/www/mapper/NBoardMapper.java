@@ -27,7 +27,7 @@ public interface NBoardMapper {
 	int bWrite(NBoardDto nbdto);
 
 	//count 총 갯수
-	int selectCountAll();
+	int selectCountAll(String category, String searchWord);
 
 	int donUpdate(NBoardDto nbdto);
 
@@ -48,6 +48,9 @@ public interface NBoardMapper {
 
 	//댓글 1개 가져오기
 	NCommentDto nCommentSelectOne(int n_cno);
+
+	//조회수 증가
+	void nbhitUp(int n_bno);
 
 
 
