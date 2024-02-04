@@ -40,6 +40,11 @@
 
 <!-- Template Main CSS File -->
 <script src="../assets/js/used/used.js"></script>
+<script>
+	var u_bno_transfer2 = ${map.list.u_bno};
+	
+</script>
+
 </head>
 <body>
 	<!-- ======= Header ======= -->
@@ -171,26 +176,28 @@
 								</table>
 								<div class="fixed-img-collist">
 									<ul class="clear">
-									<li>
-										<a href="usedcontent?u_bno=${map.udto.u_bno}"> 
-											<span><img src="/upload/${map.udto.u_bfile}"></span> 
-											<div class="used_title">
-											<strong>${map.udto.u_btitle}</strong>
-											</div>
-										</a> 
-										<strong>${map.udto.u_bprice}원</strong>
-										<br>
-										<c:if test="${map.udto.u_bstatus=='1'}">
-										<span class="used-exchange">거래완료</span>
-										</c:if>
-										
-										<c:if test="${map.udto.u_bstatus=='0'}">
-										<span class="used-buy">거래중</span>
-										</c:if>
-										<p><fmt:formatDate value="${map.udto.u_bdate}" pattern="yyyy-MM-dd"/></p>
-										<p>HITS :${map.udto.u_bhit}</p>
-										</li>
-									</ul>
+										<c:forEach var="udto" items="${map.list}">
+										<li>
+											<a href="usedcontent?u_bno=${udto.u_bno}"> 
+												<span><img src="/upload/${udto.u_bfile}"></span> 
+												<div class="used_title">
+												<strong>${udto.u_btitle}</strong>
+												</div>
+											</a> 
+											<strong>${udto.u_bprice}원</strong>
+											<br>
+											<c:if test="${udto.u_bstatus=='1'}">
+											<span class="used-exchange">거래완료</span>
+											</c:if>
+											
+											<c:if test="${udto.u_bstatus=='0'}">
+											<span class="used-buy">거래중</span>
+											</c:if>
+											<p><fmt:formatDate value="${udto.u_bdate}" pattern="yyyy-MM-dd"/></p>
+											<p>HITS :${udto.u_bhit}</p>
+										</li><!--li  -->
+										</c:forEach>									
+										</ul>
 								</div>
 								<!-- fixed-img-collist   -->
 							</div>
@@ -205,7 +212,7 @@
 					</div>
 
 					<!-- 하단 넘버링  -->
-					<div>
+					<div class="page_under">
 						<ul class="page-num-used">
 							<a href="used?page=1"><li class="first-num"></li></a>
 							<c:if test="${map.page>1 }">

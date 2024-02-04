@@ -11,20 +11,25 @@
 	<select id="selectAll" resultType="com.java.www.dto.UsedDto">
 	select * from(
 	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_btype = 'trade1') 
-	where rnum between #{startRow} and #{endRow}
+	where rnum between ${startRow} and ${endRow}
 	</select>
 	
+	<!-- trade1 게시글 총 갯수  -->
 	<select id="selectCountAll" resultType="int">
 		select count(*) from u_board where u_btype='trade1'
 	</select>
 	
+	<!-- transfer2 게시글 총 갯수 -->
+	<select id="selectCountAll2" resultType="int">
+		select count(*) from u_board where u_btype='transfer2'
+	</select>
 
 	
 	<!-- 게시글 transfer2 가져오기 -->
 	<select id="selectAll2" resultType="com.java.www.dto.UsedDto">
 	select * from(
 	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_btype = 'transfer2') 
-	where rnum between 1 and 8
+	where rnum between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- 게시글 trade1 거래가능 가져오기 -->

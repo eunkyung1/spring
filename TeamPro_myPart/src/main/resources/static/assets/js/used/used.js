@@ -24,18 +24,17 @@
 //--중고양도 내용가져오기
 	$("#tabview2").click(function(){
 		if($("input:checkbox[id=showCompleted]").is(":checked") == false){
-			
 	$.ajax({
 		url:"/used/used_transfer",
 		type:"post",
-		data:{u_btype:"transfer2"},
+		data:{u_btype:"transfer2", page:"1"},
 		dataType:"json", //받는파일형태 : text,json,xml
 		success:function(data){
-
+		alert("성공");
+		console.log(data);
         var hdata = '';
-
 		// JavaScript의 forEach 루프 사용
-        data.forEach(function(udto) {
+        data.list2.forEach(function(udto) {
             hdata += '<li>';
             hdata += '<a href="usedcontent?u_bno=' + udto.u_bno + '"> ';
             hdata += '<span><img src="/upload/' + udto.u_bfile + '"></span> ';
@@ -59,7 +58,8 @@
         });//forEach
 
         $(".consolebox2 .fixed-img-collist .clear").html(hdata);
-		
+        
+        updatePagination(data);
     },
 	error:function(){
 	alert("실패");
@@ -68,6 +68,46 @@
 
 		}
 	});//click
+	
+	/*하단 넘버링 구현*/
+	/*
+	function updatePagination(pageInfo) {
+    var paginationHtml = '';
+    
+    // 첫 페이지
+    paginationHtml += '<a href="used_transfer?page=1"><li class="first-num"></li></a>';
+
+    // 이전 페이지
+    if (pageInfo.page > 1) {
+        paginationHtml += '<a href="used_transfer?page=' + (pageInfo.page - 1) + '"><li class="prev-num"></li></a>';
+    } else {
+        paginationHtml += '<li class="prev-num"></li>';
+    }
+
+    // 페이지 번호
+    for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+        if (pageInfo.page == i) {
+            paginationHtml += '<li class="num-used on"><div>' + i + '</div></li>';
+        } else {
+            paginationHtml += '<a href="used_transfer?page=' + i + '"><li class="num"><div>' + i + '</div></li></a>';
+        }
+    }
+
+    // 다음 페이지
+    if (pageInfo.page < pageInfo.maxPage) {
+        paginationHtml += '<a href="used_transfer?page=' + (pageInfo.page + 1) + '"><li class="next-num"></li></a>';
+    } else {
+        paginationHtml += '<li class="next-num"></li>';
+    }
+
+    // 마지막 페이지
+    paginationHtml += '<a href="used_transfer?page=' + pageInfo.endPage + '"><li class="last-num"></li></a>';
+
+    paginationHtml += '</ul>';
+
+    // 업데이트된 넘버링을 적용
+    $(".page_under.page-num-used").html(paginationHtml);
+}*/
 
 	
 //--중고거래-- 거래가능내역 true, flase

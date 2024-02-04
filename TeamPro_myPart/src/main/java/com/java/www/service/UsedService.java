@@ -11,7 +11,7 @@ public interface UsedService {
 	Map<String, Object> selectAll(int page);
 
 	//transfer2 받기 - 중고양도
-	List<UsedDto> selectAll2();
+	Map<String, Object> selectAll2(int page);
 
 	//중고거래 - 거래가능내역 보기
 	ArrayList<UsedDto> selectPossible(String u_bstatus);

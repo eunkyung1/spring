@@ -41,14 +41,14 @@ public class UController {
 	//중고거래 및 양도 - 양도
 	@PostMapping("used_transfer")
 	@ResponseBody
-	public List<UsedDto> used_transfer(String u_btype){
+	public Map<String, Object> used_transfer(String u_btype,@RequestParam(defaultValue = "1")int page){
 		System.out.println("UController used_transfer :"+u_btype);
 		
-		List<UsedDto> list2 =  uService.selectAll2();
+		Map<String, Object> map =  uService.selectAll2(page);
 		
 		
 		
-		return list2;
+		return map;
 	}// used_transfer()
 	
 	
@@ -87,13 +87,12 @@ public class UController {
 	//중고양도 거래가능 checked- false일때
 	@PostMapping("used_transfer2")
 	@ResponseBody
-	public List<UsedDto> used_transfer2(Model model) {
-		List<UsedDto> list2 =  uService.selectAll2();
+	public Map<String, Object> used_transfer2(Model model,@RequestParam(defaultValue = "1")int page) {
+		Map<String, Object> map =  uService.selectAll2(page);
 		
-		model.addAttribute("list",list2);
-		System.out.println("list 갯수 :"+list2.size());
+		model.addAttribute("map",map);
 		
-		return list2;
+		return map;
 	}// used_trade1()
 	
 	

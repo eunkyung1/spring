@@ -13,7 +13,7 @@ public interface UsedMapper {
 	//중고거래
 	List<UsedDto> selectAll(int startRow, int endRow);
 	//중고양도
-	List<UsedDto> selectAll2();
+	List<UsedDto> selectAll2(int startRow, int endRow);
 	
 	//u_status = '1'(trade1)
 	ArrayList<UsedDto> selectPossible(String u_bstatus);
@@ -21,7 +21,10 @@ public interface UsedMapper {
 	//u_status = '1'(transfer2)
 	ArrayList<UsedDto> selectPossible2(String u_bstatus);
 	
-	//게시글 갯수 가져오기
+	//게시글 갯수 가져오기(trade1)
 	int selectCountAll();
+	
+	//게시글 갯수 가져오기(transfer2)
+	int selectCountAll2();
 
 }
