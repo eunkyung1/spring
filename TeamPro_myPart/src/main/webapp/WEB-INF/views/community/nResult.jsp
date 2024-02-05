@@ -9,9 +9,7 @@
 		<title>nResult</title>
 	</head>
 	<body>
-	
 		<c:choose>
-				
 				<c:when test="${result == 'nView-D'}">
 					<script>
 					 alert("게시글이 삭제되었습니다.");
@@ -26,6 +24,12 @@
 					</script>			
 				</c:when>
 				
+				<c:when test="${result == 'Update-W'}">
+					<script>
+						alert("게시글이 수정되었습니다.");
+						location.href="nList";
+					</script>			
+				</c:when>
 		</c:choose>
 		
 	</body>

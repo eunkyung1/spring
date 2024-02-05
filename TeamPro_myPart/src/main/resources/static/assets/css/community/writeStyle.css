@@ -22,8 +22,7 @@ textarea{
 	width: 100%;
 }
 #n_btitle{
-	margin-left:10px;
-	width: 93%;
+	width: 100%;
 }
 
 #p_bType{
@@ -45,35 +44,5 @@ textarea{
 	width: 900px;
 	margin-left: -40px; 
 	border: none;
-}
-
-.file-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-}
-
-.file-preview-item {
-    width: 200px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.file-preview-img {
-    width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    margin-bottom: 5px;
-}
-
-.file-input-container {
-    display: flex;
-    align-items: center;
-}
-
-#n_bfile {
-    margin-right: 5px;
 }
 

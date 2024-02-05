@@ -28,17 +28,18 @@
 	    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 	
 	    <!-- Template Main CSS File -->
- 		<link href="../assets/css/main2.css" rel="stylesheet">
+		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/writeStyle.css" rel="stylesheet">
-        <script src="../assets/js/summernote-lite.js"></script>
-        <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
+		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/writeStyle.css" rel="stylesheet">
 		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
+		<link href="../assets/css/community/nstyle.css" rel="stylesheet">
 		
 		<!-- Template nWrite JS File -->
-  		<script src="../assets/js/community/nWrite.js"></script>
+		<script src="../assets/js/summernote-lite.js"></script>
+        <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
+  		<script src="../assets/js/community/n_total.js"></script>
   		<script src="../assets/js/summernote.js"></script>
   		
  
@@ -52,7 +53,7 @@
 		
 			<!-- 공지사항 글쓰기 -->
 	    	<h1 style="float: left; margin: 40px; font-weight: 700; position: relative; left:235px; top: 30px;">공지사항 작성</h1>
-			<form action="nWrite" name="freeFrm" method="post" enctype="multipart/form-data">
+			<form action="nWrite" name="nWriteFrm" method="post" enctype="multipart/form-data">
 			    <table>
 			     <colgroup>
 			        <col width="10%">
@@ -74,13 +75,13 @@
 			        <td><input type="text" value="${session_id}" name="id" readonly="readonly" style="border: 1px solid transparent;"> </td>
 			      </tr>
 			      <tr>
-			        <td colspan="4" class="article"><textarea rows="9" name="n_bcontent" id="summernote" placeholder=" ※ 게시글 내용을 입력해주세요."></textarea> </td>
+			        <td colspan="4" class="article"><textarea rows="9" name="n_bcontent" id="summernote" placeholder=" ※ 게시글 내용을 입력해주세요."></textarea></td>
 			      </tr>
 			      <tr style="border-bottom: 2px solid #009223; line-height: 20px;">
 			      	<td><strong>첨부파일</strong></td>
 			        <td colspan="3" class="article1">
 				         <div class="file-preview-container" id="filePreviewContainer"></div>
-				        <input type="file" name="files1" id="n_bfile">
+				        <input type="file" name="files1" id="n_bfile_write">
 			        </td>
 			      </tr>
 			    </table>

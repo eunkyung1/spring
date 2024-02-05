@@ -30,16 +30,16 @@
 	    <!-- Template Main CSS File -->
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/writeStyle.css" rel="stylesheet">
-		<script src="../assets/js/summernote-lite.js"></script>
-        <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
-		<link href="../assets/css/commuinty/summernote-lite.css" rel="stylesheet">
+		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/writeStyle.css" rel="stylesheet">
+		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
 		
 		<!-- Template nWrite JS File -->
-  		<script src="../assets/js/usedWrite.js"></script>
+  		<script src="../assets/js/used/usedWrite.js"></script>
   		<script src="../assets/js/summernote.js"></script>
+		<script src="../assets/js/summernote-lite.js"></script>
+         <script src="../assets/js/lang/summernote-ko-KR.js"></script>
 	</head>
 	<body>
 	<!-- ======= Header ======= -->
@@ -49,7 +49,7 @@
 		<section class="notice">
 		
 			<!-- 중고거래&캠핑장양도_글쓰기 -->
-	    	<h1 style="float: left; margin: 40px; font-weight: 700; position: relative; left:235px; top: 30px;">자유게시판 작성</h1>
+	    	<h1 style="float: left; margin: 40px; font-weight: 700; position: relative; left:235px; top: 30px;">중고거래&캠핑장양도 글쓰기</h1>
 			<form action="" name="freeFrm" method="post" enctype="multipart/form-data">
 			    <table>
 			     <colgroup>
@@ -61,9 +61,9 @@
 			      <tr>
 			        <th style="text-align: center;">
 		        	 	<select name="bType" id="bType" class="bType">
-					       <option value="freeCont">유형</option>
-					       <option value="foodGood">삽니다.</option>
-					       <option value="sParty">팝니다.</option>
+					       <option value="0">유형</option>
+					       <option value="trade1">중고거래</option>
+					       <option value="transfer2">캠핑장양도</option>
 					    </select>
 			        </th>
 			        <th colspan="3" style="text-align: left;"><input type="text" id="f_btitle" placeholder=" ※ 게시글 제목을 입력해주세요."> </span></th>

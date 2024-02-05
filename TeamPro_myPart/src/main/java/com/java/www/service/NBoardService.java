@@ -15,7 +15,7 @@ public interface NBoardService {
 
 	void donUpdate(NBoardDto nbdto);
 
-	Map<String, Object> selectSearch(int page, String category, String searchWord);
+	//Map<String, Object> selectSearch(int page, String category, String searchWord);
 
 	//게시글 삭제
 	String nDelete(int n_bno);

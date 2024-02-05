@@ -29,12 +29,13 @@
 	    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 	
 	    <!-- JS File -->
-	    <script src="../assets/js/community/nList.js"></script>
+	    <script src="../assets/js/community/n_total.js"></script>
 	    
 	    <!-- Template Main CSS File -->
 	    <link href="../assets/css/main2.css" rel="stylesheet">
 		<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/nstyle.css" rel="stylesheet">
 	</head>
 	<body>
 	<!-- ======= Header ======= -->
@@ -57,7 +58,7 @@
 			  </form>
 
 			</div>
-			<table>
+			<table class="nList_table">
 		  		<div class="page-title">
 			      <colgroup>
 			        <col width="8%">
@@ -75,11 +76,7 @@
 			        <th>작성일</th>
 			        <th>조회수</th>
 			      </tr>
-			      <script>
-			      	
-			      	
-			      </script>
-			      
+			  
 			      <c:forEach var="n_bdto" items="${map.list}">
 			      <tr>
 			        <td id="No">${n_bdto.n_bno }</td>
@@ -91,7 +88,7 @@
 			        	<td>이벤트</td>
 			        </c:if> 
 				
-			        <td class="table-title">
+			        <td class="table-title1">
 			        <a href="nView?n_bno=${n_bdto.n_bno}">${n_bdto.n_btitle}</a>
 			        </td>
 			    
@@ -113,31 +110,32 @@
 	    	<!-- 하단넘버링 시작 -->
 		     <ul class="page-num">
 		     
-			      <a href="nList?page=1"><li class="first"></li></a>
+			      <a href="nList?page=1&category=${map.category}&searchWord=${map.searchWord}"><li class="first"></li></a>
 			      <c:if test="${map.page>1 }">
-			      	<a href="nList?page=${map.page-1}"><li class="prev"></li></a>
+			      	<a href="nList?page=${map.page-1}&category=${map.category}&searchWord=${map.searchWord}"><li class="prev"></li></a>
 			      </c:if>
 					<c:if test="${map.page<=1 }">
 			       	<li class="prev"></li>
 			       </c:if>
-			       <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}" step="1">
+			       
+			       <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
 			       	<c:if test="${map.page==i}">
 			       		<li class="num on"><div>${i}</div></li>
 			       	</c:if>
-			       	<c:if test="${map.page!=i }">
-			       		<a href="nList?page=${i}">
+			       	<c:if test="${map.page!=i}">
+			       		<a href="nList?page=${i}&category=${map.category}&searchWord=${map.searchWord}">
 			       			<li class="num"><div>${i}</div></li>
 			       		</a>
 			       	</c:if>
 			     </c:forEach>
 			     
 			     <c:if test="${map.page<map.maxPage }">
-			     	<a href="nList?page=${map.page+1}"><li class="next"></li></a>
+			     	<a href="nList?page=${map.page+1}&category=${map.category}&searchWord=${map.searchWord}"><li class="next"></li></a>
 			     </c:if>
 			     <c:if test="${map.page>=map.maxPage}">
 			     	<li class="next"></li>
 			     </c:if>
-			      <a href="nList?page=${map.maxPage}"><li class="last"></li></a>
+			      <a href="nList?page=${map.maxPage}&category=${map.category}&searchWord=${map.searchWord}"><li class="last"></li></a>
    			 </ul>
    			 
    			 <!-- 하단넘버링 끝 -->

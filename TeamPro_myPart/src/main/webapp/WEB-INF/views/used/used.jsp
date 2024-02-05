@@ -90,9 +90,9 @@
 					<div class="viewtab-menu">
 		
 						<!-- 중고거래, 중고양도 체크  -->
-						<input type="radio" name="tabview" id="tabview1">
+						<input type="radio" name="tabview" id="tabview1" value="trade1">
 						<label for="tabview1">중고거래</label> 
-						<input type="radio" name="tabview" id="tabview2"> 
+						<input type="radio" name="tabview" id="tabview2" value="transfer2"> 
 						<label for="tabview2">중고양도</label>
 						
 						<!-- 중고거래 -->
@@ -154,7 +154,7 @@
 							<div class="bbs-table-list">
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="shname" value="ok" class="MS_input_checkbox" id="showCompleted2" >거래가능내역보기
+									<input type="checkbox" name="shname" value="ok" class="MS_input_checkbox" id="showCompleted" >거래가능내역보기
 									</label>
 								</div><!-- End view-complete -->
 								<table summary="제목, 작성일, 조회수, 동영상">

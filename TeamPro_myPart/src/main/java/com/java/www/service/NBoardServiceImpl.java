@@ -28,7 +28,7 @@ public class NBoardServiceImpl implements NBoardService{
 		if(page<=0) page=1;
 		int countPerPage = 10;
 		int bottomPerNum = 10;
-		int countAll = nbMapper.selectCountAll();
+		int countAll = nbMapper.selectCountAll(category,searchWord);
 		
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
 		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
@@ -40,6 +40,13 @@ public class NBoardServiceImpl implements NBoardService{
 		if(endPage>maxPage) endPage=maxPage;
 		ArrayList<NBoardDto> list = nbMapper.selectAll(startRow,endRow,category,searchWord);
 		
+		System.out.println("NBoardServiceImpl selectAll countAll :"+countAll);
+		System.out.println("NBoardServiceImpl selectAll countAll :"+startRow);
+		System.out.println("NBoardServiceImpl selectAll countAll :"+endRow);
+		System.out.println("NBoardServiceImpl selectAll countAll :"+maxPage);
+		System.out.println("NBoardServiceImpl selectAll countAll :"+startPage);
+		System.out.println("NBoardServiceImpl selectAll countAll :"+endPage);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
 		map.put("countAll", countAll);
@@ -47,10 +54,14 @@ public class NBoardServiceImpl implements NBoardService{
 		map.put("maxPage", maxPage);
 		map.put("startPage", startPage);
 		map.put("endPage", endPage);
+		map.put("category", category);
+		map.put("searchWord", searchWord);
 		
 		
 		return map;
 	}
+	
+	/*
 	//게시글 리스트 검색 가져오기
 	@Override
 	public Map<String, Object> selectSearch(int page, String category, String searchWord) {
@@ -58,7 +69,7 @@ public class NBoardServiceImpl implements NBoardService{
 		if(page<=0) page=1;
 		int countPerPage = 10;
 		int bottomPerNum = 10;
-		int countAll = nbMapper.selectCountAll();
+		int countAll = nbMapper.selectCountAll(category,searchWord);
 		
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
 		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
@@ -81,16 +92,19 @@ public class NBoardServiceImpl implements NBoardService{
 		
 		return map;
 	}
-
+*/
+	
 	//게시글 1개 가져오기, 이전글, 다음글 가져오기, 조회수 가져오기
 	@Override
 	public Map<String, Object> selectOne(int n_bno) {
-		System.out.println("서비스 임플 : "+n_bno);
 		NBoardDto nboardDto = nbMapper.selectOne(n_bno);
 		NBoardDto predto = nbMapper.selectOnePrev(n_bno);
 		NBoardDto nextdto = nbMapper.selectOneNext(n_bno);
-		System.out.println("서비스 임플1 : "+n_bno);
 		List<NCommentDto> n_list = nbMapper.commentSelectAll(n_bno);
+
+		//조회수 증가
+		nbMapper.nbhitUp(n_bno);
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		

@@ -11,8 +11,6 @@ section {
 	margin: 0 auto;
 }
 
-
-
 table {
 	width: 75%;
 	margin-top: 100px;
@@ -43,19 +41,16 @@ table {
 	text-align: center;
 	font-size: 18px;
 	font-weight: 700;
+	outline-color:#009223;
 	border: 2px solid #009223;
 	border-radius: 10px;
-	outline-color : #009223;
-	
-	
-	
 }
 
 #searchWord {
 	width: 800px;
-	outline-color: #009223;
 	font-size: 18px;
 	font-weight: 700;
+	outline-color:#009223;
 	border: 2px solid #009223;
 	border-radius: 10px;
 }
@@ -91,22 +86,10 @@ table {
 
 .table-title {
 	text-align: left;
-	
 }
-
-.table-title a {
-	table-layout:fixed;
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow: ellipsis;
-
-	
-}
-
 
 table {
 	border-collapse: collapse;
-
 }
 
 th {
@@ -115,11 +98,7 @@ th {
 }
 
 td {
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow: ellipsis;
 	border: 1px solid silver;
-	
 }
 
 th, td {
@@ -153,19 +132,6 @@ th, td {
 	list-style: none;
 	font-weight: 700;
 }
-
-.on{
-	width: 36px;
-	height: 35px;
-	padding: 0;
-	list-style: none;
-	background: #009223;
-	border: 1px solid #009223;
-	color: #ffce32;
-	transition: all 0.4s;
-	font-weight: 700;
-}
-
 
 .num:hover {
 	width: 36px;
