@@ -19,4 +19,7 @@ public interface UsedService {
 	//중고양도 - 거래가능내역 보기
 	ArrayList<UsedDto> selectPossible2(String u_bstatus);
 
+	//중고 View 페이지
+	UsedDto selectOne(int u_bno);
+
 }

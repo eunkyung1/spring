@@ -26,5 +26,8 @@ public interface UsedMapper {
 	
 	//게시글 갯수 가져오기(transfer2)
 	int selectCountAll2();
+	
+	//View탭
+	UsedDto selectOne(int u_bno);
 
 }

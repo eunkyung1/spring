@@ -99,7 +99,11 @@ public class UController {
 	
 	//중고거래 및 양도 - 뷰
 	@GetMapping("usedcontent")
-	public String usedcontent() {
+	public String usedcontent(@RequestParam(defaultValue = "1")int u_bno, Model model ) {
+		
+		UsedDto udto = uService.selectOne(u_bno);
+		model.addAttribute("udto",udto);
+		
 		return "/used/usedcontent";
 	}// usedcontent()
 	

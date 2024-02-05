@@ -90,4 +90,11 @@ public class UsedServiceImpl implements UsedService {
 		return list2;
 	}
 
+	//View탭
+	@Override
+	public UsedDto selectOne(int u_bno) {
+		UsedDto udto = usedMapper.selectOne(u_bno);
+		return udto;
+	}
+
 }

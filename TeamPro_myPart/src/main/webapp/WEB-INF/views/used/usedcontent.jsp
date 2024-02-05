@@ -56,12 +56,7 @@
 								width:128.01px; height: 128.01px;">
 							<h1 style="text-align: center;">중고거래</h1>
 						</div>
-						<!-- <div class="bbs-hd">
-							<ul class="link">
-								<li><a href="#">캠핑용품리뷰</a></li> &nbsp &nbsp &nbsp &nbsp
-								<li><a href="#">캠핑장리뷰</a></li>
-							</ul>
-						</div> -->
+		
 						<br> <br> <br>
 						<div class="bbs-tit">
 							<h3>캠핑용품리뷰</h3>

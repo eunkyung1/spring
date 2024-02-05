@@ -46,6 +46,10 @@
 		where rnum between 1 and 8
 	</select>
 	
+	<select id="selectOne" resultType="com.java.www.dto.UsedDto">
+		select * from u_board where u_bno=#{u_bno}
+	</select>
+	
 	
 	
 	
