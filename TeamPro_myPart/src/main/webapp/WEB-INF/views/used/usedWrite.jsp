@@ -47,7 +47,6 @@
 	<!-- End Header -->
 	
 		<section class="notice">
-		
 			<!-- 중고거래&캠핑장양도_글쓰기 -->
 	    	<h1 style="float: left; margin: 40px; font-weight: 700; position: relative; left:235px; top: 30px;">중고거래&캠핑장양도 글쓰기</h1>
 			<form action="" name="freeFrm" method="post" enctype="multipart/form-data">
