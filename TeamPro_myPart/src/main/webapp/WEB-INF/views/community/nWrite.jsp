@@ -30,9 +30,15 @@
 	    <!-- Template Main CSS File -->
 		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
+<<<<<<< HEAD
 		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
 		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
 		<link href="../assets/css/community/writeStyle.css" rel="stylesheet">
+=======
+		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/commuinty/writeStyle.css" rel="stylesheet">
+>>>>>>> refs/remotes/origin/master
 		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
 		<link href="../assets/css/community/nstyle.css" rel="stylesheet">
 		
@@ -41,6 +47,8 @@
         <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
   		<script src="../assets/js/community/n_total.js"></script>
   		<script src="../assets/js/summernote.js"></script>
+        <script src="../assets/js/summernote-lite.js"></script>
+        <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
   		
  
 	</head>

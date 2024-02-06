@@ -66,7 +66,7 @@ public class BServiceImpl implements BService {
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
 		//maxPage = 45개 -> 45/10 = 4.5 (올림)-> 5
 		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1; // 5-1=4/10 -> 0*10+1
-		int endPage = (startPage+bottomPerNum)+-1;
+		int endPage = (startPage+bottomPerNum)-1;
 		
 		int startRow = (page-1)*countPerPage+1; //1, 11, 21, 31, 41
 		int endRow = startRow + countPerPage-1; //10,20,30,40

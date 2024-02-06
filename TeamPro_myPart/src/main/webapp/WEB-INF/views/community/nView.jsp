@@ -35,10 +35,19 @@
 	  
 	    <!--  JS File -->
 	    <script>
+<<<<<<< HEAD
 	    	var id = "${session_id}";
+=======
+	    	var n_bno = ${map.nbdto.n_bno};
+	    	var id = "${session_id}";
+	    	var authorID = "${map.nbdto.id}";
+>>>>>>> refs/remotes/origin/master
 	    </script>
 	    <script src="../assets/js/community/nView.js"></script>
+<<<<<<< HEAD
 	    <link href="../assets/css/community/nstyle.css" rel="stylesheet">
+=======
+>>>>>>> refs/remotes/origin/master
 	    
 	    
 	</head>
@@ -109,8 +118,13 @@
 		    <!-- 버튼 -->
 		    <div class="listBtn">
 		    	<a href="nList"><button class="list">목록</button></a>
+<<<<<<< HEAD
 		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="n_deleteBtn" data-userid="${map.nbdto.id}"><button class="list" id="n_deleteBtn">삭제</button></a>
 		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="n_updateBtn" data-userid="${map.nbdto.id}" ><button class="list" id="n_updateBtn">수정</button></a>
+=======
+		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="n_deleteBtn"><button class="list" id="n_deleteBtn">삭제</button></a>
+		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="n_updateBtn"><button class="list" id="n_updateBtn">수정</button></a>
+>>>>>>> refs/remotes/origin/master
 		    	
 		    </div>
 		    

@@ -58,6 +58,10 @@
 
         $(".consolebox2 .fixed-img-collist .clear").html(hdata);
         
+<<<<<<< HEAD
+=======
+        updatePagination(data);
+>>>>>>> refs/remotes/origin/master
     },
 	error:function(){
 	alert("실패");
