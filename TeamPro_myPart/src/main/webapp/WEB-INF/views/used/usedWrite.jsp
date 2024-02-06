@@ -64,6 +64,7 @@
 					       <option value="trade1">중고거래</option>
 					       <option value="transfer2">캠핑장양도</option>
 					    </select>
+					    
 			        </th>
 			        <th colspan="3" style="text-align: left;"><input type="text" id="f_btitle" placeholder=" ※ 게시글 제목을 입력해주세요."> </span></th>
 			      </tr>
