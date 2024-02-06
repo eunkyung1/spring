@@ -80,6 +80,7 @@
 			      </tr>
 			    </table>
 			</form>
+			
 			<div class="listBtn">
 		    	<a href="#"><div class="list" id="saveBtn">저장</div></a>
 		    	<a href="fList"><div class="list">취소</div></a>
