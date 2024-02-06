@@ -22,4 +22,9 @@ public interface UsedService {
 	//중고 View 페이지
 	UsedDto selectOne(int u_bno);
 
+	//글쓰기 저장
+	void usedWrite(UsedDto udto);
+	
+	
+
 }

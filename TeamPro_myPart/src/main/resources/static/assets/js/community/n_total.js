@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var file = fileInput.files[i];
         var reader = new FileReader();
 
-        reader.onloadend = (function (file) {
+        reader.onloadend = (function(file) {
             return function () {
                 // 파일 미리보기 표시
                 var previewItem = $('<div class="file-preview-item"></div>');

@@ -58,10 +58,6 @@
 
         $(".consolebox2 .fixed-img-collist .clear").html(hdata);
         
-<<<<<<< HEAD
-=======
-        updatePagination(data);
->>>>>>> refs/remotes/origin/master
     },
 	error:function(){
 	alert("실패");
@@ -266,7 +262,21 @@
 }//else
 })//click(#showCompleted)
 	
-	
+/*첫번째 사진가지고 list 뿌리기*/  
+     $('.image-container').each(function() {
+            // span 요소의 데이터 속성에서 이미지 파일명 가져오기
+            var imageFiles = $(this).data('images');
+            if (imageFiles) {
+                // 이미지 파일명을 쉼표로 분할하여 배열로 변환
+                var imageArray = imageFiles.split(',');
+                // 첫 번째 이미지 파일명 선택
+                var firstImage = imageArray[0];
+                if (firstImage) {
+                    // 첫 번째 이미지 파일명을 img 요소의 src 속성에 설정하여 이미지 출력
+                    $(this).find('img').attr('src', '/upload/' + firstImage);
+                }
+            }
+        });
 	
 	
 	

@@ -1,9 +1,11 @@
 package com.java.www.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.tags.shaded.org.apache.xalan.xsltc.compiler.sym;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,9 +37,6 @@ public class UController {
 		
 		return "/used/used";
 	}// used()
-	
-
-	
 	
 	
 	//중고거래 및 양도 - 양도
@@ -107,10 +108,49 @@ public class UController {
 		return "/used/usedcontent";
 	}// usedcontent()
 	
+	
 	//중고거래 및 양도 - 글쓰기
 	@GetMapping("usedWrite")
 	public String usedWrite() {
 		return "/used/usedWrite";
+	}// usedWrite()
+	
+	//중고거래 및 양도 - 글쓰기
+	@PostMapping("usedWrite")
+	public String usedWrite(List<MultipartFile> u_files, UsedDto udto, Model model) throws Exception {
+		
+		String fileUrl = "c:/upload/";
+		StringBuilder u_bfileName = new StringBuilder();
+		int fileCount =0;
+		
+		if(!u_files.isEmpty()) {
+			for(MultipartFile file:u_files) {
+				
+				if(!file.isEmpty()) {
+				String orgfileName = file.getOriginalFilename();
+				long time = System.currentTimeMillis();
+				String uploadFileName = time+"_"+orgfileName;
+				System.out.println("파일이름 : "+uploadFileName);
+				File f = new File(fileUrl+uploadFileName);
+				file.transferTo(f);
+				 if (fileCount > 0) {
+		                u_bfileName.append(",");
+		            }//if(fileCount)
+		            u_bfileName.append(uploadFileName);
+		            fileCount++;
+				}//if
+			}//for
+		}//if
+		
+		udto.setU_bfile(u_bfileName.toString());
+		System.out.println("최종파일이름 : "+u_bfileName);
+		
+		uService.usedWrite(udto);
+		
+		model.addAttribute("result","used-w");
+		
+		
+		return "/used/uResult";
 	}// usedWrite()
 
 }

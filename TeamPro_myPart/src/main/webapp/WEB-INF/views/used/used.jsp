@@ -120,7 +120,10 @@
 										<c:forEach var="udto" items="${map.list}">
 										<li>
 											<a href="usedcontent?u_bno=${udto.u_bno}"> 
-												<span><img src="/upload/${udto.u_bfile}"></span> 
+											<span class="image-container" data-images="${udto.u_bfile}">
+				                                <!-- 이미지 출력을 담당할 img 요소, 초기에는 비어있음 -->
+				                                <img src="" alt="Image">
+				                            </span> 
 												<div class="used_title">
 												<strong>${udto.u_btitle}</strong>
 												</div>
@@ -173,7 +176,10 @@
 									<ul class="clear">
 									<li>
 										<a href="usedcontent?u_bno=${map.udto.u_bno}"> 
-											<span><img src="/upload/${map.udto.u_bfile}"></span> 
+											<span class="image-container" data-images="${udto.u_bfile}">
+				                                <!-- 이미지 출력을 담당할 img 요소, 초기에는 비어있음 -->
+				                                <img src="" alt="Image">
+				                            </span> 
 											<div class="used_title">
 											<strong>${map.udto.u_btitle}</strong>
 											</div>

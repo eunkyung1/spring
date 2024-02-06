@@ -97,4 +97,11 @@ public class UsedServiceImpl implements UsedService {
 		return udto;
 	}
 
+	//usedWrite 글쓰기
+	@Override
+	public void usedWrite(UsedDto udto) {
+		usedMapper.usedWrite(udto);
+		
+	}
+
 }

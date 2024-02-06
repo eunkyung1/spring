@@ -17,7 +17,7 @@ public class UsedDto {
 	private String id;
 	private String u_btype;
 	private String u_btitle;
-	private String u_content;
+	private String u_bcontent;
 	private String u_bprice;
 	private String u_blocal;
 	private Timestamp u_bdate;

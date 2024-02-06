@@ -50,6 +50,10 @@
 		select * from u_board where u_bno=#{u_bno}
 	</select>
 	
+	<insert id="usedWrite">
+		insert into u_board values(u_board_seq.nextval,#{id},#{u_btype},#{u_btitle},#{u_bcontent},#{u_bprice},#{u_blocal},sysdate,0,0,#{u_bfile})
+	</insert>
+	
 	
 	
 	

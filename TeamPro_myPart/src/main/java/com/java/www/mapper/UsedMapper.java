@@ -29,5 +29,8 @@ public interface UsedMapper {
 	
 	//View탭
 	UsedDto selectOne(int u_bno);
+	
+	//글쓰기
+	void usedWrite(UsedDto udto);
 
 }
