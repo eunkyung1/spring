@@ -30,26 +30,24 @@ public class UController {
 	
 	
 	//중고거래 및 양도 - 중고거래
-	@GetMapping("used")
-	public String used(@RequestParam(defaultValue = "1")int page ,Model model) {
+	@GetMapping("used_ca1")
+	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model) {
 		Map<String, Object> map =  uService.selectAll(page);
 		model.addAttribute("map",map);
 		
-		return "/used/used";
+		return "/used/used_ca1";
 	}// used()
 	
 	
 	//중고거래 및 양도 - 양도
-	@PostMapping("used_transfer")
-	@ResponseBody
-	public Map<String, Object> used_transfer(String u_btype,@RequestParam(defaultValue = "1")int page){
-		System.out.println("UController used_transfer :"+u_btype);
+	@GetMapping("used_sh2")
+	public String used_sh2(@RequestParam(defaultValue = "1")int page,Model model){
 		
-		Map<String, Object> map =  uService.selectAll2(page);
-		
+		Map<String, Object> map2 =  uService.selectAll2(page);
+		model.addAttribute("map2",map2);
 		
 		
-		return map;
+		return "/used/used_sh2";
 	}// used_transfer()
 	
 	
@@ -117,19 +115,35 @@ public class UController {
 	
 	//중고거래 및 양도 - 글쓰기
 	@PostMapping("usedWrite")
-	public String usedWrite(List<MultipartFile> u_files, UsedDto udto, Model model) throws Exception {
+	public String usedWrite(@RequestPart MultipartFile uimg, List<MultipartFile> u_files, UsedDto udto, Model model) throws Exception {
 		
 		String fileUrl = "c:/upload/";
+		String orgfileName ="";
+		String uploadFileName = "";
 		StringBuilder u_bfileName = new StringBuilder();
 		int fileCount =0;
+		String noImage = "../../assets/img/nView/noImage.png";
+		
+		
+		if(!uimg.isEmpty()) {
+			orgfileName = uimg.getOriginalFilename();
+			long time = System.currentTimeMillis();
+			uploadFileName = time+"_"+orgfileName;
+			System.out.println("파일이름 : "+uploadFileName);
+			File f = new File(fileUrl+uploadFileName);
+			uimg.transferTo(f);
+			udto.setU_mimg(uploadFileName);
+		}else {
+			udto.setU_mimg(noImage);
+		}
+		
 		
 		if(!u_files.isEmpty()) {
 			for(MultipartFile file:u_files) {
-				
 				if(!file.isEmpty()) {
-				String orgfileName = file.getOriginalFilename();
+				orgfileName = file.getOriginalFilename();
 				long time = System.currentTimeMillis();
-				String uploadFileName = time+"_"+orgfileName;
+				uploadFileName = time+"_"+orgfileName;
 				System.out.println("파일이름 : "+uploadFileName);
 				File f = new File(fileUrl+uploadFileName);
 				file.transferTo(f);
@@ -147,7 +161,11 @@ public class UController {
 		
 		uService.usedWrite(udto);
 		
-		model.addAttribute("result","used-w");
+		if(udto.getU_btype()=="trade1") {
+			model.addAttribute("result","used-w");
+		}else {
+			model.addAttribute("result","used-w2");
+		}
 		
 		
 		return "/used/uResult";

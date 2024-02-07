@@ -24,5 +24,6 @@ public class UsedDto {
 	private int u_bstatus;
 	private int u_bhit;
 	private String u_bfile;
+	private String u_mimg;
 
 }

@@ -66,14 +66,14 @@ public class UsedServiceImpl implements UsedService {
 		
 		
 		List<UsedDto> list2 = usedMapper.selectAll2(startRow,endRow);
-		Map<String, Object> map = new HashMap<>();
-		map.put("list2", list2);
-		map.put("countAll", countAll);
-		map.put("page", page);
-		map.put("maxPage", maxPage);
-		map.put("startPage", startPage);
-		map.put("endPage", endPage);
-		return map;
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("list2", list2);
+		map2.put("countAll", countAll);
+		map2.put("page", page);
+		map2.put("maxPage", maxPage);
+		map2.put("startPage", startPage);
+		map2.put("endPage", endPage);
+		return map2;
 	}
 
 	//u_status = '1'(trade1)
