@@ -10,26 +10,21 @@
 	</head>
 	<body>
 		<c:choose>
-				<c:when test="${result == 'nView-D'}">
+				<c:when test="${result == 'used-w'}">
 					<script>
-					 alert("게시글이 삭제되었습니다.");
-					 location.href="nList";
+					 alert("게시글이 저장되었습니다.");
+					 location.href="used_ca1";
 					</script>			
 				</c:when>
 				
-				<c:when test="${result == 'Update-S'}">
+				<c:when test="${result == 'used-w2'}">
 					<script>
-						alert("게시글이 저장되었습니다.");
-						location.href="nList";
+					 alert("게시글이 저장되었습니다.");
+					 location.href="used_sh2";
 					</script>			
 				</c:when>
 				
-				<c:when test="${result == 'Update-W'}">
-					<script>
-						alert("게시글이 수정되었습니다.");
-						location.href="nList";
-					</script>			
-				</c:when>
+
 		</c:choose>
 		
 	</body>

@@ -31,9 +31,12 @@ public class UController {
 	
 	//중고거래 및 양도 - 중고거래
 	@GetMapping("used_ca1")
-	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model) {
-		Map<String, Object> map =  uService.selectAll(page);
+	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model,
+			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
+		Map<String, Object> map =  uService.selectAll(page,category,searchWord);
+		//Map<String, Object> mapt =  uService.selectAllt(page,u_bstatus,u_btype);
 		model.addAttribute("map",map);
+		//model.addAttribute("mapt",mapt);
 		
 		return "/used/used_ca1";
 	}// used()
@@ -41,9 +44,10 @@ public class UController {
 	
 	//중고거래 및 양도 - 양도
 	@GetMapping("used_sh2")
-	public String used_sh2(@RequestParam(defaultValue = "1")int page,Model model){
+	public String used_sh2(@RequestParam(defaultValue = "1")int page,Model model,
+			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord){
 		
-		Map<String, Object> map2 =  uService.selectAll2(page);
+		Map<String, Object> map2 =  uService.selectAll2(page,category,searchWord);
 		model.addAttribute("map2",map2);
 		
 		
@@ -51,60 +55,67 @@ public class UController {
 	}// used_transfer()
 	
 	
-	//중고거래 거래가능 checked-true일때
+	//중고거래&양도 거래가능 checked-true일때 
 	@PostMapping("possible_t")
 	@ResponseBody
-	public ArrayList<UsedDto> possible_t(String u_bstatus){
+	public ArrayList<UsedDto> possible_t(int u_bstatus,String u_btype){
 		System.out.println("UController used_transfer :"+u_bstatus);
 		
-		ArrayList<UsedDto> list = uService.selectPossible(u_bstatus);
+		ArrayList<UsedDto> list = uService.selectPossible(u_bstatus,u_btype);
 		return list;
 	}
 	
+	//중고거래 거래가능 checked-true일때 하단넘버링
+	@PostMapping("pageNum_ca1")
+	@ResponseBody
+	public Map<String, Object> page_ca1(int u_bstatus,@RequestParam(defaultValue = "1")int page,String u_btype){
+		System.out.println("UController used_transfer :"+u_bstatus);
+		
+		Map<String, Object> map = uService.selectP_num(u_bstatus,page,u_btype);
+		
+		return map;
+	}
 	
-	//중고거래 거래가능 checked- false일때
+	
+	//중고거래 거래가능 checked- false일때(ajax)
 	@PostMapping("used_trade1")
 	@ResponseBody
-	public Map<String, Object> used_trade1(@RequestParam(defaultValue = "1")int page ,Model model) {
-		Map<String, Object> map =  uService.selectAll(page);
+	public Map<String, Object> used_trade1(@RequestParam(defaultValue = "1")int page ,Model model,
+			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
+		Map<String, Object> map =  uService.selectAll(page,category,searchWord);
 		
 		model.addAttribute("map",map);
 		
 		return map;
 	}// used_trade1()
-	
-	//중고양도 거래가능 checked-true일때
-	@PostMapping("possible_t2")
-	@ResponseBody
-	public ArrayList<UsedDto> possible_t2(String u_bstatus){
-		System.out.println("UController used_transfer :"+u_bstatus);
-		
-		ArrayList<UsedDto> list2 = uService.selectPossible2(u_bstatus);
-		return list2;
-	}
-	
-	//중고양도 거래가능 checked- false일때
+
+	//중고양도 거래가능 checked- false일때(ajax)
 	@PostMapping("used_transfer2")
 	@ResponseBody
-	public Map<String, Object> used_transfer2(Model model,@RequestParam(defaultValue = "1")int page) {
-		Map<String, Object> map =  uService.selectAll2(page);
+	public Map<String, Object> used_transfer2(Model model,@RequestParam(defaultValue = "1")int page,
+			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
+		Map<String, Object> map2 =  uService.selectAll2(page,category,searchWord);
 		
-		model.addAttribute("map",map);
+		model.addAttribute("map2",map2);
 		
-		return map;
+		return map2;
 	}// used_trade1()
 	
 	
 	
 	//중고거래 및 양도 - 뷰
 	@GetMapping("usedcontent")
-	public String usedcontent(@RequestParam(defaultValue = "1")int u_bno, Model model ) {
+	public String usedcontent(@RequestParam(defaultValue = "1")int u_bno, Model model, String u_btype ) {
 		
-		UsedDto udto = uService.selectOne(u_bno);
-		model.addAttribute("udto",udto);
+		Map<String, Object> map = uService.selectOne(u_bno,u_btype);
+		model.addAttribute("map",map);
 		
 		return "/used/usedcontent";
 	}// usedcontent()
+	
+	
+	
+	
 	
 	
 	//중고거래 및 양도 - 글쓰기
@@ -170,5 +181,12 @@ public class UController {
 		
 		return "/used/uResult";
 	}// usedWrite()
+	
+	//중고거래 및 양도 - 글수정
+	@GetMapping("usedUpdate")
+	public String usedUpdate(@RequestParam(defaultValue = "1")int u_bno, Model model) {
+		return "/used/usedUpdate";
+	}// usedUpdate()
+	
 
-}
+}//controller

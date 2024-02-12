@@ -1,0 +1,317 @@
+@charset "UTF-8";
+
+/*used_ca1.jsp*/
+.CSSbuttonWhite{
+	bottom:180px;
+}
+
+
+
+
+
+/*usedcontent.jsp*/
+
+.camp-img-div img{
+	position: relative;
+	 margin-top: 40px;
+	 margin-bottom: 10px;
+	 width:128px;
+	 height: 128px;
+}
+.camp-img-div h1{
+	text-align: center;
+}
+#comment_form{
+	height: 1800px;
+	position: relative;
+	top: 100px;
+	left: 270px;
+}
+.content_table{
+	margin-top:30px;
+}
+
+.prd-tinfo{
+	padding:15px 0 10px 100px !important;
+}
+.prd-tinfo dt{
+	margin-top:12px;
+	margin-left:10px;
+}
+.prd-tinfo .tinfo_img{
+	width:100px; 
+	height:100px;
+	display: flex;
+}
+
+.prd-tinfo dd{
+	margin-bottom:20px;
+}
+
+.bbs-table-btitle>th{
+	height:80px;
+}
+
+.cont_sub{
+	padding-bottom: 5px;
+}
+
+.cont-sub-des{
+	font-size:14px;
+	padding-left:60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between; 
+}
+
+
+.cont-sub-des strong{
+	font-weight: 800;
+}
+.tb-center{
+	font-size:16px;
+}
+
+.bbs-table-view tbody td{
+	padding:0;
+}
+.cont_top_date{
+	padding-right:60px;
+	
+}
+
+.cont_top_price{
+	padding: 0 60px;
+	font-size:14px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between; 
+	
+}
+
+.cont_top_price .content_blocal{
+	margin-right:52px;
+}
+
+.content_hit{
+	margin-left:20px;
+	font-size: 13px;
+}
+
+.tb-center{
+	padding-left:60px;
+	font-weight: 600;
+}
+
+.data-bd{
+	padding-left:15px !important;
+}
+
+.data-bd-cont{
+	height: 500px;
+	font-size: 17px;
+	color:black !important;
+}
+.line{
+	border-bottom: 2px solid #009223;
+}
+.bfile{
+	display:flex;
+	flex-direction : row;
+	padding:15px 0;
+}
+
+.bfile tr{
+	text-align: center;
+}
+.bfile_name, .img_name{
+	position: relative; 
+	width:100px;
+	text-align:center
+}
+
+.img_name{
+	margin: auto 0;
+}
+
+.bfile_name{
+	height: 50px;
+}
+
+.bfile_name strong{
+	text-align: center;
+}
+.bfile_name td{
+	position: relative; 
+	left: 5px;
+}
+
+/* 이미지 VIEW  */
+.bfile_ucontent {
+    display: flex; /* Flexbox를 사용하여 이미지와 이미지명을 좌우로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.u_images-container {
+    display: flex; /* 이미지와 이미지명을 좌우로 나열하기 위해 Flexbox 사용 */
+    flex-wrap: wrap; /* 요소가 넘칠 경우 다음 줄로 넘어가도록 설정 */
+    justify-content: space-around; /* 요소들을 가로 방향으로 고르게 배치 */
+    align-items: center; /* 이미지와 텍스트를 수직 정렬 */
+    max-width: 1000px; /* 이미지들의 최대 너비 */
+}
+
+.u_image {
+    display: flex; /* 이미지와 이미지명을 옆으로 나열하기 위해 Flexbox 사용 */
+    flex-direction: column; /* 요소를 세로로 배열 */
+    text-align: center; /* 이미지와 텍스트를 가운데 정렬 */
+    margin: 10px; /* 이미지 사이의 간격 조정 */
+	cursor:pointer;
+}
+
+.u_image img {
+    max-width: 200px; /* 이미지의 최대 너비 */
+	
+}
+
+.u_image span {
+    margin-top: 5px; /* 이미지명과 이미지 사이의 간격 조정 */
+	font-size:12px;
+}
+
+/*  */
+.bfile_ucontent td{
+	text-align: center;
+}
+
+.bfile_ucontent img{
+	width:150px;
+	height:150px;
+}
+
+
+.bfile.b_Upload{
+	border-bottom: 1px solid silver;
+}
+
+/*모달창 css*/
+.u_modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.u_modal-content {
+  margin: 15% auto;
+  width: 500px; /* 변경된 부분: 모달 창의 너비를 500px로 설정 */
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+}
+/* 이미지 스타일 */
+.u_modal-content img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 80vh;
+}
+
+/* 닫기 버튼 스타일 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.u_list{
+	float: right;
+    width: 88px;
+    height: 38px;
+    line-height: 30px;
+    margin: 0 5px 50px 0;
+    border-radius: 10px;
+    border: 2px solid #009223;
+    position: relative;
+    right: 75px;
+    font-size: 15px;
+    font-weight: 700;
+    background: #009223;
+    color: white;
+	
+}
+
+/*하단버튼 */
+.u_list:hover{
+	float: right;
+    width: 88px;
+    height: 38px;
+    line-height: 30px;
+    margin: 0 5px 50px 0;
+    border-radius: 10px;
+    border: 2px solid #ffce32;
+    position: relative;
+    right: 75px;
+    font-size: 15px;
+    font-weight: 700;
+    transition: all 0.4s;
+    background: #ffce32;
+    color: #009223;
+    cursor: pointer;
+}
+.u_listBtn{
+	margin-right: 180px;
+    position: relative;
+    left: 270px;
+    margin-top: 10px;
+}
+/* 댓글 비밀번호  */
+.u_replyIPw{
+	height: 28px; 
+	position: relative; 
+	top: 45px;
+	display:flex;
+	flex-direction: row;
+}
+
+.u_replyIPw input{
+	margin-left:10px;
+}
+
+.u_replyIPw span{
+	width: 600px; 
+	
+}
+/*댓글 입력창*/
+.u_replycont{
+	width: 1000px;
+	height:80px;
+	position: relative; 
+	bottom: 2px;
+	outline-color: #009223;
+	
+}
+
+#u_replybtn{
+	background: #009223;
+    border: 2px solid #009223;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+    width: 85px; 
+    height: 80px;
+}

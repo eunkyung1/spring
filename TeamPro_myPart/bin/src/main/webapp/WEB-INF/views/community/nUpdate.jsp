@@ -30,19 +30,20 @@
 	    <!-- Template Main CSS File -->
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/writeStyle.css" rel="stylesheet">
-		<script src="../assets/js/summernote-lite.js"></script>
-        <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
+		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/writeStyle.css" rel="stylesheet">
 		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
+		<link href="../assets/css/community/nstyle.css" rel="stylesheet">
 		
 		<!-- Template nWrite JS File -->
 		<script>
-			var sel_Value = '<c:out value="${map.nbdto.n_btype}"/>';
+			var sel_Value ="${map.nbdto.n_btype}";
 		</script>
+		<script src="../assets/js/summernote-lite.js"></script>
+        <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
+  		<script src="../assets/js/community/n_total.js"></script>
   		<script src="../assets/js/summernote.js"></script>
-  		<script src="../assets/js/nUpdate.js"></script>
   	
 	</head>
 

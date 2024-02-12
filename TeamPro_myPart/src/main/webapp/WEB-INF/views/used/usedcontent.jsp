@@ -34,27 +34,31 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/main2.css" rel="stylesheet">
+<link href="../assets/css/used/used_total.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/review/reviewcontent.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/review/siteReview.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/review/listStyle2.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/review/header2.css" rel="stylesheet" type="text/css">
+
+
+<!-- Template Main JS File -->
+<script src="../assets/js/used/usedTotal.js"></script>
+
 </head>
 <body>
 	<!-- ======= Header ======= -->
 	<%@include file="../include/header.jsp"%>
 	<!-- End Header -->
+	
+	
 	<section class="headerCss">
 		<div id="contentWrap">
-			<link type="text/css" rel="stylesheet"
-				href="/template_common/shop/basic_simple/menu.1.css?t=201711221039" />
 			<div id="content">
 				<div id="bbsData">
 					<div class="page-body">
 						<div class="camp-img-div">
-							<img src="assets/img/campUsed/free-icon-camp-8486682.png" alt="캠핑용품리뷰"
-								style="position: relative; margin-top: 40px; margin-bottom: 10px;
-								width:128.01px; height: 128.01px;">
-							<h1 style="text-align: center;">중고거래</h1>
+							<img src="/assets/img/campUsed/free-icon-camp-8486682.png" alt="캠핑용품리뷰">
+							<h1>중고거래</h1>
 						</div>
 		
 						<br> <br> <br>
@@ -63,118 +67,121 @@
 						</div>
 						<dl class="prd-tinfo">
 							<dt>
-								<a href="#"><img src="assets/img/campUsed/campUsed1.jpg" /></a>
+								<a class="tinfo_img"><img src="/upload/${map.udto.u_mimg}" /></a>
 							</dt>
 							<dd>
 								<ul>
-									<li class="name"><span class="tit">상품명 :</span> <a
-										href="assets/img/campUsed/campUsed1.jpg"> 몬테라 테이블 팔아요</a></li>
-									<!-- <li class="price"><span class="tit">판매가 :</span> 100,000원</li> -->
+									<li class="name"><span class="tit">중고거래명 : </span> <a>${map.udto.u_btitle}</a></li>
+									<li class="price"><span class="tit">판매가 : </span>
+									<c:set var="price" value="${map.udto.u_bprice}" />
+									<fmt:formatNumber value="${price}" pattern="#,##0원" />
+									</li>
+									<li class="u_local"><span class="tit">판매지역 : </span>${map.udto.u_blocal}</li>
 								</ul>
 							</dd>
 						</dl>
 						<br>
-					<form id="comment_form" name="comment" action="#" method="post" autocomplete="off" 
-					style="height: 1800px; position: relative; top: 100px; left: 270px;">
-						<div class="bbs-table-view">
+						
+					<form id="comment_form">
+						<input type="hidden" id="session" value="${session_id}"/>
+						 
+						<div class="bbs-table-view" >
 							<table summary="게시글 보기">
 								<caption>게시글 보기</caption>
 								<thead>
-									<tr>
-										<th><div class="tb-center">몬테라 테이블 팔아요</div></th>
+									<tr class="bbs-table-btitle">
+										<th><div class="tb-center ${map.udto.u_bno}">${map.udto.u_btitle }</div></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="line">
+										<td class="cont-sub line" style="padding:0 0 5px 0;">
 											<div class="cont-sub-des">
-												<div>
-													<span><em>Date :</em> 2024.01.17 08:00:58</span>
+												<div class="${map.udto.id}">
+													<span class="writer"><strong>작성자 :</strong> ${map.udto.id}</span> 
 												</div>
-												<div>
-													<span class="writer"><em>Name :</em> 뿌라빠파 </span> <span><em>Hits
-															:</em> 2</span>
+												<div class="cont_top_date">
+													<span class="content_date"><fmt:formatDate value="${map.udto.u_bdate}" pattern="yyyy-MM-dd HH:dd"/></span>
+													<span class="content_hit"><strong>조회:</strong> ${map.udto.u_bhit}</span>
 												</div>
+											</div>
+											<div class="cont_top_price">
+												<span class="content_bprice"><strong>가격 : </strong>
+												<c:set var="price" value="${map.udto.u_bprice}" />
+												<fmt:formatNumber value="${price}" pattern="#,##0원" />
+												</span>
+												<span class="content_blocal"><strong>판매지역 : </strong>${map.udto.u_blocal}</span>
 											</div>
 										</td>
 									</tr>
 									<tr>
-										<td>
+										<td class="data-bd">
 											<div class="data-bd-cont">
-												<div id=MS_WritenBySEB>얼른 구매하세용~</div>
-												<br> <img src="assets/img/campUsed/campUsed1.jpg"
-													style="width: 400px; height: 400px;">
+												${map.udto.u_bcontent }
 											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 							<div id="comment_list_0"></div>
-							
-								<input type="hidden" name="page_type" value="board_view" /> <input
-									type="hidden" name="formnum" value="0" /> <input type="hidden"
-									name="code" value="ocamall_board13" /> <input type="hidden"
-									name="num1" value="998627" /> <input type="hidden" name="num2"
-									value="00000" /> <input type="hidden" name="page" value="1" />
-								<input type="hidden" name="lock" value="N" /> <input
-									type="hidden" name="type" value="v" /> <input type="hidden"
-									name="uti" value="1705459911" /> <input type="hidden"
-									name="key"
-									value="aqT3cAkuQhSMdd9t5n0exgHGEMulYxadTSJSwoN5qtPU19Dm/4pWyQ==" />
-								<input type="hidden" name="type2" /> <input type="hidden"
-									name="comnum" /> <input type="hidden" name="comtype" /> <input
-									type="text" name="___DUMMY___" readonly disabled
-									style="display: none;" /><input type="hidden" name="secret"
-									value="N" />
-
-								<div class="bfileUpload"
-									style="border-bottom: 2px solid #009223; height: 81.5px;">
-									<tr style="text-align: center;">
-										<div
-											style="width: 85.88px; height: 81.5; position: relative; left: 10px; top: 25px;">
-											<td class="article" style="position: relative; left: 5px;"><strong>첨부파일
-											</strong></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</div>
-										<div
-											style="width: 773.02px; height: 81.5; position: relative; left: 100px; bottom: 21px;">
-											<td colspan="3" style="text-align: center;">※첨부파일 없음</td>
-										</div>
-									</tr>
-								</div>
-
-
-								<!-- 하단 버튼 -->
-								<!-- 버튼 -->
-									<tr>
-										<input type="password" name="replyPw" id="replyIPw"
-										placeholder=" ※ 입력시 비밀글로 저장" style="width: 170px; height: 28px; position: relative; top: 65px;">
-									</tr>
 								
-								<div class="listBtn">
-									<button class="list">삭제</button>
-									<a href="fUpdate"><button class="list">수정</button></a> <a
-										href="fList"><button class="list">목록</button></a>
+								<div class="bfile img_Upload line">
+									<tr>
+										<div class="img_name">
+											<td><strong>이미지</strong></td>
+										</div>
+										
+										<c:set var="fileNames" value="${map.udto.u_bfile}" />
+										<c:set var="fileNameList" value="${fn:split(fileNames, ',')}" />
+										
+										<div class="bfile_ucontent">
+										    <div class="u_images-container">
+										        <div class="u_image">
+										            <img src="/upload/${map.udto.u_mimg}" class="modal-u_trigger">
+										            <span>${map.udto.u_mimg}</span>
+										        </div>
+										        <c:forEach var="fileName" items="${fileNameList}">
+										            <div class="u_image">
+										                <img src="/upload/${fileName}" class="modal-u_trigger" data-modal-image="/upload/${fileName}">
+										                <span>${fileName}</span>
+										            </div>
+										        </c:forEach>
+										    </div>
+										</div>
+									</tr>
+								</div>
+								
+								<!-- 모달창 -->
+								<div id="u_myModal" class="u_modal">
+								  <div class="u_modal-content">
+								    <span class="close">&times;</span>
+								    <img id="u_modalImage" src="" alt="모달 이미지">
+								  </div>
+								</div>
+								
+
+								
+								<!-- 삭제,수정, 목록버튼 -->
+								<div class="u_listBtn">
+									<a href="fList"><button class="u_list">목록</button></a>
+									<button class="u_list pri">삭제</button>
+									<!-- <a href="usedUpdate?u_bno=${udto.u_bno}"><button class="u_list u_updateBtn pri">수정</button></a> -->
+									<a><button class="u_list u_updateBtn pri">수정</button></a> 
+									<button class="u_list pri">거래완료</button>
 								</div>
 
-								<!-- 댓글입력-->
-						<!-- 		<table id="replyPw" style="position: relative; left: 280px; bottom: 10px;">
-									<tr>
-										<tr>
-										<td id="replyBorder" style="width: 100px; height: 22px; position: relative; left: 290px; top: 10px;
-										border: 1px solid white; font-size: 14px;"><strong>댓글 비밀번호</strong>
-										</tr>
-										<tr>
-										<input type="password" name="replyPw" id="replyIPw"
-										placeholder=" ※ 입력시 비밀글로 저장" style="width: 170px; height: 28px; position: relative; left: 820px; top: 180px;">
-										</tr>
-								</table>  -->
-	
+								<!-- 댓글비밀번호 -->
+								 
+									<div class="u_replyIPw">
+										<tr><strong>댓글 비밀번호</strong></tr>
+										<tr><input type="password" name="#" placeholder=" ※ 입력시 비밀글로 저장" /></tr>
+									</div>
+								
+								<!-- 댓글입력창 -->
 								<table>
 									<tr>
-										<textarea
-											placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)"
-											style="width: 1000px; height: 88px; position: relative; bottom: 2px;"></textarea>
-										<button id="replybtn" style="width: 84.33px; height: 88px;">등록</button>
+										<textarea class="u_replycont" placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)"></textarea>
+										<button id="u_replybtn">등록</button>
 									</tr>
 								</table>
 
@@ -182,13 +189,22 @@
 								<table
 									style="margin-top: -150px; position: relative; top: 120px; font-size: 14px; width: 1100px;">
 									<tr>
-										<td colspan="4"><strong>다음글</strong> <span
-											class="separator">|</span><a href="#"> [키즈잼] 2월 프로그램 안내</a></td>
+										<td colspan="4"><strong>다음글</strong> <span class="separator">|</span>
+										<c:if test="${map.nextudto!=null}">
+											<a href="usedcontent?u_bno=${map.nextudto.u_bno}">${map.nextudto.u_bno} || ${map.nextudto.u_btitle}</a></td>
+										</c:if>
+										<c:if test="${map.nextudto==null }">
+											다음글 없습니다.
+										</c:if>
 									</tr>
 									<tr>
-										<td colspan="4"><strong>이전글</strong> <span
-											class="separator">|</span><a href="#"> [키즈잼] 2020년 1분기 정기
-												휴관일 안내</a></td>
+										<td colspan="4"><strong>이전글</strong> <span class="separator">|</span>
+											<c:if test="${map.preudto!=null}">
+											<a href="usedcontent?u_bno=${map.preudto.u_bno}">${map.preudto.u_bno} || ${map.preudto.u_btitle}</a></td>
+										</c:if>
+										<c:if test="${map.preudto==null }">
+											다음글 없습니다.
+										</c:if>
 									</tr>
 								</table>
 								<!-- 이전글/다음글 끝-->
@@ -267,28 +283,8 @@
 			<!-- #content -->
 		</div>
 		<!-- #contentWrap -->
-		</div>
-		<!-- #contentWrapper-->
 	</section>
-	<!-- 하단 넘버링  -->
-	<!-- <div>
-		<ul class="page-num-used">
-			<li class="first-num"></li>
-			<li class="prev-num"></li>
-			<li class="num-used">1</li>
-			<li class="num-used">2</li>
-			<li class="num-used">3</li>
-			<li class="num-used">4</li>
-			<li class="num-used">5</li>
-			<li class="num-used">6</li>
-			<li class="num-used">7</li>
-			<li class="num-used">8</li>
-			<li class="num-used">9</li>
-			<li class="num-used">10</li>
-			<li class="next-num"></li>
-			<li class="last-num"></li>
-		</ul>
-	</div> -->
+
 
 
 		<!-- ======= Footer ======= -->

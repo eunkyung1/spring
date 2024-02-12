@@ -5,7 +5,6 @@ let temp =0;
 
 /* 수정&삭제 버튼  hide & show*/
 $(function(){
-<<<<<<< HEAD
 	
 	function handleButtons(){
 	
@@ -27,8 +26,7 @@ $(function(){
 	
 	}//function
 	handleButtons();
-	
-=======
+
 
 	if(id != authorID){
 		$('#n_deleteBtn').hide();
@@ -111,7 +109,6 @@ $(function(){
 			 alert("다른 입력창이 열려 있습니다.");
 			 return false;
 		 }
-		 
 		 let n_cno = $(this).parent().parent().parent().attr("id");
 		 let n_ccontent = $(this).parent().prev().text(); 
 		 let n_cdate = $(this).parent().parent().find("span").text();
@@ -130,9 +127,8 @@ $(function(){
 		 
 		 $("#"+n_cno).html(hdata);
 		 temp =1;
->>>>>>> refs/remotes/origin/master
-
-<<<<<<< HEAD
+	 });//click
+	 
 	/* 댓글 저장하기 */
 	 $("#replybtn").click(function(){
 		let n_cpw = $("#replyIPw").val();
@@ -161,7 +157,12 @@ $(function(){
 			hdata += '</li>';
 			hdata += '</td>';
 			hdata += '</tr>';
-=======
+			},
+   				error:function(){
+   				alert("실패");
+   				}
+   				})//ajax끝
+
 		 
 	 });//click
 	 
@@ -171,20 +172,12 @@ $(function(){
 		 let n_cno = $(this).closest("tr").attr("id")
 		 let n_ccontent = $(this).parent().parent().parent().prev().find("textarea").val();
 		 let n_cpw = $(this).parent().parent().parent().prev().prev().find(".f_cpw").val();
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
 			$(".replyBox").prepend(hdata);
 			$(".n_Count").text(n_Count+1); 
 			
 			$("#reply_ncontent").val(""); 
 			$("#replyIPw").val("");
-			
-			},
-			error:function(){
-			alert("실패");
-			}
-			})//ajax끝
 			
 	 });//click
 	 
@@ -249,9 +242,6 @@ $(function(){
 		 let n_ccontent = $(this).parent().parent().parent().prev().find("textarea").val();
 		 let n_cpw = $(this).parent().parent().parent().prev().prev().find(".f_cpw").val();
 
-=======
->>>>>>> refs/remotes/origin/master
-		
 			//ajax - 댓글수정 저장
 			$.ajax({
 				url:"/community/NCommentUpdate", 

@@ -35,7 +35,6 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/main2.css" rel="stylesheet">
 <link href="../assets/css/used/used.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/used/used_total.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/review/header2.css" rel="stylesheet" type="text/css">
 
 <!-- Template Main CSS File -->
@@ -57,21 +56,27 @@
 					<h1 style="text-align: center;">캠핑중고거래</h1>
 				</div>
 				<div class="bbs-sch">
-					<form action="used_ca1" name="used_ca1Frm" method="get">
+					<form action="#" name="form1">
+						<input type="hidden" name="s_id" value=""> 
+						<input type="hidden" name="code" value="ocamall_image1"> 
+						<input type="hidden" name="page" value="1">
+						<input type="hidden" name="type" value="s"> 
+						<input type="hidden" name="board_cate" value=""> 
+						<input type="hidden" name="review_type" value="">
 						<!-- .검색 폼시작 -->
 						<fieldset>
 							<legend>게시판 검색 폼</legend>
 							<label>
-								<input type="checkbox" name="category" value="all" class="MS_input_checkbox" > 전체
+								<input type="checkbox" name="shname" value="ok" class="MS_input_checkbox"> 이름
 							</label> 
 							<label> 
-								<input type="checkbox" name="category" value="u_btitle" class="MS_input_checkbox"> 제목
+								<input type="checkbox" name="ssubject" value="ok" checked="checked" class="MS_input_checkbox"> 제목
 							</label> 
 							<label> 
-								<input type="checkbox" name="category" value="n_bcontent" class="MS_input_checkbox"> 내용
+								<input type="checkbox" name="scontent" value="ok" class="MS_input_checkbox"> 내용
 							</label> 
 							<span class="key-wrap"> 
-								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_ca1"><img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>
+								<input type="text" name="stext" value="" class="MS_input_txt"> <a href="#"> <img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>
 							</span>
 						</fieldset>
 					</form>
@@ -85,23 +90,19 @@
 					<div class="viewtab-menu">
 		
 						<!-- 중고거래, 중고양도 체크  -->
-						<input type="hidden" name="session_id" id="session_id" value="${session_id}">
-						<input type="radio" name="tabview" id="tabview1" value="trade1" class="trade1" checked>
+						<input type="radio" name="tabview" id="tabview1" value="trade1" checked>
 						<label for="tabview1">중고거래</label> 
-						<input type="radio" name="tabview" id="tabview2" value="transfer2" class="transfer2"> 
-						<label for="tabview2">캠핑장양도</label>
+						<input type="radio" name="tabview" id="tabview2" value="transfer2"> 
+						<label for="tabview2">중고양도</label>
 						
 						<!-- 중고거래 -->
 						<div class="consolebox1">
-							<div id="sessionID" data-session-id="${session.getAttribute('session_id')}"></div>
 							<div class="bbs-table-list">
-								
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="shname" class="MS_input_checkbox" id="showCompleted" >거래가능내역보기
+									<input type="checkbox" name="shname" class="MS_input_checkbox possible" id="showCompleted" >거래가능내역보기
 									</label>
 								</div>
-								 
 								<table summary="제목, 작성일, 조회수, 동영상">
 									<caption>갤러리 게시글</caption>
 									<colgroup>
@@ -115,23 +116,21 @@
 									</tbody>
 								</table>
 								<div class="fixed-img-collist">
-
-								 	<ul class="clear">
+									<ul class="clear">
 										<c:forEach var="udto" items="${map.list}">
 										
 										<li>
-											<a href="usedcontent?u_bno=${udto.u_bno}&u_btype=${udto.u_btype}"> 
+											<a href="usedcontent?u_bno=${udto.u_bno}"> 
 											<span><img src="/upload/${udto.u_mimg}"></span>
 									
-											<div class="used_title ">
+											<div class="used_title">
 											<strong>${udto.u_btitle}</strong>
 											</div>
 											</a> 
-											<c:set var="price" value="${udto.u_bprice}" />
-											<strong><fmt:formatNumber value="${price}" pattern="#,##0원" /></strong>
+											<strong>${udto.u_bprice}원</strong>
 											<br>
 											<c:if test="${udto.u_bstatus=='1'}">
-											<span class="used-exchange" >거래완료</span>
+											<span class="used-exchange">거래완료</span>
 											</c:if>
 											
 											<c:if test="${udto.u_bstatus=='0'}">
@@ -158,16 +157,15 @@
 				<!-- 하단 페이징 & 버튼 -->
 				<div class="bbs-btm">
 					<div class="bbs-link">
-						<a class="CSSbuttonWhite">글쓰기</a>
+						<a href="usedWrite" class="CSSbuttonWhite">글쓰기</a>
 					</div>
 
 					<!-- 하단 넘버링  -->
-					
-					<div class="PageNum">
+					<div>
 						<ul class="page-num-used">
-							<a href="used_ca1?page=1&category=${map.category}&searchWord=${map.searchWord}"><li class="first-num"></li></a>
+							<a href="used_ca1?page=1"><li class="first-num"></li></a>
 							<c:if test="${map.page>1 }">
-					       <a href="used_ca1?page=${map.page-1}&category=${map.category}&searchWord=${map.searchWord}"><li class="prev-num"></li></a>
+					       <a href="used?page=${map.page-1}"><li class="prev-num"></li></a>
 					       </c:if>
 					      <c:if test="${map.page<=1 }">
 					       <li class="prev-num"></li>
@@ -178,24 +176,24 @@
 					      	<li class="num-used on"><div>${i}</div></li>
 					      	</c:if>
 					      	<c:if test="${map.page!=i}">
-					      	<a href="used_ca1?page=${i}&category=${map.category}&searchWord=${map.searchWord}">
-					    	  <li class="num-used"><div>${i}</div></li>
+					      	<a href="used_ca1?page=${i}">
+					    	  <li class="num"><div>${i}</div></li>
 					      	</a>
 					      	</c:if>
 					      </c:forEach>
 					      
 					      <c:if test="${map.page<map.maxPage}">
-					       <a href="used_ca1?page=${map.page+1}&category=${map.category}&searchWord=${map.searchWord}"><li class="next-num"></li></a>
+					       <a href="used_ca1?page=${map.page+1}"><li class="next-num"></li></a>
 					     </c:if>
 					      <c:if test="${map.page>=map.maxPage}">
 					       <li class="next-num"></li>
 					     </c:if>
-					     	<a href="used_ca1?page=${map.maxPage}&category=${map.category}&searchWord=${map.searchWord}"><li class="last-num"></li></a>
+					     	<a href="used_ca1?page=${map.endPage}"><li class="last-num"></li></a>
 					    </ul>
-						</div><!-- //PageNum    -->
+						</div>
 						
 					</div>
-
+					<!-- //하단 페이징 & 버튼 -->
 
 				</div>
 				<!-- .page-body -->

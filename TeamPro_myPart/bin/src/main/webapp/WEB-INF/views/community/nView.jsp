@@ -30,14 +30,15 @@
 	    <!-- Template Main CSS File -->
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	  
 	    <!--  JS File -->
-	    <script src="../assets/js/community/nView.js"></script>
 	    <script>
-	    	let n_bno = ${map.nbdto.n_bno};
+	    	var id = "${session_id}";
 	    </script>
+	    <script src="../assets/js/community/nView.js"></script>
+	    <link href="../assets/css/community/nstyle.css" rel="stylesheet">
 	    
 	    
 	</head>
@@ -50,13 +51,12 @@
 		
 			<!-- 공지사항 글보기 -->
 	    	<h1 style="float: left; margin: 40px 0 0 700px; font-weight: 700; position: relative; left:50px;">공지사항 게시글</h1>
-		    <table>
+		    <table class="view_table">
 		     <colgroup>
-		        <col width="10%">
-		        <col width="51%">
 		        <col width="15%">
-		        <col width="12%">
-		        <col width="12%">
+		        <col width="55%">
+		        <col width="15%">
+		        <col width="15%">
    			</colgroup>
 		     <tr id="notice_top">
 		        <th style="text-align: center;"><strong>${map.nbdto.n_bno}</strong></th>
@@ -105,12 +105,12 @@
 		      </tr>
 		    
 		    </table>
-		    
 		    <!-- 버튼 -->
 		    <div class="listBtn">
 		    	<a href="nList"><button class="list">목록</button></a>
-		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="deleteBtn"><button class="list">삭제</button></a>
-		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="updateBtn"><button class="list">수정</button></a>
+		    	<a href="nDelete?n_bno=${map.nbdto.n_bno}" class="n_deleteBtn" data-userid="${map.nbdto.id}"><button class="list" id="n_deleteBtn">삭제</button></a>
+		    	<a href="nUpdate?n_bno=${map.nbdto.n_bno}" class="n_updateBtn" data-userid="${map.nbdto.id}" ><button class="list" id="n_updateBtn">수정</button></a>
+		    	
 		    </div>
 		    
 		     <!-- 댓글입력-->
@@ -125,7 +125,7 @@
 			  <tr>
 			  	<td style="display: flex; border: 1px solid white; margin: -80px 0 0 -20px;">
 				  	<textarea id="reply_ncontent" placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)" style="width: 1200px; "></textarea>
-				  	<button id="replybtn">등록</button>
+				  	<button id="replybtn" data-userid="${map.nbdto.n_bno}">등록</button>
 			  	</td>
 			  </tr>
 		   	</table>
@@ -173,7 +173,6 @@
 					<button class="rUBtn">수정</button>
 				</li>
 				</c:if>
-				
 				<c:if test="${session_id != ncomment.id}">
 				<li id="replyBtn">
 

@@ -8,22 +8,28 @@ import com.java.www.dto.UsedDto;
 
 public interface UsedService {
 	//trade1 받기 - 중고거래
-	Map<String, Object> selectAll(int page);
+	Map<String, Object> selectAll(int page, String category, String searchWord);
 
 	//transfer2 받기 - 중고양도
-	Map<String, Object> selectAll2(int page);
+	Map<String, Object> selectAll2(int page, String category, String searchWord);
 
 	//중고거래 - 거래가능내역 보기
-	ArrayList<UsedDto> selectPossible(String u_bstatus);
+	ArrayList<UsedDto> selectPossible(int u_bstatus, String u_btype);
 
 	//중고양도 - 거래가능내역 보기
 	ArrayList<UsedDto> selectPossible2(String u_bstatus);
 
 	//중고 View 페이지
-	UsedDto selectOne(int u_bno);
+	Map<String, Object> selectOne(int u_bno, String u_btype);
 
 	//글쓰기 저장
 	void usedWrite(UsedDto udto);
+
+	//중고거래 거래가능 하단넘버링
+	Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype);
+
+	//중고거래 하단넘버링 합치기
+	//Map<String, Object> selectAllt(int page, int u_bstatus, String u_btype);
 	
 	
 

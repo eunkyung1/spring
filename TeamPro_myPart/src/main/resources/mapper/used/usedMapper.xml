@@ -10,32 +10,81 @@
 	<!-- 게시글 trade1 가져오기 -->
 	<select id="selectAll" resultType="com.java.www.dto.UsedDto">
 	select * from(
-	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_btype = 'trade1') 
+	select row_number() over(order by u_bno desc)rnum, a.*from 
+	(select * from u_board 
+	<if test="category == 'u_btitle' or category == 'u_bcontent'">
+		where ${category} like '%'||#{searchWord}||'%'
+	</if>
+	<if test="category == 'all'">
+		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
+	</if>
+	order by u_bno desc)a where u_btype = 'trade1') 
+	where rnum between ${startRow} and ${endRow}
+	</select>
+	
+	<!-- 게시글 trade1 가져오기 -->
+	<select id="selectAllt" resultType="com.java.www.dto.UsedDto">
+	select * from(
+	select row_number() over(order by u_bno desc)rnum, a.*from (
+	select * from u_board where b_status = 0
+	)a where u_btype = #{u_btype}) 
 	where rnum between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- trade1 게시글 총 갯수  -->
 	<select id="selectCountAll" resultType="int">
-		select count(*) from u_board where u_btype='trade1'
+		select count(*) from u_board 
+		<if test="category == 'u_btitle' or category == 'u_bcontent'">
+			where ${category} like '%'||#{searchWord}||'%' and u_btype='trade1'
+		</if>
+		<if test="category == 'all'">
+			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype='trade1'
+		</if>
+		
 	</select>
 	
 	<!-- transfer2 게시글 총 갯수 -->
 	<select id="selectCountAll2" resultType="int">
-		select count(*) from u_board where u_btype='transfer2'
+		select count(*) from u_board 
+		<if test="category == 'u_btitle' or category == 'u_bcontent'">
+			where ${category} like '%'||#{searchWord}||'%' and u_btype='transfer2'
+		</if>
+		<if test="category == 'all'">
+			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype='transfer2'
+		</if>
+	</select>
+	
+	<!-- 중고거래&캠핑장양도 거래가능 게시글 총 갯수  -->
+	<select id="selectP_count" resultType="int">
+		select count(*) from u_board where u_bstatus=#{u_bstatus} and u_btype= #{u_btype}
 	</select>
 
+	<!-- 중고거래&캠핑장양도 거래가능 하단넘버링 -->
+	<select id="used_PerNum" resultType="com.java.www.dto.UsedDto">
+	select * from(
+	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_bstatus=#{u_bstatus} and u_btype = #{u_btype}) 
+	where rnum between ${startRow} and ${endRow}
+	</select>
 	
 	<!-- 게시글 transfer2 가져오기 -->
 	<select id="selectAll2" resultType="com.java.www.dto.UsedDto">
-	select * from(
-	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_btype = 'transfer2') 
+select * from(
+	select row_number() over(order by u_bno desc)rnum, a.*from 
+	(select * from u_board 
+	<if test="category == 'u_btitle' or category == 'u_bcontent'">
+		where ${category} like '%'||#{searchWord}||'%'
+	</if>
+	<if test="category == 'all'">
+		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
+	</if>
+	order by u_bno desc)a where u_btype = 'transfer2') 
 	where rnum between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- 게시글 trade1 거래가능 가져오기 -->
 	<select id="selectPossible" resultType="com.java.www.dto.UsedDto">
 		select * from(
-		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_bstatus=#{u_bstatus} and u_btype = 'trade1')
+		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_bstatus=#{u_bstatus} and u_btype = #{u_btype})
 		where rnum between 1 and 8
 	</select>
 	
@@ -46,8 +95,29 @@
 		where rnum between 1 and 8
 	</select>
 	
+	<!-- 게시 현재글 가져오기  -->
 	<select id="selectOne" resultType="com.java.www.dto.UsedDto">
-		select * from u_board where u_bno=#{u_bno}
+		select * from u_board where u_bno=#{u_bno} and u_btype=#{u_btype}
+	</select>
+	
+	<!-- 이전글 가져오기 -->
+	<select id="selectOneprev" resultType="com.java.www.dto.UsedDto">
+		select * from (
+		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_btype=#{u_btype})
+		where rnum = 
+		(select rnum from 
+		(select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_btype=#{u_btype})
+		where u_bno = #{u_bno})+1
+	</select>
+	
+	<!-- 다음글 가져오기 -->
+	<select id="selectOnenext" resultType="com.java.www.dto.UsedDto">
+		select * from (
+		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_btype=#{u_btype})
+		where rnum = 
+		(select rnum from 
+		(select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_btype=#{u_btype})
+		where u_bno = #{u_bno})-1
 	</select>
 	
 	<insert id="usedWrite">

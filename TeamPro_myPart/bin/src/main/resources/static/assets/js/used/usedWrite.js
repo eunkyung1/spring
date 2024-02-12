@@ -66,9 +66,6 @@ $(function(){
 	            // 정규 표현식을 사용하여 숫자가 아닌 문자를 제거합니다.
 	            var newValue = value.replace(/[^\d]/g, '');
 	            // 변경된 값을 다시 입력란에 설정합니다.
-	            
-	            newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	            
 	            $(this).val(newValue);
 	        });
 	        

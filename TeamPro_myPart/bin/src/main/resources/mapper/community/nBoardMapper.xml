@@ -10,13 +10,14 @@
 	<!-- 게시글 전체 가져오기 -->
 	<select id="selectAll" resultType="com.java.www.dto.NBoardDto">
 		select * from (
-		select row_number() over(order by n_bno desc) rnum , a.* from (
-		select * from n_board
+		select row_number() over(order by n_bno desc) rnum , a.* from 
+		(select * from n_board
+		
 		<if test="category == 'n_btitle' or category == 'n_bcontent'">
 			where ${category} like '%'||#{searchWord}||'%'
 		</if>
 		<if test="category == 'all'">
-			where n_btitle like '%'||#{searchWord}||'%' or n_bcontent like '%'||#{searchWord}||'%' or n_btype like '%'||#{searchWord}||'%'
+			where n_btitle like '%'||#{searchWord}||'%' or n_bcontent like '%'||#{searchWord}||'%'
 		</if>
 
 		order by n_bno desc) a)
@@ -40,6 +41,12 @@
 	
 	<select id="selectCountAll" resultType="int">
 		select count(*) from n_board
+		<if test="category == 'n_btitle' or category =='n_bcontent'">
+		where ${category} like '%'||#{searchWord}||'%'
+	</if>
+	<if test="category == 'all'">
+		where n_btitle like '%'||#{searchWord}||'%' or n_bcontent like '%'||#{searchWord}||'%'
+	</if>
 	</select>
 	
 	<!-- 현재글 가져오기 -->
@@ -77,6 +84,10 @@
 		</selectKey>
 		insert into n_comment values(#{n_cno}, #{n_bno}, #{id}, #{n_cpw}, #{n_ccontent}, #{n_cdate})
 	</insert>
+	
+	<update id="nbhitUp">
+		update n_board set n_bhit = n_bhit+1 where n_bno=#{n_bno}
+	</update>
 	
 	<!-- 댓글 1개 삭제하기 -->
 	<delete id="NCommnetDelete">
