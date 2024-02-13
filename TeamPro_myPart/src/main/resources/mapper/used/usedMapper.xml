@@ -56,13 +56,28 @@
 	
 	<!-- 중고거래&캠핑장양도 거래가능 게시글 총 갯수  -->
 	<select id="selectP_count" resultType="int">
-		select count(*) from u_board where u_bstatus=#{u_bstatus} and u_btype= #{u_btype}
+		select count(*) from u_board 
+		<if test="category == 'u_btitle' or category == 'u_bcontent'">
+			where ${category} like '%'||#{searchWord}||'%' and
+		</if>
+		<if test="category == 'all'">
+			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and
+		</if>
+		where u_bstatus=#{u_bstatus} and u_btype= #{u_btype}
 	</select>
 
 	<!-- 중고거래&캠핑장양도 거래가능 하단넘버링 -->
 	<select id="used_PerNum" resultType="com.java.www.dto.UsedDto">
 	select * from(
-	select row_number() over(order by u_bno desc)rnum, a.*from u_board a where u_bstatus=#{u_bstatus} and u_btype = #{u_btype}) 
+	select row_number() over(order by u_bno desc)rnum, a.*from 
+	(select * from u_board 
+	<if test="category == 'u_btitle' or category == 'u_bcontent'">
+		where ${category} like '%'||#{searchWord}||'%'
+	</if>
+	<if test="category == 'all'">
+		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
+	</if>
+	order by u_bno desc)a where u_btype = #{u_btype} and u_bstatus=#{u_bstatus}) 
 	where rnum between ${startRow} and ${endRow}
 	</select>
 	
@@ -120,9 +135,18 @@ select * from(
 		where u_bno = #{u_bno})-1
 	</select>
 	
+	<!-- 중고거래 글쓰기 -->
 	<insert id="usedWrite">
 		insert into u_board values(u_board_seq.nextval,#{id},#{u_btype},#{u_btitle},#{u_bcontent},#{u_bprice},#{u_blocal},sysdate,0,0,#{u_bfile},#{u_mimg})
 	</insert>
+	
+	<delete id="usedDelete">
+		delete u_board where u_bno = #{u_bno}
+	</delete>
+	
+	<update id="usedComplete">
+		update u_board set u_bstatus = 1 where u_bno=#{u_bno}
+	</update>
 	
 	
 	

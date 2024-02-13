@@ -5,13 +5,53 @@
 
 $(function(){
 	
-/*수정,삭제 버튼 구현*/
+/*수정,삭제,거래완료 버튼 구현*/
 	$(".u_updateBtn").click(function(){
-		window.location.href = '/used/usedUpdate';
-		var u_bno =  $(this).closest('tr').find('.tb-center').attr('class').split(' ')[1];
-		alert(u_bno);
+		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
+		var u_btype = $("#u_btype").val();
+		window.location.href = '/used/usedUpdate?u_bno='+u_bno+'&u_btype='+u_btype;
+	});
+	
+	$(".u_delBtn").click(function(){
+		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
+		var u_btype = $("#u_btype").val();
+		window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;
+	});
+	
+	$(".u_comple").click(function(){
+		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
+		if(confirm("거래완료로 변경하시겠습니까?")){
+			$.ajax({
+				url:"/used/usedComplete",
+				type:"post",
+				data:{"u_bno":u_bno},
+				dataType:"json", //받는파일형태 : text,json,xml
+				success:function(data){
+				 if(data == 1){
+				  var hdata = '';
+					hdata+='<button type="button" class="u_list">목록</button>';
+					hdata+='<button type="button" class="u_list u_delBtn pri">삭제</button>';
+					hdata+='<button type="button" class="u_list u_updateBtn pri">수정</button>';
+	                $(".u_listBtn").html(hdata);
+	                alert("거래가 완료되었습니다.")
+				 }
+				},
+				error:function(){
+				alert("실패");
+				}
+				})//ajax끝
+			
+		}else{
+			alert("오류가 발생하였습니다. 다시 시도하시기 바랍니다.");
+		}
 		
-	});//click(update)
+		
+	});
+	
+	
+	
+	
+	
 	
 	/*작성자 아니면 (.pri)버튼 hide & show*/
 	var sessionID = $('#session').val();
@@ -22,6 +62,12 @@ $(function(){
 	}else{
 		$('.pri').show();
 	};
+	
+	/*b_ustatus가 1이면 거래완료 버튼 hide*/
+	var u_bstatus = $("#u_bstatus").val();
+	if(u_bstatus == 1){
+		$(".u_comple").hide();
+	}
 	
  /*이미지 모달창 열기*/
   $('.modal-u_trigger').click(function() {

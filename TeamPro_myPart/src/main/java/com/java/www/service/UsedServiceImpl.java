@@ -24,6 +24,8 @@ public class UsedServiceImpl implements UsedService {
 		int countPerPage = 8;
 		int bottomPerNum = 10;
 		int countAll = usedMapper.selectCountAll(category,searchWord);
+		
+		
 		System.out.println("UsedServiceImpl selectAll countAll"+countAll);
 		
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
@@ -137,6 +139,8 @@ public class UsedServiceImpl implements UsedService {
 		UsedDto udto = usedMapper.selectOne(u_bno,u_btype);
 		UsedDto preudto = usedMapper.selectOneprev(u_bno,u_btype);
 		UsedDto nextudto = usedMapper.selectOnenext(u_bno,u_btype);
+
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -156,11 +160,11 @@ public class UsedServiceImpl implements UsedService {
 	
 	//중고거래 거래가능 하단넘버링
 	@Override
-	public Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype) {
+	public Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype,String category, String searchWord) {
 		if(page<=0) page =1;
 		int countPerPage = 8;
 		int bottomPerNum = 10;
-		int countAll = usedMapper.selectP_count(u_bstatus,u_btype);
+		int countAll = usedMapper.selectP_count(u_bstatus,u_btype,category,searchWord);
 		System.out.println("UsedServiceImpl selectP_num selectP_count "+countAll);
 		
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
@@ -171,7 +175,7 @@ public class UsedServiceImpl implements UsedService {
 		int endRow = startRow + countPerPage-1;
 		
 		if(endPage>maxPage) endPage = maxPage;
-		List<UsedDto> list = usedMapper.used_PerNum(u_bstatus,u_btype,startRow,endRow);
+		List<UsedDto> list = usedMapper.used_PerNum(u_bstatus,u_btype,startRow,endRow,category,searchWord);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
@@ -180,10 +184,35 @@ public class UsedServiceImpl implements UsedService {
 		map.put("maxPage", maxPage);
 		map.put("startPage", startPage);
 		map.put("endPage", endPage);
+		map.put("category", category);
+		map.put("searchWord", searchWord);
 		
 		return map;
 		
 	}
+	
+	//글 삭제
+	@Override
+	public void usedDelete(int u_bno) {
+		usedMapper.usedDelete(u_bno);
+		
+	}
+	//거래완료 버튼
+	@Override
+	public int usedComplete(int u_bno) {
+		int result = usedMapper.usedComplete(u_bno);
+	
 
+		return result;
+		
+	}
+	//전체페이지 test
+	/*
+	@Override
+	public Map<String, Object> selectAll_t(int page, String category, String searchWord, int u_bstatus, String u_btype) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+*/
 
 }

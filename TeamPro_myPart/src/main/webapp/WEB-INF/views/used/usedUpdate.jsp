@@ -49,6 +49,7 @@
 	<!-- End Header -->
 	
 		<section class="notice">
+		
 			<!-- 중고거래&캠핑장양도_글쓰기 -->
 	    	<h1>중고거래&캠핑장양도 글쓰기</h1>
 			<form action="usedWrite" name="usedWriteFrm" method="post" enctype="multipart/form-data">
@@ -67,18 +68,18 @@
 					       <option value="transfer2">캠핑장양도</option>
 					    </select>
 			        </th>
-			        <th colspan="3" style="text-align: left;"><input type="text" id="used_btitle" name="u_btitle" placeholder=" ※ 게시글 제목을 입력해주세요."> </span></th>
+			        <th colspan="3" style="text-align: left;"><input type="text" id="used_btitle" name="u_btitle" value="${map.udto.u_btitle}"></th>
 			      </tr>
 			      
 			      <tr class="usedW_writer">
 			        <td style="text-align: center;"><strong>작성자 | </strong></td>
-			        <td class="writer_input" colspan="3"><input type="text" name="id" value="aaa" readonly="readonly"> </td>
+			        <td class="writer_input" colspan="3">${map.udto.id}</td>
 			      </tr>
 
 			      
 			      <tr class="used_top u_bottom">
 			        <td class="used_price"><strong>가격  | </strong></td>
-			        <td class="used_input1"><input class="used_input1" type="text" name="u_bprice" id="u_bprice" placeholder="숫자만 입력하세요." > <span>원</span></td>
+			        <td class="used_input1"><input class="used_input1" type="text" name="u_bprice" id="u_bprice" value="${map.udto.u_bprice}"> <span> 원</span></td>
 			        <td class="used_region"><strong>거래장소 | </strong></td>
 					<td>
 						<select name="u_blocal" id="used_region" class="used_region">
@@ -104,34 +105,34 @@
 			      </tr>
 			      
 			      <tr>
-			        <td colspan="4" class="article"><textarea rows="9" class="used_bcontent" name="u_bcontent" id="summernote" placeholder=" ※ 게시글 내용을 입력해주세요."></textarea> </td>
+			        <td colspan="4" class="article"><textarea rows="9" class="used_bcontent" name="u_bcontent" id="summernote">${map.udto.u_bcontent}</textarea> </td>
 			      </tr>
 			      
 			      <tr class="u_files_up">
 			      	<td><strong>첨부파일 1 |</strong></td>
 			        <td colspan="3" class="article">
 			        <span>※해당 사진은 메인사진으로 사용됩니다.</span>
-			        <div class="file-preview-container" id="filePreviewContainer1"></div>
-			        <input type="file" class="u_files_input" name="uimg">
+			        <div class="file-preview-container" id="filePreviewContainer1" >${map.udto.u_mimg}</div>
+			        <input type="file" class="u_files_input" id="u_files_input1" name="uimg">
 			        </td>
 			      </tr>
 			      <tr class="u_files_up">
 			      	<td><strong>첨부파일 2 |</strong></td>
 			        <td colspan="3" class="article">
 			        <div class="file-preview-container" id="filePreviewContainer2"></div>
-			        <input type="file" class="u_files_input" name="u_files" ></td>
+			        <input type="file" class="u_files_input" id="u_files_input2" name="u_files" ></td>
 			      </tr>
 			       <tr class="u_files_up">
 			      	<td><strong>첨부파일 3 |</strong></td>
 			        <td colspan="3" class="article">
 			        <div class="file-preview-container" id="filePreviewContainer3"></div>
-			        <input type="file" class="u_files_input" name="u_files" ></td>
+			        <input type="file" class="u_files_input" id="u_files_input3" name="u_files" ></td>
 			      </tr>
 			      <tr class="u_files_up u_bottom">
 			      	<td><strong>첨부파일 4 |</strong></td>
 			        <td colspan="3" class="article">
 			        <div class="file-preview-container" id="filePreviewContainer4"></div>
-			        <input type="file" class="u_files_input" name="u_files" ></td>
+			        <input type="file" class="u_files_input" id="u_files_input4" name="u_files" ></td>
 			      </tr>
 			      
 			    </table>

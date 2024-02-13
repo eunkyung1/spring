@@ -38,6 +38,11 @@
 	margin-top:12px;
 	margin-left:10px;
 }
+
+.prd-tinfo dd ul{
+	font-size:14px;
+}
+
 .prd-tinfo .tinfo_img{
 	width:100px; 
 	height:100px;

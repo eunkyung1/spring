@@ -35,6 +35,16 @@ $(function(){
 	});//click
 	
 /*사진 미리보기*/
+	imgName = $("#filePreviewContainer1").text();
+	alert(imgName);
+
+    var imageUrl = "/upload/imgName";
+    if (imageUrl) {
+        var previewItem = $('<div class="file-preview-item"></div>');
+        previewItem.append('<img src="' + imageUrl + '" alt="File Preview" class="file-preview-img">');
+        $('.file-preview-container').append(previewItem);
+    }
+
  $(document).on('change', '.u_files_input', function() {
         var fileInput = this;
         var filePreviewContainer = $(this).prev('.file-preview-container');
@@ -61,17 +71,19 @@ $(function(){
     });	
 
 	/*가격 숫자만 입력가능*/
-	 $('#u_bprice').on('input', function() {
-	            var value = $(this).val();
-	            // 정규 표현식을 사용하여 숫자가 아닌 문자를 제거합니다.
-	            var newValue = value.replace(/[^\d]/g, '');
-	            // 변경된 값을 다시 입력란에 설정합니다.
-	            
-	            newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	            
-	            $(this).val(newValue);
-	        });
-	        
+    // 입력란에 입력이 발생할 때 이벤트 처리
+     $('#u_bprice').on('input', function() {
+        // 입력된 값 가져오기
+        var value = $(this).val();
+        // 숫자 이외의 문자가 있는지 확인하는 정규식
+        var regex = /^[0-9]*$/;
+        // 숫자와 일치하지 않는 문자가 입력된 경우
+        if (!regex.test(value)) {
+            // 입력된 값에서 숫자 이외의 문자를 모두 제거하여 다시 입력란에 설정
+            $(this).val(value.replace(/\D/g, ''));
+            console.log("Invalid input");
+        }
+});      
 	
 	        
 	        

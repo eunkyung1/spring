@@ -31,12 +31,22 @@ public class UController {
 	
 	//중고거래 및 양도 - 중고거래
 	@GetMapping("used_ca1")
-	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model,
-			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
+	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model,@RequestParam(defaultValue = "2")int u_bstatus,String u_btype,
+		@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
 		Map<String, Object> map =  uService.selectAll(page,category,searchWord);
 		//Map<String, Object> mapt =  uService.selectAllt(page,u_bstatus,u_btype);
 		model.addAttribute("map",map);
 		//model.addAttribute("mapt",mapt);
+		
+		return "/used/used_ca1";
+	}// used()
+	
+	//중고거래 및 양도 - 중고거래(test)
+	@GetMapping("Tused_ca1")
+	public String Tused_ca1(@RequestParam(defaultValue = "1")int page ,Model model,int u_bstatus,String u_btype,
+			@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
+		//Map<String, Object> map =  uService.selectAll_t(page,category,searchWord,u_bstatus,u_btype);
+		//model.addAttribute("map",map);
 		
 		return "/used/used_ca1";
 	}// used()
@@ -54,24 +64,31 @@ public class UController {
 		return "/used/used_sh2";
 	}// used_transfer()
 	
+
+	
 	
 	//중고거래&양도 거래가능 checked-true일때 
+	/*
 	@PostMapping("possible_t")
 	@ResponseBody
 	public ArrayList<UsedDto> possible_t(int u_bstatus,String u_btype){
 		System.out.println("UController used_transfer :"+u_bstatus);
+		System.out.println("UController used_transfer :"+u_btype);
 		
 		ArrayList<UsedDto> list = uService.selectPossible(u_bstatus,u_btype);
 		return list;
 	}
+	*/
 	
 	//중고거래 거래가능 checked-true일때 하단넘버링
-	@PostMapping("pageNum_ca1")
+	//@PostMapping("pageNum_ca1")
+	@RequestMapping("possible_t")
 	@ResponseBody
-	public Map<String, Object> page_ca1(int u_bstatus,@RequestParam(defaultValue = "1")int page,String u_btype){
-		System.out.println("UController used_transfer :"+u_bstatus);
+	public Map<String, Object> page_ca1(int u_bstatus,@RequestParam(defaultValue = "1")int page,String u_btype,String category, String searchWord){
+		System.out.println("UController page_ca1 u_bstatus :"+u_bstatus);
+		System.out.println("UController page_ca1 u_btype :"+u_btype);
 		
-		Map<String, Object> map = uService.selectP_num(u_bstatus,page,u_btype);
+		Map<String, Object> map = uService.selectP_num(u_bstatus,page,u_btype,category,searchWord);
 		
 		return map;
 	}
@@ -172,7 +189,7 @@ public class UController {
 		
 		uService.usedWrite(udto);
 		
-		if(udto.getU_btype()=="trade1") {
+		if(udto.getU_btype().equals("trade1")) {
 			model.addAttribute("result","used-w");
 		}else {
 			model.addAttribute("result","used-w2");
@@ -184,9 +201,33 @@ public class UController {
 	
 	//중고거래 및 양도 - 글수정
 	@GetMapping("usedUpdate")
-	public String usedUpdate(@RequestParam(defaultValue = "1")int u_bno, Model model) {
+	public String usedUpdate(@RequestParam(defaultValue = "1")int u_bno, Model model,String u_btype) {
+		Map<String, Object> map = uService.selectOne(u_bno,u_btype);
+		model.addAttribute("map",map);
+		
 		return "/used/usedUpdate";
 	}// usedUpdate()
+	
+	//중고거래 및 양도 - 글삭제
+	@GetMapping("usedDelete")
+	public String usedDelete(@RequestParam(defaultValue = "1")int u_bno, Model model,String u_btype) {
+		uService.usedDelete(u_bno);
+		if(u_btype.equals("trade1")) {
+			model.addAttribute("result","used-del1");
+		}else{
+			model.addAttribute("result","used-del2");
+		}
+		
+		return "/used/uResult";
+	}// usedDelete()
+	
+	//중고거래 및 양도 - 거래완료 버튼 변경
+	@PostMapping("usedComplete")
+	@ResponseBody
+	public String usedComplete(@RequestParam(defaultValue = "1")int u_bno) {
+		int result = uService.usedComplete(u_bno);
+		return result+"";
+	}// usedComplete()
 	
 
 }//controller

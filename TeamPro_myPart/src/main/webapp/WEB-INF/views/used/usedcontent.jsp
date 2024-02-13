@@ -1,48 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>중고거래뷰</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<meta content="" name="description">
-<meta content="" name="keywords">
-
-<!-- Favicons -->
-<link href="assets/img/favicon.png" rel="icon">
-<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-	rel="stylesheet">
-
-<!-- Vendor CSS Files -->
-<link href="../assets/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
-	rel="stylesheet">
-<link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="../assets/vendor/glightbox/css/glightbox.min.css"
-	rel="stylesheet">
-<link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-<!-- Template Main CSS File -->
-<link href="../assets/css/main2.css" rel="stylesheet">
-<link href="../assets/css/used/used_total.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/review/reviewcontent.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/review/siteReview.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/review/listStyle2.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/review/header2.css" rel="stylesheet" type="text/css">
-
-
-<!-- Template Main JS File -->
-<script src="../assets/js/used/usedTotal.js"></script>
+	<meta charset="UTF-8">
+	<title>중고거래뷰</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	
+	<!-- Favicons -->
+	<link href="assets/img/favicon.png" rel="icon">
+	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+	
+	<!-- Vendor CSS Files -->
+	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+	<link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	
+	<!-- Template Main CSS File -->
+	<link href="../assets/css/main2.css" rel="stylesheet">
+	<link href="../assets/css/used/used_total.css" rel="stylesheet" type="text/css">
+	<link href="../assets/css/review/reviewcontent.css" rel="stylesheet" type="text/css">
+	<link href="../assets/css/review/siteReview.css" rel="stylesheet" type="text/css">
+	<link href="../assets/css/review/listStyle2.css" rel="stylesheet" type="text/css">
+	<link href="../assets/css/review/header2.css" rel="stylesheet" type="text/css">
+	
+	
+	<!-- Template Main JS File -->
+	<script src="../assets/js/used/usedTotal.js"></script>
 
 </head>
 <body>
@@ -84,7 +81,9 @@
 						
 					<form id="comment_form">
 						<input type="hidden" id="session" value="${session_id}"/>
-						 
+						<input type="hidden" id="u_btype" value="${map.udto.u_btype}"/>
+						<input type="hidden" id ="u_bstatus" value="${map.udto.u_bstatus}"/>
+						
 						<div class="bbs-table-view" >
 							<table summary="게시글 보기">
 								<caption>게시글 보기</caption>
@@ -163,19 +162,12 @@
 								
 								<!-- 삭제,수정, 목록버튼 -->
 								<div class="u_listBtn">
-									<a href="fList"><button class="u_list">목록</button></a>
-									<button class="u_list pri">삭제</button>
-									<!-- <a href="usedUpdate?u_bno=${udto.u_bno}"><button class="u_list u_updateBtn pri">수정</button></a> -->
-									<a><button class="u_list u_updateBtn pri">수정</button></a> 
-									<button class="u_list pri">거래완료</button>
+									<button type="button" class="u_list">목록</button>
+									<button type="button" class="u_list u_delBtn pri">삭제</button>
+									<button type="button" class="u_list u_updateBtn pri">수정</button>
+									<button type="button" class="u_list u_comple pri">거래완료</button>
 								</div>
 
-								<!-- 댓글비밀번호 -->
-								 
-									<div class="u_replyIPw">
-										<tr><strong>댓글 비밀번호</strong></tr>
-										<tr><input type="password" name="#" placeholder=" ※ 입력시 비밀글로 저장" /></tr>
-									</div>
 								
 								<!-- 댓글입력창 -->
 								<table>
@@ -209,71 +201,7 @@
 								</table>
 								<!-- 이전글/다음글 끝-->
 
-								<!-- 댓글보기-->
-								<table
-									style="margin-top: 70px; position: relative; top: 120px; font-size: 14px; width: 1100px;">
-									<td style="font-weight: 700">총<strong
-										style="color: #009223">&nbsp;&nbsp;5</strong>&nbsp;개의 댓글이
-										등록되었습니다.
-									</td>
-									<tr>
-										<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12
-												15:27:23:00]</span>
-											<li id="replyTxt">&nbsp;&nbsp;댓글내1용일 들어갑니다. <br>ex)이벤트
-												너무 좋아요! 꼭 참여해서 혜택받아볼게요!
-										</li>
-											<li id="replyBtn">
-												<button id="rDelBtn">삭제</button>
-												<button id="rUBtn">수정</button>
-										</li></td>
-									</tr>
-									<tr>
-										<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12
-												15:27:23:00]</span>
-											<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트
-												너무 좋아요! 꼭 참여해서 혜택받아볼게요!
-										</li>
-											<li id="replyBtn">
-												<button id="rDelBtn">삭제</button>
-												<button id="rUBtn">수정</button>
-										</li></td>
-									</tr>
-									<tr>
-										<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12
-												15:27:23:00]</span>
-											<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트
-												너무 좋아요! 꼭 참여해서 혜택받아볼게요!
-										</li>
-											<li id="replyBtn">
-												<button id="rDelBtn">삭제</button>
-												<button id="rUBtn">수정</button>
-										</li></td>
-									</tr>
-									<tr>
-										<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12
-												15:27:23:00]</span>
-											<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트
-												너무 좋아요! 꼭 참여해서 혜택받아볼게요!
-										</li>
-											<li id="replyBtn">
-												<button id="rDelBtn">삭제</button>
-												<button id="rUBtn">수정</button>
-										</li></td>
-									</tr>
-									<tr>
-										<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12
-												15:27:23:00]</span>
-											<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트
-												너무 좋아요! 꼭 참여해서 혜택받아볼게요!
-										</li>
-											<li id="replyBtn">
-												<button id="rDelBtn">삭제</button>
-												<button id="rUBtn">수정</button>
-										</li></td>
-									</tr>
-
-								</table>
-								<!-- 댓글보기 끝-->
+							
 						</div>
 					</div>
 					<!-- .page-body -->

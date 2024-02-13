@@ -58,17 +58,26 @@
 				</div>
 				<div class="bbs-sch">
 					<form action="used_ca1" name="used_ca1Frm" method="get">
+						<input type="hidden" id ="u_bstatus" value="${map.udto.u_bstatus}"/>
+						<input type="hidden" id="u_page" value="${map.page }">
+						<script>
+							$(function(){
+								var u_bstatus =$("#u_bstatus").val();
+								alert("u_bstatus"+u_bstatus);
+							});
+						</script>
+					
 						<!-- .검색 폼시작 -->
 						<fieldset>
 							<legend>게시판 검색 폼</legend>
 							<label>
-								<input type="checkbox" name="category" value="all" class="MS_input_checkbox" > 전체
+								<input type="checkbox" name="category" value="all" class="MS_input_checkbox used_category" > 전체
 							</label> 
 							<label> 
-								<input type="checkbox" name="category" value="u_btitle" class="MS_input_checkbox"> 제목
+								<input type="checkbox" name="category" value="u_btitle" class="MS_input_checkbox used_category"> 제목
 							</label> 
 							<label> 
-								<input type="checkbox" name="category" value="n_bcontent" class="MS_input_checkbox"> 내용
+								<input type="checkbox" name="category" value="n_bcontent" class="MS_input_checkbox used_category"> 내용
 							</label> 
 							<span class="key-wrap"> 
 								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_ca1"><img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>

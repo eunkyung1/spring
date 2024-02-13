@@ -34,10 +34,10 @@ public interface UsedMapper {
 	void usedWrite(UsedDto udto);
 	
 	//중고거래 거래가능 하단넘버링(총 게시글 수)
-	int selectP_count(int u_bstatus, String u_btype);
+	int selectP_count(int u_bstatus, String u_btype, String category, String searchWord);
 	
 	//중고거래 거래가능 하단넘버링
-	List<UsedDto> used_PerNum(int u_bstatus, String u_btype, int startRow, int endRow);
+	List<UsedDto> used_PerNum(int u_bstatus, String u_btype, int startRow, int endRow, String category, String searchWord);
 	
 	//중고거래 리스트 & 하단넘버링 테스
 	List<UsedDto> selectAllt(int u_bstatus, String u_btype, int startRow, int endRow);
@@ -47,6 +47,12 @@ public interface UsedMapper {
 	
 	//중고거래 다음글 가져오기
 	UsedDto selectOnenext(int u_bno, String u_btype);
+	
+	//글쓰기 삭제
+	void usedDelete(int u_bno);
+	
+	//거래완료 버튼
+	int usedComplete(int u_bno);
 	
 
 }

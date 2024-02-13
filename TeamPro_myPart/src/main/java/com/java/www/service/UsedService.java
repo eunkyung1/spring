@@ -26,7 +26,14 @@ public interface UsedService {
 	void usedWrite(UsedDto udto);
 
 	//중고거래 거래가능 하단넘버링
-	Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype);
+	Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype, String category, String searchWord);
+
+	//글쓰기 삭제
+	void usedDelete(int u_bno);
+
+	//거래완료버튼 
+	int usedComplete(int u_bno);
+
 
 	//중고거래 하단넘버링 합치기
 	//Map<String, Object> selectAllt(int page, int u_bstatus, String u_btype);
