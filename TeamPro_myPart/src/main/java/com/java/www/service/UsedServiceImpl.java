@@ -18,13 +18,13 @@ public class UsedServiceImpl implements UsedService {
 
 	//u_btype='trade1'
 	@Override
-	public Map<String, Object> selectAll(int page, String category, String searchWord) {
+	public Map<String, Object> selectAll(int page, String category, String searchWord, int u_bstatus, String u_btype) {
 		
 		if(page<=0) page =1;
 		int countPerPage = 8;
 		int bottomPerNum = 10;
-		int countAll = usedMapper.selectCountAll(category,searchWord);
-		
+		int countAll = usedMapper.selectCountAll(category,searchWord,u_bstatus,u_btype);
+		System.out.println("UsedServiceImpl selectAll u_btype (countall 후): "+u_btype);
 		
 		System.out.println("UsedServiceImpl selectAll countAll"+countAll);
 		
@@ -36,7 +36,12 @@ public class UsedServiceImpl implements UsedService {
 		int endRow = startRow + countPerPage-1;
 		
 		if(endPage>maxPage) endPage = maxPage;
-		List<UsedDto> list = usedMapper.selectAll(startRow,endRow,category,searchWord);
+		System.out.println("UsedServiceImpl selectAll u_btype (selectall 전): "+u_btype);
+		List<UsedDto> list = usedMapper.selectAll(startRow,endRow,category,searchWord,u_bstatus,u_btype);
+		System.out.println("UsedServiceImpl selectAll u_btype (selectall 후): "+u_btype);
+		
+		System.out.println("UsedServiceImpl u_bstatus :"+u_bstatus);
+		System.out.println("UsedServiceImpl u_btype :"+u_btype);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
@@ -46,46 +51,11 @@ public class UsedServiceImpl implements UsedService {
 		map.put("startPage", startPage);
 		map.put("endPage", endPage);
 		map.put("category", category);
-		map.put("searchWord", searchWord);
+		map.put("u_bstatus", u_bstatus);
+		map.put("u_btype", u_btype);
 		return map;
 	}
-	/*
-	//리스트띄우기 & 하단넘버링 
-	@Override
-	public Map<String, Object> selectAllt(int page, int u_bstatus, String u_btype) {
-		if(page<=0) page =1;
-		int countPerPage = 8;
-		int bottomPerNum = 10;
-		//int countAll = usedMapper.selectCountAll();
-		int countAllt = usedMapper.selectP_count(u_bstatus, u_btype);
-		System.out.println("UsedServiceImpl selectAll countAll"+countAllt);
-		
-		int maxPage = (int)Math.ceil((double)countAllt/countPerPage);
-		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
-		int endPage = (startPage+bottomPerNum)-1;
-		
-		int startRow = (page-1)*countPerPage+1;
-		int endRow = startRow + countPerPage-1;
-		
-		if(endPage>maxPage) endPage = maxPage;
-		
-		if(u_bstatus == 0) {
-		List<UsedDto> list = usedMapper.selectAllt(u_bstatus,u_btype,startRow,endRow);
-		}else{
-		List<UsedDto> list = usedMapper.selectAll(startRow,endRow);
-				
-			}
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("list", list);
-		map.put("countAll", countAllt);
-		map.put("page", page);
-		map.put("maxPage", maxPage);
-		map.put("startPage", startPage);
-		map.put("endPage", endPage);
-		return map;
-	}
-*/
+
 	
 	//u_btype='transfer2'
 	@Override
@@ -118,6 +88,42 @@ public class UsedServiceImpl implements UsedService {
 		map2.put("searchWord", searchWord);
 		return map2;
 	}
+	
+	//중고거래 거래가능 하단넘버링
+	@Override
+	public Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype,String category, String searchWord) {
+		if(page<=0) page =1;
+		int countPerPage = 8;
+		int bottomPerNum = 10;
+		int countAll = usedMapper.selectP_count(u_bstatus,u_btype,category,searchWord);
+		System.out.println("UsedServiceImpl selectP_num selectP_count "+countAll);
+		
+		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
+		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
+		int endPage = (startPage+bottomPerNum)-1;
+		
+		int startRow = (page-1)*countPerPage+1;
+		int endRow = startRow + countPerPage-1;
+		
+		if(endPage>maxPage) endPage = maxPage;
+		List<UsedDto> list = usedMapper.used_PerNum(u_bstatus,u_btype,startRow,endRow,category,searchWord);
+		System.out.println("UsedServiceImpl selectP_num u_btype (selectall 후): "+u_btype);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("countAll", countAll);
+		map.put("page", page);
+		map.put("maxPage", maxPage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		map.put("category", category);
+		map.put("searchWord", searchWord);
+		
+		return map;
+		
+	}
+	
+	
 
 	//u_status = '1'(trade1)
 	@Override
@@ -139,11 +145,7 @@ public class UsedServiceImpl implements UsedService {
 		UsedDto udto = usedMapper.selectOne(u_bno,u_btype);
 		UsedDto preudto = usedMapper.selectOneprev(u_bno,u_btype);
 		UsedDto nextudto = usedMapper.selectOnenext(u_bno,u_btype);
-
-		
-		
 		Map<String, Object> map = new HashMap<>();
-		
 		map.put("udto", udto);
 		map.put("preudto", preudto);
 		map.put("nextudto", nextudto);
@@ -158,38 +160,7 @@ public class UsedServiceImpl implements UsedService {
 		
 	}
 	
-	//중고거래 거래가능 하단넘버링
-	@Override
-	public Map<String, Object> selectP_num(int u_bstatus, int page, String u_btype,String category, String searchWord) {
-		if(page<=0) page =1;
-		int countPerPage = 8;
-		int bottomPerNum = 10;
-		int countAll = usedMapper.selectP_count(u_bstatus,u_btype,category,searchWord);
-		System.out.println("UsedServiceImpl selectP_num selectP_count "+countAll);
-		
-		int maxPage = (int)Math.ceil((double)countAll/countPerPage);
-		int startPage = ((page-1)/bottomPerNum)*bottomPerNum+1;
-		int endPage = (startPage+bottomPerNum)-1;
-		
-		int startRow = (page-1)*countPerPage+1;
-		int endRow = startRow + countPerPage-1;
-		
-		if(endPage>maxPage) endPage = maxPage;
-		List<UsedDto> list = usedMapper.used_PerNum(u_bstatus,u_btype,startRow,endRow,category,searchWord);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("list", list);
-		map.put("countAll", countAll);
-		map.put("page", page);
-		map.put("maxPage", maxPage);
-		map.put("startPage", startPage);
-		map.put("endPage", endPage);
-		map.put("category", category);
-		map.put("searchWord", searchWord);
-		
-		return map;
-		
-	}
+
 	
 	//글 삭제
 	@Override

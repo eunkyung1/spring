@@ -1,8 +1,7 @@
 /**
- * used.js파일
+ * usedUpdate.js파일
  */
 
-/*usedWrite*/
 
 $(function(){
 	/*제목,내용,가격 막기*/
@@ -72,11 +71,15 @@ $(document).on('change', '.u_files_input', function() {
 	
 /*usedUpdate*/	   
 
-options.each(function(){
-	var Ou_btype = $("#Ou_btype").val();
-	alert("Ou_btype");
+	var selectElement = $("#used_trade");
+	var options = selectElement.find("option");
 	
-});
+	var Ou_btype = $(".update_btype").data("btype");
+	options.each(function(){
+		if($(this).val() == Ou_btype){
+			$(this).prop("selected".true);
+		}
+	});
 
 
 	   

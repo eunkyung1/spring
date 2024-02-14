@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>중고거래&캠핑장양도_글작성</title>
+		<title>중고거래&캠핑장양도_수정페이지</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	    <meta content="" name="description">
 	    <meta content="" name="keywords">
@@ -37,7 +37,7 @@
 		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
 		
 		<!-- Template nWrite JS File -->
-  		<script src="../assets/js/used/usedWrite.js"></script>
+  		<script src="../assets/js/used/usedupdate.js"></script>
   		<script src="../assets/js/summernote.js"></script>
 		<script src="../assets/js/summernote-lite.js"></script>
          <script src="../assets/js/lang/summernote-ko-KR.js"></script>
@@ -53,17 +53,17 @@
 			<!-- 중고거래&캠핑장양도_글쓰기 -->
 	    	<h1>중고거래&캠핑장양도 글쓰기</h1>
 			<form action="usedWrite" name="usedWriteFrm" method="post" enctype="multipart/form-data">
+			   
 			    <table class="usedW_table">
 			     <colgroup>
 			        <col width="5%">
-			        <col width="30%">
-			        <col width="15%">
+			        <col width="20%">
+			        <col width="25%">
 			        <col width="50%">
 	   			</colgroup>
 			      <tr>
-			        <th style="text-align: center;">
+			        <th class="update_btype" data-btype="${map.udto.u_btype}" style="text-align: center;">
 		        	 	<select name="u_btype" id="used_trade" class="bType">
-					       <option value="">유형</option>
 					       <option value="trade1">중고거래</option>
 					       <option value="transfer2">캠핑장양도</option>
 					    </select>
@@ -108,29 +108,53 @@
 			        <td colspan="4" class="article"><textarea rows="9" class="used_bcontent" name="u_bcontent" id="summernote">${map.udto.u_bcontent}</textarea> </td>
 			      </tr>
 			      
+				<tr class="bfile img_Upload">
+					<div class="img_name">
+						<td><strong>이전 이미지</strong></td>
+					</div>
+					
+					<c:set var="fileNames" value="${map.udto.u_bfile}" />
+					<c:set var="fileNameList" value="${fn:split(fileNames, ',')}" />
+					
+					<td colspan = "3" class="bfile_ucontent file_bo">
+					    <div class="u_images-container2">
+					        <div class="u_image">
+					            <img src="/upload/${map.udto.u_mimg}" class="modal-u_trigger">
+					            <span>${map.udto.u_mimg}</span>
+					        </div>
+					        <c:forEach var="fileName" items="${fileNameList}">
+					            <div class="u_image">
+					                <img src="/upload/${fileName}" class="modal-u_trigger" data-modal-image="/upload/${fileName}">
+					                <span>${fileName}</span>
+					            </div>
+					        </c:forEach>
+					    </div>
+					</td>
+				</tr>
+			      
 			      <tr class="u_files_up">
-			      	<td><strong>첨부파일 1 |</strong></td>
-			        <td colspan="3" class="article">
+			      	<td><strong>첨부파일 1 </strong></td>
+			        <td colspan="3" class="article ">
 			        <span>※해당 사진은 메인사진으로 사용됩니다.</span>
-			        <div class="file-preview-container" id="filePreviewContainer1" >${map.udto.u_mimg}</div>
+			        <div class="file-preview-container" id="filePreviewContainer1" ></div>
 			        <input type="file" class="u_files_input" id="u_files_input1" name="uimg">
 			        </td>
 			      </tr>
 			      <tr class="u_files_up">
-			      	<td><strong>첨부파일 2 |</strong></td>
-			        <td colspan="3" class="article">
+			      	<td><strong>첨부파일 2 </strong></td>
+			        <td colspan="3" class="article ">
 			        <div class="file-preview-container" id="filePreviewContainer2"></div>
 			        <input type="file" class="u_files_input" id="u_files_input2" name="u_files" ></td>
 			      </tr>
 			       <tr class="u_files_up">
-			      	<td><strong>첨부파일 3 |</strong></td>
-			        <td colspan="3" class="article">
+			      	<td><strong>첨부파일 3 </strong></td>
+			        <td colspan="3" class="article ">
 			        <div class="file-preview-container" id="filePreviewContainer3"></div>
 			        <input type="file" class="u_files_input" id="u_files_input3" name="u_files" ></td>
 			      </tr>
 			      <tr class="u_files_up u_bottom">
-			      	<td><strong>첨부파일 4 |</strong></td>
-			        <td colspan="3" class="article">
+			      	<td><strong>첨부파일 4 </strong></td>
+			        <td colspan="3" class="article ">
 			        <div class="file-preview-container" id="filePreviewContainer4"></div>
 			        <input type="file" class="u_files_input" id="u_files_input4" name="u_files" ></td>
 			      </tr>

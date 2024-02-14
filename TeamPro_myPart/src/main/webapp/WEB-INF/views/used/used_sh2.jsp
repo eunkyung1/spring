@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>캠핑중고거래</title>
+<title>캠핑장 양도</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta content="" name="description">
 <meta content="" name="keywords">
@@ -54,10 +54,11 @@
 				<div class="camp-img-div">
 					<img src="/assets/img/campUsed/free-icon-camp-9056684.png"
 						alt="중고거래이미지">
-					<h1 style="text-align: center;">캠핑중고거래</h1>
+					<h1 style="text-align: center;">캠핑장 양도</h1>
 				</div>
 				<div class="bbs-sch">
 					<form action="used_sh2" name="used_sh2Frm" method="get">
+						
 						<!-- .검색 폼시작 -->
 						<fieldset>
 							<legend>게시판 검색 폼</legend>
@@ -73,6 +74,7 @@
 							<span class="key-wrap"> 
 								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_sh2"><img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>
 							</span>
+							<input type="hidden" name="u_bstatus" value="">
 						</fieldset>
 					</form>
 					<!-- .검색 폼 끝 -->
@@ -114,10 +116,19 @@
 								</table>
 								<div class="fixed-img-collist">
 									<ul class="clear">
-										<c:forEach var="udto" items="${map2.list2}">
+										<c:forEach var="udto" items="${map.list}">
+										
 										<li>
 											<a href="usedcontent?u_bno=${udto.u_bno}&u_btype=${udto.u_btype}"> 
+											
+											<c:if test="${udto.u_mimg != null}">
 											<span><img src="/upload/${udto.u_mimg}"></span>
+											</c:if>
+											
+											<c:if test="${udto.u_mimg == null}">
+											<img id="imageElement" src="" alt="Image">
+											</c:if>
+									
 											<div class="used_title">
 											<strong>${udto.u_btitle}</strong>
 											</div>
@@ -126,7 +137,7 @@
 											<strong><fmt:formatNumber value="${price}" pattern="#,##0원" /></strong>
 											<br>
 											<c:if test="${udto.u_bstatus=='1'}">
-											<span class="used-exchange">거래완료</span>
+											<span class="used-exchange" >거래완료</span>
 											</c:if>
 											
 											<c:if test="${udto.u_bstatus=='0'}">
@@ -139,12 +150,13 @@
 										
 										
 									</ul>
+
 								</div>
 								<!-- fixed-img-collist   -->
 							</div>
-					<!-- viewtab-menu  -->
-				</div>
-				<!-- bbs-tit  -->
+							<!-- bbs-table-list  -->
+						</div>
+						<!-- consolebox  -->
 
 				<!-- 하단 페이징 & 버튼 -->
 				<div class="bbs-btm">
@@ -153,50 +165,82 @@
 					</div>
 
 					<!-- 하단 넘버링  -->
-					<div>
+					<c:if test="${map.u_bstatus ==2 }">
+					<div class="PageNum">
 						<ul class="page-num-used">
-							<a href="used_sh2?page=1&category=${map2.category}&searchWord=${map2.searchWord}"><li class="first-num"></li></a>
-							<c:if test="${map2.page>1 }">
-					       <a href="used_sh2?page=${map2.page-1}&category=${map2.category}&searchWord=${map2.searchWord}"><li class="prev-num"></li></a>
+							<a href="used_sh2?page=1&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="first-num"></li></a>
+							<c:if test="${map.page>1 }">
+					       <a href="used_sh2?page=${map.page-1}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="prev-num"></li></a>
 					       </c:if>
-					      <c:if test="${map2.page<=1 }">
+					      <c:if test="${map.page<=1 }">
 					       <li class="prev-num"></li>
 					       </c:if>
 							
-					      <c:forEach var="i" begin="${map2.startPage}" end="${map2.endPage}">
-					      	<c:if test="${map2.page==i}">
+					      <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
+					      	<c:if test="${map.page==i}">
 					      	<li class="num-used on"><div>${i}</div></li>
 					      	</c:if>
-					      	<c:if test="${map2.page!=i}">
-					      	<a href="used_sh2?page=${i}&category=${map2.category}&searchWord=${map2.searchWord}">
+					      	<c:if test="${map.page!=i}">
+					      	<a href="used_sh2?page=${i}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}">
 					    	  <li class="num-used"><div>${i}</div></li>
 					      	</a>
 					      	</c:if>
 					      </c:forEach>
 					      
-					      <c:if test="${map2.page<map2.maxPage}">
-					       <a href="used_sh2?page=${map2.page+1}&category=${map2.category}&searchWord=${map2.searchWord}"><li class="next-num"></li></a>
+					      <c:if test="${map.page<map.maxPage}">
+					       <a href="used_sh2?page=${map.page+1}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="next-num"></li></a>
 					     </c:if>
-					      <c:if test="${map2.page>=map2.maxPage}">
+					      <c:if test="${map.page>=map.maxPage}">
 					       <li class="next-num"></li>
 					     </c:if>
-					     	<a href="used_sh2?page=${map2.maxPage}&category=${map2.category}&searchWord=${map2.searchWord}"><li class="last-num"></li></a>
+					     	<a href="used_sh2?page=${map.maxPage}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="last-num"></li></a>
 					    </ul>
+					</div><!-- //PageNum    -->
+					</c:if>
+					
+					
+					<c:if test="${map.u_bstatus ==0 }">
+					<div class="PageNum">
+						<ul class="page-num-used">
+							<a href="used_sh2?page=1&category=${map.category}&searchWord=${map.searchWord}&u_bstatus=${map.u_bstatus}&u_btype=${map.u_btype}"><li class="first-num"></li></a>
+							<c:if test="${map.page>1 }">
+					       <a href="used_sh2?page=${map.page-1}&category=${map.category}&searchWord=${map.searchWord}&u_bstatus=${map.u_bstatus}&u_btype=${map.u_btype}"><li class="prev-num"></li></a>
+					       </c:if>
+					      <c:if test="${map.page<=1 }">
+					       <li class="prev-num"></li>
+					       </c:if>
+							
+					      <c:forEach var="i" begin="${map.startPage}" end="${map.endPage}">
+					      	<c:if test="${map.page==i}">
+					      	<li class="num-used on"><div>${i}</div></li>
+					      	</c:if>
+					      	<c:if test="${map.page!=i}">
+					      	<a href="used_sh2?page=${i}&category=${map.category}&searchWord=${map.searchWord}&u_bstatus=${map.u_bstatus}&u_btype=${map.u_btype}">
+					    	  <li class="num-used"><div>${i}</div></li>
+					      	</a>
+					      	</c:if>
+					      </c:forEach>
+					      
+					      <c:if test="${map.page<map.maxPage}">
+					       <a href="used_sh2?page=${map.page+1}&category=${map.category}&searchWord=${map.searchWord}&u_bstatus=${map.u_bstatus}&u_btype=${map.u_btype}"><li class="next-num"></li></a>
+					     </c:if>
+					      <c:if test="${map.page>=map.maxPage}">
+					       <li class="next-num"></li>
+					     </c:if>
+					     	<a href="used_sh2?page=${map.maxPage}&category=${map.category}&searchWord=${map.searchWord}&u_bstatus=${map.u_bstatus}&u_btype=${map.u_btype}"><li class="last-num"></li></a>
+					    </ul>
+					</div><!-- //PageNum    -->
+					</c:if>
+				</div><!-- //bbs-btm --><!-- 하단 페이징 & 버튼 -->
+					
+					</div><!-- //viewtab-menu -->
+
+				</div><!-- //bbs-tit -->
+				
+			</div><!-- .page-body -->
 			
-						
-					</div>
-					<!-- //하단 페이징 & 버튼 -->
-
-				</div>
-				<!-- .page-body -->
-			</div>
-			<!-- #bbsData -->
-		</div>
-		<!-- #content -->
-		</div>
-		<!-- #contentWrap -->
-	</section>
-
+		</div><!-- #contentWrap -->
+</section>
 
 
 	<!-- ======= Footer ======= -->

@@ -14,9 +14,7 @@ section{margin: 150px 50px; text-align: center;}
 	top: 47px;
 }
 
-.consolebox1{width: 1100px; height: auto; background: white; display: none; border-bottom: 3px solid #009223; border-top: 3px solid #009223; position: relative; top: 3px;}
-.consolebox2{border-bottom: 3px solid #009223; border-top: 3px solid #009223; osition: relative; top: 3px;
-padding: 10px 10px 10px 10px;}
+.consolebox1, .consolebox2{width: 1100px; height: auto; background: white; display: none; border-bottom: 3px solid #009223; border-top: 3px solid #009223; position: relative; top: 3px;}
 
 input[id="tabview1"]:checked ~ .consolebox1{display: block;}
 input[id="tabview2"]:checked ~ .consolebox2{display: block;}
@@ -328,7 +326,7 @@ used-a {
 }
 
 .consolebox2 .bbs-table-list {
-	margin-top:2px;
+	margin-top: 10px;
 }
 
 .consolebox1 .view-complete {
@@ -340,9 +338,9 @@ used-a {
 
 .consolebox2 .view-complete {
 	position: relative; 
+	left: 460px; 
 	top: 15px; 
 	font-size: 16px;
-	float: right;
 }
 
 .view-complete .MS_input_checkbox{

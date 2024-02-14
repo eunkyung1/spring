@@ -11,7 +11,7 @@ import com.java.www.dto.UsedDto;
 public interface UsedMapper {
 
 	//중고거래
-	List<UsedDto> selectAll(int startRow, int endRow, String category, String searchWord);
+	List<UsedDto> selectAll(int startRow, int endRow, String category, String searchWord, int u_bstatus, String u_btype);
 	//중고양도
 	List<UsedDto> selectAll2(int startRow, int endRow, String category, String searchWord);
 	
@@ -22,7 +22,8 @@ public interface UsedMapper {
 	ArrayList<UsedDto> selectPossible2(String u_bstatus);
 	
 	//게시글 갯수 가져오기(trade1)
-	int selectCountAll(String category, String searchWord);
+	int selectCountAll(String category, String searchWord, int u_bstatus, String u_btype);
+
 	
 	//게시글 갯수 가져오기(transfer2)
 	int selectCountAll2(String category, String searchWord);

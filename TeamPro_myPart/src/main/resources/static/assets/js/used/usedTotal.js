@@ -4,7 +4,25 @@
 
 
 $(function(){
-	
+// 이미지 URL
+var imageUrl = "/assets/img/nView/noImage_camp.jpg";
+
+// 파일명 추출
+var filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+	/*
+var mainImage = $("#u_image_mimg").text();
+var defaultImageUrl = "../../assets/img/nView/noImage.png";
+
+if(!mainImage) {
+	console.log("이미지가 없으니깐 돌아요!");
+	mainImage = defaultImageUrl;
+	$('#imageElement').attr('src', imageUrl);
+}
+*/
+
+
+
+
 /*수정,삭제,거래완료 버튼 구현*/
 	$(".u_updateBtn").click(function(){
 		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];

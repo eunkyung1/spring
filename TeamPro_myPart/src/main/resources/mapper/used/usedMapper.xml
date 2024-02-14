@@ -12,36 +12,51 @@
 	select * from(
 	select row_number() over(order by u_bno desc)rnum, a.*from 
 	(select * from u_board 
+
 	<if test="category == 'u_btitle' or category == 'u_bcontent'">
 		where ${category} like '%'||#{searchWord}||'%'
 	</if>
 	<if test="category == 'all'">
 		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
 	</if>
-	order by u_bno desc)a where u_btype = 'trade1') 
+	
+	order by u_bno desc)a
+	<if test="u_bstatus == 2">
+	where u_btype = #{u_btype}) 
+	</if>
+	<if test="u_bstatus != 2">
+	where u_btype = #{u_btype} and u_bstatus = #{u_bstatus})
+	</if>
+	
 	where rnum between ${startRow} and ${endRow}
 	</select>
 	
-	<!-- 게시글 trade1 가져오기 -->
-	<select id="selectAllt" resultType="com.java.www.dto.UsedDto">
-	select * from(
-	select row_number() over(order by u_bno desc)rnum, a.*from (
-	select * from u_board where b_status = 0
-	)a where u_btype = #{u_btype}) 
-	where rnum between ${startRow} and ${endRow}
-	</select>
-	
-	<!-- trade1 게시글 총 갯수  -->
+	<!-- trade1 게시글 총 갯수(u_bstatus 있을때) -->
 	<select id="selectCountAll" resultType="int">
 		select count(*) from u_board 
+		<if test="u_bstatus == 2">
 		<if test="category == 'u_btitle' or category == 'u_bcontent'">
-			where ${category} like '%'||#{searchWord}||'%' and u_btype='trade1'
+			where ${category} like '%'||#{searchWord}||'%' and u_btype=#{u_btype} 
 		</if>
 		<if test="category == 'all'">
-			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype='trade1'
+			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype=#{u_btype}
+		</if>
+		
+		</if>
+		
+		<if test="u_bstatus != 2">
+		<if test="category == 'u_btitle' or category == 'u_bcontent'">
+			where ${category} like '%'||#{searchWord}||'%' and u_btype=#{u_btype} and u_bstatus= #{u_bstatus}
+		</if>
+		<if test="category == 'all'">
+			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype=#{u_btype}and u_bstatus= #{u_bstatus}
+		</if>
 		</if>
 		
 	</select>
+	
+	
+	
 	
 	<!-- transfer2 게시글 총 갯수 -->
 	<select id="selectCountAll2" resultType="int">

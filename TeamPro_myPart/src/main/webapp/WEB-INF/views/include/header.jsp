@@ -64,7 +64,7 @@
 	            <ul>
 	              <li><a href="/community/pList">파티원모집</a></li>
 		          <li><a href="/community/tList">캠핑꿀팁(Tip)</a></li>
-	              <li><a href="/used/used_ca1">중고거래&캠핑장 양도</a></li>
+	              <li><a href="/used/used_ca1?u_btype=trade1">중고거래&캠핑장 양도</a></li>
 	              <li><a href="/community/fList">자유게시판</a></li>
 	            </ul>
 	          </li>

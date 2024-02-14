@@ -65,7 +65,56 @@ line-height: 20px;
 border-bottom: 2px solid #009223;
 }
 
-/*사진 미리보기  */
+/* 이전 이미지 보기 */
+
+.bfile_ucontent {
+    display: flex; /* Flexbox를 사용하여 이미지와 이미지명을 좌우로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.bfile_ucontent .u_images-container2 {
+    display: flex; /* 이미지와 이미지명을 좌우로 나열하기 위해 Flexbox 사용 */
+    justify-content: space-around; /* 요소들을 가로 방향으로 고르게 배치 */
+    align-items: center; /* 이미지와 텍스트를 수직 정렬 */
+    max-width: 1000px; /* 이미지들의 최대 너비 */
+}
+
+.u_image {
+    display: flex; /* 이미지와 이미지명을 옆으로 나열하기 위해 Flexbox 사용 */
+    flex-direction: column; /* 요소를 세로로 배열 */
+    text-align: center; /* 이미지와 텍스트를 가운데 정렬 */
+    margin: 10px; /* 이미지 사이의 간격 조정 */
+	cursor:pointer;
+}
+
+.u_image img {
+    max-width: 200px; /* 이미지의 최대 너비 */
+	
+}
+
+.u_image span {
+    margin-top: 5px; /* 이미지명과 이미지 사이의 간격 조정 */
+	font-size:12px;
+}
+
+/*  */
+.bfile_ucontent td{
+	text-align: center;
+}
+
+.bfile_ucontent img{
+	width:150px;
+	height:150px;
+}
+
+
+.bfile.b_Upload{
+	border-bottom: 1px solid silver;
+}
+
+
+
+/*업로드사진 미리보기  */
 .file-preview-container {
    display: flex;
    flex-wrap: wrap;

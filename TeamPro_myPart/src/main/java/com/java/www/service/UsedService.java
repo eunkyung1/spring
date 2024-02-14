@@ -8,7 +8,7 @@ import com.java.www.dto.UsedDto;
 
 public interface UsedService {
 	//trade1 받기 - 중고거래
-	Map<String, Object> selectAll(int page, String category, String searchWord);
+	Map<String, Object> selectAll(int page, String category, String searchWord, int u_bstatus, String u_btype);
 
 	//transfer2 받기 - 중고양도
 	Map<String, Object> selectAll2(int page, String category, String searchWord);
@@ -35,9 +35,5 @@ public interface UsedService {
 	int usedComplete(int u_bno);
 
 
-	//중고거래 하단넘버링 합치기
-	//Map<String, Object> selectAllt(int page, int u_bstatus, String u_btype);
-	
-	
 
 }

@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>중고거래뷰</title>
+	<title>중고거래&캠핑장 양도</title>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<meta content="" name="description">
 	<meta content="" name="keywords">
@@ -55,12 +55,22 @@
 					<div class="page-body">
 						<div class="camp-img-div">
 							<img src="/assets/img/campUsed/free-icon-camp-8486682.png" alt="캠핑용품리뷰">
+							<c:if test="${map.udto.u_btype == 'trade1'}">
 							<h1>중고거래</h1>
+							</c:if>
+							<c:if test="${map.udto.u_btype == 'transfer2'}">
+							<h1>캠핑장양도</h1>
+							</c:if>
 						</div>
 		
 						<br> <br> <br>
 						<div class="bbs-tit">
-							<h3>캠핑용품리뷰</h3>
+							<c:if test="${map.udto.u_btype == 'trade1'}">
+							<h3>중고거래</h3>
+							</c:if>
+							<c:if test="${map.udto.u_btype == 'transfer2'}">
+							<h3>캠핑장양도</h3>
+							</c:if>
 						</div>
 						<dl class="prd-tinfo">
 							<dt>
@@ -137,7 +147,7 @@
 										    <div class="u_images-container">
 										        <div class="u_image">
 										            <img src="/upload/${map.udto.u_mimg}" class="modal-u_trigger">
-										            <span>${map.udto.u_mimg}</span>
+										            <span id="u_image_mimg">${map.udto.u_mimg}</span>
 										        </div>
 										        <c:forEach var="fileName" items="${fileNameList}">
 										            <div class="u_image">
