@@ -34,6 +34,9 @@ public interface UsedService {
 	//거래완료버튼 
 	int usedComplete(int u_bno);
 
+	//글수정 저장
+	void usedDoUpdate(UsedDto udto);
+
 
 
 }

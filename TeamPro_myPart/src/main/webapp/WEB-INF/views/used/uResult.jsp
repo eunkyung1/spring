@@ -38,6 +38,20 @@
 					</script>			
 				</c:when>
 				
+				<c:when test="${result == 'used-up'}">
+					<script>
+					 alert("게시글이 수정되었습니다.");
+					 location.href="used_ca1";
+					</script>			
+				</c:when>
+				
+				<c:when test="${result == 'used-up2'}">
+					<script>
+					 alert("게시글이 수정되었습니다.");
+					 location.href="used_sh2";
+					</script>			
+				</c:when>
+				
 
 		</c:choose>
 		

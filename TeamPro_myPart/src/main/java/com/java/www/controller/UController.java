@@ -181,8 +181,6 @@ public class UController {
 		String fileUrl = "c:/upload/";
 		String orgfileName ="";
 		String uploadFileName = "";
-		int fileCount =0;
-		StringBuilder u_bfileName = new StringBuilder();
 		System.out.println(u_files);
 		
 		
@@ -196,17 +194,19 @@ public class UController {
 			udto.setU_mimg(uploadFileName);
 		};//if(umimg)
 		
-		// 이전 파일명들을 가져옴
-		String file1 = udto.getFile1();
-		String file2 = udto.getFile2();
-		String file3 = udto.getFile3();
+	    // 이전 파일명들을 가져옴
+	    String file1 = udto.getFile1();
+	    String file2 = udto.getFile2();
+	    String file3 = udto.getFile3();
+
+	    // 새로운 파일명들을 저장할 변수
+	    String newFile1 = file1;
+	    String newFile2 = file2;
+	    String newFile3 = file3;
 		
-		// 새로운 파일명들을 저장할 변수
-		String newFile1 = "";
-		String newFile2 = "";
-		String newFile3 = "";
-		
-	    for (MultipartFile file : u_files) {
+	    // u_files 리스트를 반복하며 각 파일에 대해 처리
+	    for (int i = 0; i < u_files.size(); i++) {
+	        MultipartFile file = u_files.get(i);
 	        if (!file.isEmpty()) {
 	            orgfileName = file.getOriginalFilename();
 	            long time = System.currentTimeMillis();
@@ -214,46 +214,21 @@ public class UController {
 	            File f = new File(fileUrl + uploadFileName);
 	            file.transferTo(f);
 
-	            if (file1 == null || file1.isEmpty()) {
-	                
-	            	newFile1 = uploadFileName;
-	            } else if (file2 == null || file2.isEmpty()) {
+	            // 새 파일명 설정
+	            if (i == 0) {
+	                newFile1 = uploadFileName;
+	            } else if (i == 1) {
 	                newFile2 = uploadFileName;
-	            } else if (file3 == null || file3.isEmpty()) {
+	            } else if (i == 2) {
 	                newFile3 = uploadFileName;
-	            }
-	            
-	            if (file1 != null && orgfileName !=null && uploadFileName != file1) {
-	            	newFile1 = uploadFileName;
-	            	System.out.println(file1);
-	            	System.out.println(newFile1);
-	            	System.out.println(uploadFileName);
-	            } else if (file2 != null && orgfileName !=null && uploadFileName != file2 ) {
-	            	newFile2 = uploadFileName;
-	            } else if (file3 != null && orgfileName !=null  ) {
-	            	newFile3 = uploadFileName;
-	            }
-	 
-	            
-	            System.out.println("orgfileName : "+orgfileName);
-	            System.out.println("------------------------------------------");
-	            System.out.println("이전 파일 file1 : "+file1);
-	            System.out.println("이전 파일 file2 : "+file2);
-	            System.out.println("이전 파일 file3 : "+file3);
-	        }
-	    }
+	            }//else if
+	        }//file.isEmpty
+	    }//for
 
 	    // 파일명을 Dto 객체에 설정
 	    udto.setFile1(newFile1);
 	    udto.setFile2(newFile2);
 	    udto.setFile3(newFile3);
-	    
-	    System.out.println("------------------------------------------");
-	    System.out.println("새로운 파일 newFile1 : "+newFile1);
-	    System.out.println("새로운 파일 newFile2 : "+newFile2);
-	    System.out.println("새로운 파일 newFile3 : "+newFile3);
-	    System.out.println("------------------------------------------");
-	    
 
 	    // 파일명들을 ','로 구분하여 udto에 설정
 	    String bfile = Stream.of(newFile1, newFile2, newFile3)
@@ -261,7 +236,15 @@ public class UController {
 	                         .collect(Collectors.joining(","));
 	    udto.setU_bfile(bfile);
 		System.out.println("최종 bfile : "+bfile);
-		return "/used/usedUpdate";
+		
+		uService.usedDoUpdate(udto);
+		
+		if(udto.getU_btype().equals("trade1")) {
+			model.addAttribute("result","used-up");
+		}else {
+			model.addAttribute("result","used-up2");
+		}
+		return "/used/uResult";
 	}// usedUpdate()
 	
 	

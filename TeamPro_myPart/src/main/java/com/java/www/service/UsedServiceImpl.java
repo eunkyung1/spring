@@ -24,7 +24,6 @@ public class UsedServiceImpl implements UsedService {
 		int countPerPage = 8;
 		int bottomPerNum = 10;
 		int countAll = usedMapper.selectCountAll(category,searchWord,u_bstatus,u_btype);
-		System.out.println("UsedServiceImpl selectAll u_btype (countall 후): "+u_btype);
 		
 		System.out.println("UsedServiceImpl selectAll countAll"+countAll);
 		
@@ -36,12 +35,16 @@ public class UsedServiceImpl implements UsedService {
 		int endRow = startRow + countPerPage-1;
 		
 		if(endPage>maxPage) endPage = maxPage;
-		System.out.println("UsedServiceImpl selectAll u_btype (selectall 전): "+u_btype);
 		List<UsedDto> list = usedMapper.selectAll(startRow,endRow,category,searchWord,u_bstatus,u_btype);
-		System.out.println("UsedServiceImpl selectAll u_btype (selectall 후): "+u_btype);
 		
 		System.out.println("UsedServiceImpl u_bstatus :"+u_bstatus);
 		System.out.println("UsedServiceImpl u_btype :"+u_btype);
+		
+		System.out.println("UsedServiceImpl selectAll countAll :"+countAll);
+		System.out.println("UsedServiceImpl selectAll startRow :"+startRow);
+		System.out.println("UsedServiceImpl selectAll endRow :"+endRow);
+		System.out.println("UsedServiceImpl selectAll maxPage :"+maxPage);
+		System.out.println("UsedServiceImpl selectAll startPage :"+startPage);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
@@ -55,8 +58,6 @@ public class UsedServiceImpl implements UsedService {
 		map.put("u_btype", u_btype);
 		return map;
 	}
-
-	
 	//u_btype='transfer2'
 	@Override
 	public Map<String, Object> selectAll2(int page, String category, String searchWord) {
@@ -122,8 +123,6 @@ public class UsedServiceImpl implements UsedService {
 		return map;
 		
 	}
-	
-	
 
 	//u_status = '1'(trade1)
 	@Override
@@ -145,6 +144,9 @@ public class UsedServiceImpl implements UsedService {
 		UsedDto udto = usedMapper.selectOne(u_bno,u_btype);
 		UsedDto preudto = usedMapper.selectOneprev(u_bno,u_btype);
 		UsedDto nextudto = usedMapper.selectOnenext(u_bno,u_btype);
+		
+		 usedMapper.ubhitUp(u_bno);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("udto", udto);
 		map.put("preudto", preudto);
@@ -152,16 +154,11 @@ public class UsedServiceImpl implements UsedService {
 		map.put("u_btype",u_btype);
 		return map;
 	}
-
 	//usedWrite 글쓰기
 	@Override
 	public void usedWrite(UsedDto udto) {
 		usedMapper.usedWrite(udto);
-		
 	}
-	
-
-	
 	//글 삭제
 	@Override
 	public void usedDelete(int u_bno) {
@@ -172,18 +169,13 @@ public class UsedServiceImpl implements UsedService {
 	@Override
 	public int usedComplete(int u_bno) {
 		int result = usedMapper.usedComplete(u_bno);
-	
-
 		return result;
+	}
+	//글 수정 저장하기
+	@Override
+	public void usedDoUpdate(UsedDto udto) {
+		usedMapper.usedDoUpdate(udto);
 		
 	}
-	//전체페이지 test
-	/*
-	@Override
-	public Map<String, Object> selectAll_t(int page, String category, String searchWord, int u_bstatus, String u_btype) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-*/
 
 }

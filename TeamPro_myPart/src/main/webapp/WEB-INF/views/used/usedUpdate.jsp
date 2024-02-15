@@ -63,7 +63,7 @@
 			<input type="hidden" name="u_bno" value="${map.udto.u_bno}">
 			<input type="hidden" name="u_bfile" value="${map.udto.u_bfile}">
 			<input type="hidden" name="u_mimg" value="${map.udto.u_mimg}">
-			<input type="hideen" name="fileNameList" id="fileNameList" value="${map.udto.u_bfile}">
+			<input type="hidden" name="fileNameList" id="fileNameList" value="${map.udto.u_bfile}">
 			
 			
 			   

@@ -202,7 +202,7 @@
 					      <c:if test="${map.page>=map.maxPage}">
 					       <li class="next-num"></li>
 					     </c:if>
-					     	<a href="used_ca1?page=${map.maxPage}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="last-num"></li></a>
+					     	<a href="used_ca1?page=${map.endPage}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="last-num"></li></a>
 					    </ul>
 					</div><!-- //PageNum    -->
 					</c:if>

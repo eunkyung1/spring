@@ -55,5 +55,11 @@ public interface UsedMapper {
 	//거래완료 버튼
 	int usedComplete(int u_bno);
 	
+	//글수정 저장
+	void usedDoUpdate(UsedDto udto);
+	
+	//조회수 증가
+	void ubhitUp(int u_bno);
+	
 
 }

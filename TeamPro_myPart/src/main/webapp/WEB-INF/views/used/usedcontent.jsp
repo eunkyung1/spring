@@ -190,7 +190,7 @@
 								
 								<!-- 삭제,수정, 목록버튼 -->
 								<div class="u_listBtn">
-									<button type="button" class="u_list">목록</button>
+									<button type="button" class="u_list" id="u_listBtn">목록</button>
 									<button type="button" class="u_list u_delBtn pri">삭제</button>
 									<button type="button" class="u_list u_updateBtn pri">수정</button>
 									<button type="button" class="u_list u_comple pri">거래완료</button>

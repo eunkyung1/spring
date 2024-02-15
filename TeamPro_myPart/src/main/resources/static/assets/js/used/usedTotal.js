@@ -4,23 +4,6 @@
 
 
 $(function(){
-// 이미지 URL
-var imageUrl = "/assets/img/nView/noImage_camp.jpg";
-
-// 파일명 추출
-var filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-	/*
-var mainImage = $("#u_image_mimg").text();
-var defaultImageUrl = "../../assets/img/nView/noImage.png";
-
-if(!mainImage) {
-	console.log("이미지가 없으니깐 돌아요!");
-	mainImage = defaultImageUrl;
-	$('#imageElement').attr('src', imageUrl);
-}
-*/
-
-
 
 
 /*수정,삭제,거래완료 버튼 구현*/
@@ -34,6 +17,15 @@ if(!mainImage) {
 		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
 		var u_btype = $("#u_btype").val();
 		window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;
+	});
+	
+	$("#u_listBtn").click(function(){
+		var u_btype = $("#u_btype").val();
+		if(u_btype == "trade1"){
+			window.location.href="/used/used_ca1";
+		}else{
+			window.location.href="/used/used_sh2";
+		}	
 	});
 	
 	$(".u_comple").click(function(){
@@ -65,11 +57,6 @@ if(!mainImage) {
 		
 		
 	});
-	
-	
-	
-	
-	
 	
 	/*작성자 아니면 (.pri)버튼 hide & show*/
 	var sessionID = $('#session').val();

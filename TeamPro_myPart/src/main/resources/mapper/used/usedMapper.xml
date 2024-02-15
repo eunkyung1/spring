@@ -54,9 +54,6 @@
 		
 	</select>
 	
-	
-	
-	
 	<!-- transfer2 게시글 총 갯수 -->
 	<select id="selectCountAll2" resultType="int">
 		select count(*) from u_board 
@@ -154,16 +151,27 @@ select * from(
 		insert into u_board values(u_board_seq.nextval,#{id},#{u_btype},#{u_btitle},#{u_bcontent},#{u_bprice},#{u_blocal},sysdate,0,0,#{u_bfile},#{u_mimg})
 	</insert>
 	
+	
+	<!-- 글 삭제  -->
 	<delete id="usedDelete">
 		delete u_board where u_bno = #{u_bno}
 	</delete>
 	
+	<!-- 거래 완료  -->
 	<update id="usedComplete">
 		update u_board set u_bstatus = 1 where u_bno=#{u_bno}
 	</update>
 	
+	<!-- 글 수정 저장  -->
+	<update id="usedDoUpdate">
+		update u_board set u_btype=#{u_btype},u_btitle = #{u_btitle}, u_bcontent=#{u_bcontent},u_bprice=#{u_bprice},
+		u_blocal=#{u_blocal},u_bdate=sysdate,u_bfile=#{u_bfile},u_mimg=#{u_mimg} where u_bno=#{u_bno}
+	</update>
 	
-	
+	<!-- 조회수 증가 -->
+	<update id="ubhitUp">
+		update u_board set u_bhit = u_bhit+1 where u_bno = #{u_bno}
+	</update>
 	
 	
 	
