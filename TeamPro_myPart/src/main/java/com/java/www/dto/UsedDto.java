@@ -25,5 +25,7 @@ public class UsedDto {
 	private int u_bhit;
 	private String u_bfile;
 	private String u_mimg;
-
+	private String file1;
+	private String file2;
+	private String file3;
 }

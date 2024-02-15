@@ -72,11 +72,7 @@ $(document).on('change', '.u_files_input', function() {
 	
 /*usedUpdate*/	   
 
-options.each(function(){
-	var Ou_btype = $("#Ou_btype").val();
-	alert("Ou_btype");
-	
-});
+
 
 
 	   

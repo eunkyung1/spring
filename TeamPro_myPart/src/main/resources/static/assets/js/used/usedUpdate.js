@@ -2,8 +2,24 @@
  * usedUpdate.js파일
  */
 
-
 $(function(){
+		var fileNameList = $("#fileNameList").val();
+		var fileNameArray = fileNameList.split(',');
+		console.log(fileNameArray);
+		for (var i = 0; i < fileNameArray.length; i++) {
+	        console.log(fileNameArray[i]);
+	    var hiddenInput = $('<input>').attr({
+	        type: 'hidden',
+	        name: 'file' + (i + 1), // 파일명을 file1, file2, file3으로 할당
+	        value: fileNameArray[i],// 파일명을 hidden input의 값으로 설정
+	        id : 'file' + (i + 1)
+	    });
+		  $('form[name="usedUpdateFrm"]').append(hiddenInput); // hidden input을 폼에 추가
+			//usedUpdateFrm.submit();
+			};
+		
+		
+	
 	/*제목,내용,가격 막기*/
 	$("#u_saveBtn").click(function(){
 		if($("#used_btitle").val().length<1){
@@ -29,8 +45,8 @@ $(function(){
 			return false;
 		};
 		
-		usedWriteFrm.submit();
-		
+		usedUpdateFrm.submit();
+  	
 	});//click
 	
 /*사진 미리보기*/
@@ -70,20 +86,29 @@ $(document).on('change', '.u_files_input', function() {
 });      
 	
 /*usedUpdate*/	   
-
+	/* 유형(중고거래, 캠핑장양도) => selected */
 	var selectElement = $("#used_trade");
 	var options = selectElement.find("option");
 	
 	var Ou_btype = $(".update_btype").data("btype");
+	
 	options.each(function(){
 		if($(this).val() == Ou_btype){
-			$(this).prop("selected".true);
+			$(this).prop("selected",true);
 		}
+	});//options
+
+	/* 거래장소 => selected */
+	var local_options = $("#used_region").find("option");
+	var Ou_blocal = $(".used_region").data("blocal");
+	
+	local_options.each(function(){
+		if($(this).val() == Ou_blocal){
+			$(this).prop("selected",true);
+		}
+		
 	});
+	
 
-
-	   
-	        
-	        
 
 });//jquery

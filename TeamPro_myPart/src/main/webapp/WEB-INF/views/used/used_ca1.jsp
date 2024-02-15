@@ -41,6 +41,15 @@
 <!-- Template Main CSS File -->
 <script src="../assets/js/used/used.js"></script>
 
+<style>
+	.default-image {
+            display: none; /* 기본 이미지 숨기기 */
+        }
+        img:not([src]) + .default-image {
+            display: inline-block; /* 이미지가 없을 때 기본 이미지 표시 */
+        }
+</style>
+
 </head>
 <body>
 	<!-- ======= Header ======= -->
@@ -124,15 +133,7 @@
 										
 										<li>
 											<a href="usedcontent?u_bno=${udto.u_bno}&u_btype=${udto.u_btype}"> 
-											
-											<c:if test="${udto.u_mimg == null}">
-											<span><img src="${filename}"></span>
-											</c:if>
-											
-											<c:if test="${udto.u_mimg != null}">
 											<span><img src="/upload/${udto.u_mimg}"></span>
-											</c:if>
-											
 											
 											<div class="used_title">
 											<strong>${udto.u_btitle}</strong>

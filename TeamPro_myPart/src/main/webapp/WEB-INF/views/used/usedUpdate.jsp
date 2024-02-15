@@ -51,8 +51,21 @@
 		<section class="notice">
 		
 			<!-- 중고거래&캠핑장양도_글쓰기 -->
-	    	<h1>중고거래&캠핑장양도 글쓰기</h1>
-			<form action="usedWrite" name="usedWriteFrm" method="post" enctype="multipart/form-data">
+			<c:if test="${map.udto.u_btype == 'trade1'}">
+	    	<h1>중고거래 수정</h1>
+			</c:if>
+			
+			<c:if test="${map.udto.u_btype == 'transfer2'}">
+	    	<h1>캠핑장양도 수정</h1>
+			</c:if>
+			
+			<form action="usedUpdate" name="usedUpdateFrm" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="u_bno" value="${map.udto.u_bno}">
+			<input type="hidden" name="u_bfile" value="${map.udto.u_bfile}">
+			<input type="hidden" name="u_mimg" value="${map.udto.u_mimg}">
+			<input type="hideen" name="fileNameList" id="fileNameList" value="${map.udto.u_bfile}">
+			
+			
 			   
 			    <table class="usedW_table">
 			     <colgroup>
@@ -80,7 +93,7 @@
 			      <tr class="used_top u_bottom">
 			        <td class="used_price"><strong>가격  | </strong></td>
 			        <td class="used_input1"><input class="used_input1" type="text" name="u_bprice" id="u_bprice" value="${map.udto.u_bprice}"> <span> 원</span></td>
-			        <td class="used_region"><strong>거래장소 | </strong></td>
+			        <td class="used_region" data-blocal="${map.udto.u_blocal}"><strong>거래장소 | </strong></td>
 					<td>
 						<select name="u_blocal" id="used_region" class="used_region">
 					       <option value="서울시">서울시</option>
@@ -116,14 +129,16 @@
 					<c:set var="fileNames" value="${map.udto.u_bfile}" />
 					<c:set var="fileNameList" value="${fn:split(fileNames, ',')}" />
 					
-					<td colspan = "3" class="bfile_ucontent file_bo">
+					<td colspan = "3" class="bfile_ucontent file_bo" data-bfile="${fileNameList}">
 					    <div class="u_images-container2">
 					        <div class="u_image">
+					        	<h7>메인사진</h7>
 					            <img src="/upload/${map.udto.u_mimg}" class="modal-u_trigger">
 					            <span>${map.udto.u_mimg}</span>
 					        </div>
-					        <c:forEach var="fileName" items="${fileNameList}">
+					        <c:forEach var="fileName" items="${fileNameList}" varStatus="loop">
 					            <div class="u_image">
+									<h7>첨부파일${loop.index + 1}</h7>					            
 					                <img src="/upload/${fileName}" class="modal-u_trigger" data-modal-image="/upload/${fileName}">
 					                <span>${fileName}</span>
 					            </div>
@@ -133,7 +148,7 @@
 				</tr>
 			      
 			      <tr class="u_files_up">
-			      	<td><strong>첨부파일 1 </strong></td>
+			      	<td class="u_file_main"><strong>메인사진 </strong></td>
 			        <td colspan="3" class="article ">
 			        <span>※해당 사진은 메인사진으로 사용됩니다.</span>
 			        <div class="file-preview-container" id="filePreviewContainer1" ></div>
@@ -141,19 +156,19 @@
 			        </td>
 			      </tr>
 			      <tr class="u_files_up">
-			      	<td><strong>첨부파일 2 </strong></td>
+			      	<td><strong>첨부파일 1 </strong></td>
 			        <td colspan="3" class="article ">
 			        <div class="file-preview-container" id="filePreviewContainer2"></div>
 			        <input type="file" class="u_files_input" id="u_files_input2" name="u_files" ></td>
 			      </tr>
 			       <tr class="u_files_up">
-			      	<td><strong>첨부파일 3 </strong></td>
+			      	<td><strong>첨부파일 2 </strong></td>
 			        <td colspan="3" class="article ">
 			        <div class="file-preview-container" id="filePreviewContainer3"></div>
 			        <input type="file" class="u_files_input" id="u_files_input3" name="u_files" ></td>
 			      </tr>
 			      <tr class="u_files_up u_bottom">
-			      	<td><strong>첨부파일 4 </strong></td>
+			      	<td><strong>첨부파일 3 </strong></td>
 			        <td colspan="3" class="article ">
 			        <div class="file-preview-container" id="filePreviewContainer4"></div>
 			        <input type="file" class="u_files_input" id="u_files_input4" name="u_files" ></td>

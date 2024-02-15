@@ -1,11 +1,12 @@
 package com.java.www.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.eclipse.tags.shaded.org.apache.xalan.xsltc.compiler.sym;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.www.dto.UsedDto;
 import com.java.www.service.UsedService;
 
@@ -111,9 +110,12 @@ public class UController {
 	public String usedWrite(@RequestPart MultipartFile uimg, List<MultipartFile> u_files, UsedDto udto, Model model) throws Exception {
 		
 		String fileUrl = "c:/upload/";
+		String noImage = "nImage.jpg";
 		String orgfileName ="";
 		String uploadFileName = "";
 		StringBuilder u_bfileName = new StringBuilder();
+		System.out.println(u_files);
+		
 		int fileCount =0;
 		
 		
@@ -126,7 +128,7 @@ public class UController {
 			uimg.transferTo(f);
 			udto.setU_mimg(uploadFileName);
 		}else {
-			udto.setU_mimg("");
+			udto.setU_mimg(noImage);
 		}
 		
 		
@@ -163,7 +165,7 @@ public class UController {
 		return "/used/uResult";
 	}// usedWrite()
 	
-	//중고거래 및 양도 - 글수정
+	//중고거래 및 양도 - 글수정 불러오기
 	@GetMapping("usedUpdate")
 	public String usedUpdate(@RequestParam(defaultValue = "1")int u_bno, Model model,String u_btype) {
 		Map<String, Object> map = uService.selectOne(u_bno,u_btype);
@@ -171,6 +173,99 @@ public class UController {
 		
 		return "/used/usedUpdate";
 	}// usedUpdate()
+	
+	//중고거래 및 양고 - 글수정 저장
+	@PostMapping("usedUpdate")
+	public String usedUpdate(UsedDto udto, @RequestPart MultipartFile uimg, @RequestPart("u_files")List<MultipartFile> u_files, Model model) throws Exception {
+	
+		String fileUrl = "c:/upload/";
+		String orgfileName ="";
+		String uploadFileName = "";
+		int fileCount =0;
+		StringBuilder u_bfileName = new StringBuilder();
+		System.out.println(u_files);
+		
+		
+		if(!uimg.isEmpty()) {
+			orgfileName = uimg.getOriginalFilename();
+			long time = System.currentTimeMillis();
+			uploadFileName = time+"_"+orgfileName;
+			System.out.println("파일이름 : "+uploadFileName);
+			File f = new File(fileUrl+uploadFileName);
+			uimg.transferTo(f);
+			udto.setU_mimg(uploadFileName);
+		};//if(umimg)
+		
+		// 이전 파일명들을 가져옴
+		String file1 = udto.getFile1();
+		String file2 = udto.getFile2();
+		String file3 = udto.getFile3();
+		
+		// 새로운 파일명들을 저장할 변수
+		String newFile1 = "";
+		String newFile2 = "";
+		String newFile3 = "";
+		
+	    for (MultipartFile file : u_files) {
+	        if (!file.isEmpty()) {
+	            orgfileName = file.getOriginalFilename();
+	            long time = System.currentTimeMillis();
+	            uploadFileName = time + "_" + orgfileName;
+	            File f = new File(fileUrl + uploadFileName);
+	            file.transferTo(f);
+
+	            if (file1 == null || file1.isEmpty()) {
+	                
+	            	newFile1 = uploadFileName;
+	            } else if (file2 == null || file2.isEmpty()) {
+	                newFile2 = uploadFileName;
+	            } else if (file3 == null || file3.isEmpty()) {
+	                newFile3 = uploadFileName;
+	            }
+	            
+	            if (file1 != null && orgfileName !=null && uploadFileName != file1) {
+	            	newFile1 = uploadFileName;
+	            	System.out.println(file1);
+	            	System.out.println(newFile1);
+	            	System.out.println(uploadFileName);
+	            } else if (file2 != null && orgfileName !=null && uploadFileName != file2 ) {
+	            	newFile2 = uploadFileName;
+	            } else if (file3 != null && orgfileName !=null  ) {
+	            	newFile3 = uploadFileName;
+	            }
+	 
+	            
+	            System.out.println("orgfileName : "+orgfileName);
+	            System.out.println("------------------------------------------");
+	            System.out.println("이전 파일 file1 : "+file1);
+	            System.out.println("이전 파일 file2 : "+file2);
+	            System.out.println("이전 파일 file3 : "+file3);
+	        }
+	    }
+
+	    // 파일명을 Dto 객체에 설정
+	    udto.setFile1(newFile1);
+	    udto.setFile2(newFile2);
+	    udto.setFile3(newFile3);
+	    
+	    System.out.println("------------------------------------------");
+	    System.out.println("새로운 파일 newFile1 : "+newFile1);
+	    System.out.println("새로운 파일 newFile2 : "+newFile2);
+	    System.out.println("새로운 파일 newFile3 : "+newFile3);
+	    System.out.println("------------------------------------------");
+	    
+
+	    // 파일명들을 ','로 구분하여 udto에 설정
+	    String bfile = Stream.of(newFile1, newFile2, newFile3)
+	                         .filter(fileName -> fileName != null && !fileName.isEmpty())
+	                         .collect(Collectors.joining(","));
+	    udto.setU_bfile(bfile);
+		System.out.println("최종 bfile : "+bfile);
+		return "/used/usedUpdate";
+	}// usedUpdate()
+	
+	
+	
 	
 	//중고거래 및 양도 - 글삭제
 	@GetMapping("usedDelete")

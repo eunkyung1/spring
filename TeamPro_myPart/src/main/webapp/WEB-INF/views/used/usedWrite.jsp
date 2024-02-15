@@ -108,7 +108,7 @@
 			      </tr>
 			      
 			      <tr class="u_files_up">
-			      	<td><strong>첨부파일 1 |</strong></td>
+			      	<td class="u_file_main"><strong>메인사진  |</strong></td>
 			        <td colspan="3" class="article">
 			        <span>※해당 사진은 메인사진으로 사용됩니다.</span>
 			        <div class="file-preview-container" id="filePreviewContainer1"></div>
@@ -116,19 +116,19 @@
 			        </td>
 			      </tr>
 			      <tr class="u_files_up">
-			      	<td><strong>첨부파일 2 |</strong></td>
+			      	<td><strong>첨부파일 1 |</strong></td>
 			        <td colspan="3" class="article">
 			        <div class="file-preview-container" id="filePreviewContainer2"></div>
 			        <input type="file" class="u_files_input" name="u_files" ></td>
 			      </tr>
 			       <tr class="u_files_up">
-			      	<td><strong>첨부파일 3 |</strong></td>
+			      	<td><strong>첨부파일 2 |</strong></td>
 			        <td colspan="3" class="article">
 			        <div class="file-preview-container" id="filePreviewContainer3"></div>
 			        <input type="file" class="u_files_input" name="u_files" ></td>
 			      </tr>
 			      <tr class="u_files_up u_bottom">
-			      	<td><strong>첨부파일 4 |</strong></td>
+			      	<td><strong>첨부파일 3 |</strong></td>
 			        <td colspan="3" class="article">
 			        <div class="file-preview-container" id="filePreviewContainer4"></div>
 			        <input type="file" class="u_files_input" name="u_files" ></td>

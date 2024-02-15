@@ -19,7 +19,6 @@
 	<if test="category == 'all'">
 		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
 	</if>
-	
 	order by u_bno desc)a
 	<if test="u_bstatus == 2">
 	where u_btype = #{u_btype}) 

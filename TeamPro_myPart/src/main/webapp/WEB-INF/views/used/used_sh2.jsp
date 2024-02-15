@@ -120,15 +120,9 @@
 										
 										<li>
 											<a href="usedcontent?u_bno=${udto.u_bno}&u_btype=${udto.u_btype}"> 
-											
-											<c:if test="${udto.u_mimg != null}">
+										
 											<span><img src="/upload/${udto.u_mimg}"></span>
-											</c:if>
-											
-											<c:if test="${udto.u_mimg == null}">
-											<img id="imageElement" src="" alt="Image">
-											</c:if>
-									
+										
 											<div class="used_title">
 											<strong>${udto.u_btitle}</strong>
 											</div>
