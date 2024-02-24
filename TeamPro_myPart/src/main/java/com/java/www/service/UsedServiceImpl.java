@@ -16,7 +16,7 @@ public class UsedServiceImpl implements UsedService {
 	
 	@Autowired UsedMapper usedMapper;
 
-	//u_btype='trade1'
+	//All
 	@Override
 	public Map<String, Object> selectAll(int page, String category, String searchWord, int u_bstatus, String u_btype) {
 		
@@ -99,6 +99,7 @@ public class UsedServiceImpl implements UsedService {
 		map.put("u_btype",u_btype);
 		return map;
 	}
+	
 	//usedWrite 글쓰기
 	@Override
 	public void usedWrite(UsedDto udto) {

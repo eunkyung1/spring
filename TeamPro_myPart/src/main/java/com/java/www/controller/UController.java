@@ -30,12 +30,11 @@ public class UController {
 	
 	//중고거래 및 양도 - 중고거래
 	@GetMapping("used_ca1")
-	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model,@RequestParam(defaultValue = "2")int u_bstatus,@RequestParam(required = false) String u_btype,
+	public String used_ca1(@RequestParam(defaultValue = "1")int page ,Model model,
+		@RequestParam(defaultValue = "2")int u_bstatus,@RequestParam(required = false) String u_btype,
 		@RequestParam(required = false) String category, @RequestParam(required = false) String searchWord) {
 		
 		u_btype = "trade1";
-		
-		System.out.println("종고거래(trade1) 입니다.");
 		Map<String, Object> map =  uService.selectAll(page,category,searchWord,u_bstatus,u_btype);
 		model.addAttribute("map",map);
 		

@@ -63,14 +63,14 @@
 	<select id="selectP_count" resultType="int">
 		select count(*) from (select * from u_board 
 		
-			<if test="category == 'u_btitle' or category == 'u_bcontent'">
-				where ${category} like '%'||#{searchWord}||'%' 
-			</if>
-			
-			<if test="category == 'all'">
-				where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' 
-			</if>
-				)a where a.u_btype=#{u_btype} and a.u_bstatus=#{u_bstatus}
+		<if test="category == 'u_btitle' or category == 'u_bcontent'">
+			where ${category} like '%'||#{searchWord}||'%' 
+		</if>
+		
+		<if test="category == 'all'">
+			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' 
+		</if>
+			)a where a.u_btype=#{u_btype} and a.u_bstatus=#{u_bstatus}
 	</select>
 
 
