@@ -30,18 +30,28 @@
 	    <!-- Template Main CSS File -->
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+		
+		<!-- Template nWrite JS File -->
+  		<script src="../assets/js/community/fView.js"></script>
 	</head>
+	<script>
+		let f_bno = ${map.fbdto.f_bno};
+		let id ="${session_id}";
+		let temp=0; //댓글 수정창 비활성화
+	</script>
 	<body>
 	<!-- ======= Header ======= -->
 	<%@include file="../include/header.jsp" %>
 	<!-- End Header -->
-	
+	<!-- 자유게시글 보기 -->
 		<section class="notice">
-		
-			<!-- 자유게시글 보기 -->
-	    	<h1 style="float: left; margin: 40px 0 0 700px; font-weight: 700; position: relative; left:50px;">자유게시판 게시글</h1>
+	    	<h1 style="float: left; margin: 40px 0 0 700px; font-weight: 700; position: relative; left:50px;"><a href="fList">자유게시판 게시글</a></h1>
+		    <form action="#" id="freeViewFrm" method="post">
+		    	<input type="hidden" name="f_bno" value="${map.fbdto.f_bno }"> <!-- 자유게시글 수정 및 삭제 게시판 번호 넘기기 Form-->
+		    </form>
 		    <table>
 		     <colgroup>
 		        <col width="10%">
@@ -50,35 +60,50 @@
 		        <col width="12%">
    			</colgroup>
 		      <tr>
-		        <th style="text-align: center;"><strong>1007</strong></th>
-		        <th style="text-align: left;"><span>게시글 제목이 들어갑니다.</span></th>
+		        <th style="text-align: center;"><strong id="f_bno">${map.fbdto.f_bno }</strong></th>
+		        <th style="text-align: left;"><span>[${map.fbdto.f_btype }]</span>&nbsp;&nbsp;<span>${map.fbdto.f_btitle }</span></th>
 		        <th style="text-align: right;"><strong>작성일</strong></th>
-		        <th>2019-12-11</th>
+		        <th><fmt:formatDate value="${map.fbdto.f_bdate}" pattern="yyyy-MM-dd"/></th>
 		      </tr>
 		      <tr style="border-bottom: 2px solid #009223">
 		        <td style="text-align: center;"><strong>작성자</strong style="text-align: center;"></td>
-		        <td>관리자</td>
+		        <td>${map.fbdto.id }</td>
 		        <td style="text-align: right;"><strong>조회수</strong></td>
-		        <td>123</td>
+		        <td>${map.fbdto.f_bhit }</td>
 		      </tr>
 		      <tr>
-		        <td colspan="4" class="article">게시글 내용이 들어갑니다.<br><br><br><br><br></td>
+		        <td colspan="4" class="article">${map.fbdto.f_bcontent }<br><br>
+		          <c:if test="${map.fbdto.f_bfile!=null }">
+		        	<img src="/upload/${map.fbdto.f_bfile }">
+		          </c:if>
+		        <br><br><br><br><br></td>
 		      </tr>
 		       <tr style="border-bottom: 2px solid #009223;">
 		        <td class="article" style="text-align: center;"><strong>첨부파일 </strong>
 		        </td>
-		        <td colspan="3">※첨부파일 없음</td>
+		        <c:if test="${map.fbdto.f_bfile!=null }">
+		       	 	<td colspan="3">${map.fbdto.f_bfile }</td>
+		        </c:if>
+		        <c:if test="${map.fbdto.f_bfile==null }">
+		        	<td colspan="3">※첨부파일 없음</td>
+		        </c:if>
 		      </tr>
 		    </table>
 		    
 		    <!-- 버튼 -->
 		    <div class="listBtn">
-		    	<button class="list">삭제</button>
-		    	<a href="fUpdate"><button class="list">수정</button></a>
+		    	<c:if test="${session_id==map.fbdto.id or session_id=='admin'}">
+		    	<button class="list" id="fDelBtn">삭제</button>
+		    	</c:if>
+		    	<c:if test="${session_id==map.fbdto.id }">
+		    	<button class="list" id="fUpdateBtn">수정</button></a>
+		    	</c:if>
+		    	<button class="list" id="fReplyBtn">답글</button></a>
 		    	<a href="fList"><button class="list">목록</button></a>
 		    </div>
+		    <!-- 버튼 -->
 		    
-		    <!-- 댓글입력-->
+		    <!-- 댓글입력창-->
 		    <table id="replyPw">
 			    <tr>
 				    <td id="replyBorder">
@@ -89,71 +114,95 @@
 			 <table style="position: relative; bottom: 200px;">
 			  <tr>
 			  	<td style="display: flex; border: 1px solid white; margin: -80px 0 0 -20px;">
-				  	<textarea placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)" style="width: 1200px; "></textarea>
+				  	<textarea id="replyCont" placeholder=" ※ 댓글을 입력하세요. (타인을 향한 욕설 및 비방은 무통보 삭제됩니다.)" style="width: 1200px; "></textarea>
 				  	<button id="replybtn">등록</button>
 			  	</td>
 			  </tr>
 		   	</table>
+		    <!-- 댓글입력창-->
+		    
 		    <!-- 이전글/다음글-->
 		    <table style="margin-top: -150px; ">
 		      <tr>
-		        <td colspan="4"><strong>다음글</strong> <span class="separator">|</span><a href="#"> [키즈잼] 2월 프로그램 안내</a></td>
+		        <td colspan="4"><strong>다음글▲</strong> <span class="separator">|</span>
+		        	<c:if test="${map.nextFbdto!=null }">
+		        	<a href="fView?f_bno=${map.nextFbdto.f_bno }" class="selNextPrev"> ${map.nextFbdto.f_btitle }</a>
+		        	</c:if>
+		        	<c:if test="${map.nextFbdto==null }">
+		        	 <span style="color: red; font-weight: 700;">※ 다음 게시글이 없습니다.</span>
+		        	</c:if>
+		        </td>
 		      </tr>
 		      <tr>
-		        <td colspan="4"><strong>이전글</strong> <span class="separator">|</span><a href="#"> [키즈잼] 2020년 1분기 정기 휴관일 안내</a></td>
+		        <td colspan="4"><strong>이전글▼</strong> <span class="separator">|</span>
+		        <c:if test="${map.prevFbdto!=null }">
+		        	<a href="fView?f_bno=${map.prevFbdto.f_bno }" class="selNextPrev"> ${map.prevFbdto.f_btitle }</a>
+		        </c:if>
+		        <c:if test="${map.prevFbdto==null }">
+		        	<span style="color: red; font-weight: 700;">※ 이전 게시글이 없습니다.</span>
+		        </c:if>
+		        </td>
 		      </tr>
 		    </table>
 		    <!-- 이전글/다음글 끝-->
 		    
 		    <!-- 댓글보기-->
 		    <table style="margin-top: 70px;">
-		      <td style="font-weight: 700">총<strong style="color: #009223">&nbsp;&nbsp;5</strong>&nbsp;개의 댓글이 등록되었습니다.</td>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내1용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  <tr>
-				<td><strong>댓글 작성자</strong> | <span style="color: blue;">aaa</span>&nbsp;&nbsp;<span>[2024-12-12 15:27:23:00]</span>
-				<li id="replyTxt">&nbsp;&nbsp;댓글내용일 들어갑니다. <br>ex)이벤트 너무 좋아요! 꼭 참여해서 혜택받아볼게요!</li>
-				<li id="replyBtn">
-					<button id="rDelBtn">삭제</button>
-					<button id="rUBtn">수정</button>
-				</li>
-				</td>			
-			  </tr>
-			  
+		    	<tr>
+		     		<td style="font-weight: 700"><strong>댓 글|</strong>&nbsp;&nbsp;총<strong style="color: #009223" class="f_count">&nbsp;${map.fCmmtlist.size() }</strong>&nbsp;개의 댓글이 등록되었습니다.</td>
+		    	</tr>
+		    	<tbody id="replyBox">
+				    <c:forEach var="fCommentList" items="${map.fCmmtlist }">
+							  <tr id="${fCommentList.f_cno }">
+							  	<input type="hidden" value="${fCommentList.f_cpw }" class="f_cpw">
+								<td><strong style="color: navy;">댓글 작성자</strong> | <strong style="color: #009223;" class="f_cid">${fCommentList.id}</strong>
+								&nbsp;&nbsp;[<span class="f_cdate"><fmt:formatDate value="${fCommentList.f_cdate }" pattern="YYYY-MM-dd HH:mm:ss"/> </span>]
+									<li id="replyTxt">${fCommentList.f_ccontent}</li>
+									<li id="replyBtn">
+										<c:if test="${session_id==fCommentList.id or session_id=='admin'}">
+											<button class="rDelBtn">삭제</button>
+										</c:if>
+										<c:if test="${session_id==fCommentList.id}">
+											<button class="rUBtn">수정</button>
+										</c:if>
+									</li>
+								</td>			
+							  </tr>
+					  <!-- 나중에 
+					  <c:if test="${session_id!=fCommentList.id or session_id!='admin'}">
+						  <c:if test="${fCommentList.f_cpw!=null}">
+						  	<tr id="${fCommentList.f_cno }">
+						  	<input type="hidden" value="${fCommentList.f_cpw }" class="f_cpw">
+							<td><strong style="color: navy;">댓글 작성자</strong> | <strong style="color: #009223;" class="f_cid">${fCommentList.id}</strong>
+							&nbsp;&nbsp;[<span class="f_cdate"><fmt:formatDate value="${fCommentList.f_cdate }" pattern="YYYY-MM-dd HH:mm:ss"/> </span>]
+							<li id="replyTxt" style="color: red;">※ 비밀댓글입니다.(댓글 작성자와 관리자만 열람이 가능합니다.)</li>
+						  	</tr>
+						  </c:if>
+					  </c:if>
+					  -->
+						  <!-- 댓글 수정입력창 
+						   <tr id="${fCommentList.f_cno }">
+							<td><strong style="color: navy;">댓글 작성자</strong> | <span style="color: #009223; font-weight: 700;">${fCommentList.id}</span>&nbsp;&nbsp;<span>[ ${fCommentList.f_cdate } ]</span>
+							<li style="list-style: none; float: right; line-height: 27px;"><strong>비밀번호 |<strong><input type="text" value="${fCommentList.f_cpw }" placeholder=" ※입력시 비밀글로 저장"></li>
+							<li id="replyTxt"><textarea cols="145%">${fCommentList.f_ccontent}</textarea></li>
+							<li id="replyBtn">
+								<button class="rCanBtn">취소</button>
+								<button class="rSaveBtn">저장</button>
+							</li>
+							</td>			
+						  </tr>
+						 -->
+					  <!-- 비밀댓글  
+					  <c:if test="${fCommentList.f_cpw!=null ||fCommentList.f_cpw!='' }">
+						  <tr id="${fCommentList.f_cno }">
+							<td><strong style="color: navy;">댓글 작성자</strong> | <span style="color: #009223; font-weight: 700;">${fCommentList.id}</span>&nbsp;&nbsp;<span>[ ${fCommentList.f_cdate } ]</span>
+							<li id="replyTxt">&nbsp;&nbsp; <span style="color: #009223; font-weight: 700;">※ 비밀 댓글입니다. (작성자 또는 관리자 열람가능)</span></li>
+							</td>			
+						  </tr>
+					  </c:if>
+					  -->
+				    </c:forEach>
+		    	</tbody>
 		    </table>
 		    <!-- 댓글보기 끝-->
 		    

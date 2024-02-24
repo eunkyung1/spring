@@ -15,7 +15,7 @@ $(function(){
 	
 	$(".u_delBtn").click(function(){
 		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
-		var u_btype = $("#u_btype").val();
+		window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;
 		window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;
 	});
 	
@@ -30,6 +30,7 @@ $(function(){
 	
 	$(".u_comple").click(function(){
 		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
+		var u_btype = $("#u_btype").val();
 		if(confirm("거래완료로 변경하시겠습니까?")){
 			$.ajax({
 				url:"/used/usedComplete",
@@ -44,6 +45,7 @@ $(function(){
 					hdata+='<button type="button" class="u_list u_updateBtn pri">수정</button>';
 	                $(".u_listBtn").html(hdata);
 	                alert("거래가 완료되었습니다.")
+	                 window.location.href = '/used/usedcontent?u_bno='+u_bno+'&u_btype='+u_btype;
 				 }
 				},
 				error:function(){
@@ -52,7 +54,7 @@ $(function(){
 				})//ajax끝
 			
 		}else{
-			alert("오류가 발생하였습니다. 다시 시도하시기 바랍니다.");
+			alert("거래완료 취소하였습니다.");
 		}
 		
 		

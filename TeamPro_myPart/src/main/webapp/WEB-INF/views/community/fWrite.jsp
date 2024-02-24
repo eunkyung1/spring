@@ -5,6 +5,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<c:if test="${session_id==null }">
+			<script>
+			 alert("※로그인 상태만 접근이 가능합니다.")
+			 location.href="../my/login";
+			</script>
+		</c:if>
 		<meta charset="UTF-8">
 		<title>자유게시판_글작성</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -30,15 +36,15 @@
 	    <!-- Template Main CSS File -->
  		<link href="../assets/css/main2.css" rel="stylesheet">
        	<link href="../assets/css/header.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/listStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/viewStyle.css" rel="stylesheet">
-		<link href="../assets/css/commuinty/writeStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/listStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/viewStyle.css" rel="stylesheet">
+		<link href="../assets/css/community/writeStyle.css" rel="stylesheet">
 		<script src="../assets/js/summernote-lite.js"></script>
         <script src="../assets/js/summernote/lang/summernote-ko-KR.js"></script>
 		<link href="../assets/css/summernote-lite.css" rel="stylesheet">
 		
 		<!-- Template nWrite JS File -->
-  		<script src="../assets/js/fWrite.js"></script>
+  		<script src="../assets/js/community/fWrite.js"></script>
 	</head>
 	<body>
 	<!-- ======= Header ======= -->
@@ -49,7 +55,7 @@
 		
 			<!-- 자유게시판 글쓰기 -->
 	    	<h1 style="float: left; margin: 40px; font-weight: 700; position: relative; left:235px; top: 30px;">자유게시판 작성</h1>
-			<form action="" name="freeFrm" method="post" enctype="multipart/form-data">
+			<form action="fWrite" name="freeFrm" method="post" enctype="multipart/form-data">
 			    <table>
 			     <colgroup>
 			        <col width="5%">
@@ -59,23 +65,23 @@
 	   			</colgroup>
 			      <tr>
 			        <th style="text-align: center;">
-		        	 	<select name="bType" id="bType" class="bType">
-					       <option value="freeCont">자유게시</option>
-					       <option value="foodGood">맛집추천</option>
-					       <option value="sParty">소모임</option>
+		        	 	<select name="f_btype" id="bType" class="bType">
+					       <option value="자유게시">자유게시</option>
+					       <option value="맛집추천">맛집추천</option>
+					       <option value="소모임">소모임</option>
 					    </select>
 			        </th>
-			        <th colspan="3" style="text-align: left;"><input type="text" id="f_btitle" placeholder=" ※ 게시글 제목을 입력해주세요."> </span></th>
+			        <th colspan="3" style="text-align: left;"><input type="text" name="f_btitle" id="f_btitle" placeholder=" ※ 게시글 제목을 입력해주세요."> </span></th>
 			      </tr>
 			      <tr style="border-bottom: 2px solid #009223">
-			        <td style="text-align: center;"><strong>작성자 | </strong style="text-align: center;"></td>
-			        <td><input type="text" value="aaa" readonly="readonly" style="border: 1px solid transparent;"> </td>
+			        <td style="text-align: center;"><strong>작성자 | </strong></td>
+			        <td><input type="text" name="id" value="${session_id }" readonly="readonly" style="border: 1px solid transparent;"> </td>
 			      </tr>
 			      <tr>
 			        <td colspan="4" class="article"><textarea rows="9" name="f_bcontent" id="summernote" placeholder=" ※ 게시글 내용을 입력해주세요."></textarea> </td>
 			      </tr>
 			      <tr style="border-bottom: 2px solid #009223; line-height: 20px;">
-			        <td colspan="4" class="article"><input type="file" name="f_bfile" id="f_bfile"></td>
+			        <td colspan="4" class="article"><input type="file" name="fFile" id="f_bfile"></td>
 			      </tr>
 			    </table>
 			</form>

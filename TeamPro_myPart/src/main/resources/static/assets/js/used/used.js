@@ -18,7 +18,7 @@ $("#tabview2").click(function() {
 });
 
 /*거래가능내역만 보기 유지 및 해제*/
-    // 요구사항 1: 중고거래 페이지
+    //중고거래 페이지
     var u_bstatus1 = localStorage.getItem('u_bstatus');
     if (u_bstatus1 === '0') {
         $('#showCompleted').prop('checked', true);
@@ -39,7 +39,7 @@ $("#tabview2").click(function() {
         localStorage.removeItem('u_bstatus');
     });
 
-    // 요구사항 2: 양도거래 페이지
+    //양도 페이지
     var u_bstatus2 = localStorage.getItem('u_bstatus');
     if (u_bstatus2 === '0') {
         $('#showCompleted2').prop('checked', true);
@@ -63,12 +63,12 @@ $("#tabview2").click(function() {
 
 /* 검색Form */
 $("#searchBtn_ca1").click(function(){
-	if($("input:checkbox[id=showCompleted]").is(":checked") == true){
-		$("input[name=u_bstatus]").val("0");
-	}else{
-		$("input[name=u_bstatus]").val("");
-	}
-	used_ca1Frm.submit();
+    if($("input:checkbox[id=showCompleted]").is(":checked") == true){
+        $("input[name=u_bstatus]").val("0");
+    } else {
+        $("input[name=u_bstatus]").val(""); // checkbox가 체크되어 있지 않으면 빈 값으로 설정
+    }
+    used_ca1Frm.submit();
 });//click
 
 $("#searchBtn_sh2").click(function(){
@@ -105,7 +105,7 @@ $("#searchBtn_sh2").click(function(){
 			url:"/used/possible_t",
 			type:"post",
 			data:{"u_bstatus":possible,"u_btype":u_btype},
-			dataType:"json", //받는파일형태 : text,json,xml
+			dataType:"json",
 			success:function(data){
 			  var hdata = '';
                 // JavaScript의 forEach 루프 사용
@@ -124,8 +124,6 @@ $("#searchBtn_sh2").click(function(){
                     hdata += '</li>';
                 });//forEach
                 $(".consolebox1 .fixed-img-collist .clear").html(hdata);
-				console.log(u_btype);
-				console.log("trade1 페이지 돌 준비");
 				
 			    var pdata ='';
 			    
@@ -147,7 +145,7 @@ $("#searchBtn_sh2").click(function(){
                 // 다음 페이지 링크
                 pdata += data.page < data.maxPage ? '<a href="used_ca1?page=' + (data.page + 1) +'&u_bstatus='+possible+'&u_btype='+u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="next-num"></li></a>' : '<li class="next-num"></li>';
                 
-                pdata += '<a href="used_ca1?page=' + data.endPage +'&u_bstatus='+possible+'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+ '"><li class="last-num"></li></a>';
+                pdata += '<a href="used_ca1?page=' + data.maxPage +'&u_bstatus='+possible+'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+ '"><li class="last-num"></li></a>';
                 pdata += '</ul>';
 				console.log("trade1 페이지 돌았다.");
 
@@ -163,7 +161,7 @@ $("#searchBtn_sh2").click(function(){
 	}else{
 		
 			$.ajax({
-			url:"/used/used_trade1",
+		url:"/used/used_trade1",
 			data:{"u_btype":"trade1"},
 			type:"post",
 			dataType:"json", //받는파일형태 : text,json,xml
@@ -220,7 +218,7 @@ $("#searchBtn_sh2").click(function(){
                 // 다음 페이지 링크
                 pdata += data.page < data.maxPage ? '<a href="possible_t?page=' + (data.page + 1) +'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="next-num"></li></a>' : '<li class="next-num"></li>';
                 
-                pdata += '<a href="used_ca1?page=' + data.endPage +'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="last-num"></li></a>';
+                pdata += '<a href="used_ca1?page=' + data.maxPage +'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="last-num"></li></a>';
                 pdata += '</ul>';
 				console.log("trade1 페이지 돌았다.");
 
@@ -281,13 +279,13 @@ $("#searchBtn_sh2").click(function(){
 				    if (data.page == i) {
 				        pdata += '<li class="num-used on"><div>' + i + '</div></li>';
 				    } else {
-				        pdata += '<a href="used_ca1?page=' + i +'&u_bstatus='+possible+'&u_btype='+u_btype+'&category='+data.category+'&searchWord='+data.searchWord+ '"><li class="num-used"><div>' + i + '</div></li></a>';
+				        pdata += '<a href="used_sh2?page=' + i +'&u_bstatus='+possible+'&u_btype='+u_btype+'&category='+data.category+'&searchWord='+data.searchWord+ '"><li class="num-used"><div>' + i + '</div></li></a>';
 				    }
 				}
                 // 다음 페이지 링크
                 pdata += data.page < data.maxPage ? '<a href="used_sh2?page=' + (data.page + 1) +'&u_bstatus='+possible+'&u_btype='+u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="next-num"></li></a>' : '<li class="next-num"></li>';
                 
-                pdata += '<a href="used_sh2?page=' + data.endPage +'&u_bstatus='+possible+'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+ '"><li class="last-num"></li></a>';
+                pdata += '<a href="used_sh2?page=' + data.maxPage +'&u_bstatus='+possible+'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+ '"><li class="last-num"></li></a>';
                 pdata += '</ul>';
 				console.log("trade1 페이지 돌았다.");
 
@@ -353,14 +351,14 @@ $("#searchBtn_sh2").click(function(){
 				    if (data.page == i) {
 				        pdata += '<li class="num-used on"><div>' + i + '</div></li>';
 				    } else {
-				        pdata += '<a href="used_ca1?page=' + i +'&u_bstatus='+possible+'&u_btype='+u_btype+'&category='+data.category+'&searchWord='+data.searchWord+ '"><li class="num-used"><div>' + i + '</div></li></a>';
+				        pdata += '<a href="used_sh2?page=' + i +'&u_bstatus='+possible+'&u_btype='+u_btype+'&category='+data.category+'&searchWord='+data.searchWord+ '"><li class="num-used"><div>' + i + '</div></li></a>';
 				    }
 				}
                 
                 // 다음 페이지 링크
                 pdata += data.page < data.maxPage ? '<a href="used_sh2?page=' + (data.page + 1) +'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="next-num"></li></a>' : '<li class="next-num"></li>';
                 
-                pdata += '<a href="used_sh2?page=' + data.endPage +'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="last-num"></li></a>';
+                pdata += '<a href="used_sh2?page=' + data.maxPage +'&u_btype='+data.u_btype+'&category='+data.category+'&searchWord'+data.searchWord+'"><li class="last-num"></li></a>';
                 pdata += '</ul>';
 				console.log("중고양도 trade1 페이지 돌았다.");
 
@@ -377,8 +375,13 @@ $("#searchBtn_sh2").click(function(){
 
 /*글쓰기 버튼 구현*/
 $(".CSSbuttonWhite").click(function(){
-	window.location.href = "/used/usedWrite";
-})
+	let Writer = $("#sid").val();
+	if(Writer == ""){
+		alert("로그인 후에 글쓰기가 가능합니다.");
+	}else{
+		window.location.href = "/used/usedWrite";
+	}
+});//글쓰기 버튼
 
 	
 });//jquery

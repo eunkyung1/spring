@@ -59,7 +59,7 @@
 		        <col width="15%">
    			</colgroup>
 		     <tr id="notice_top">
-		        <th style="text-align: center;"><strong>${map.nbdto.n_bno}</strong></th>
+		        <th class="notice_top_bno"style="text-align: center;"><strong>${map.nbdto.n_bno}</strong></th>
 		        
 		        <c:if test="${map.nbdto.n_btype=='instapayment'}">
 		        <th style="text-align: left;"><span>[공지사항]&nbsp${map.nbdto.n_btitle}</span></th>

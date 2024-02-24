@@ -79,7 +79,7 @@
 								<input type="checkbox" name="category" value="u_btitle" class="MS_input_checkbox used_category"> 제목
 							</label> 
 							<label> 
-								<input type="checkbox" name="category" value="n_bcontent" class="MS_input_checkbox used_category"> 내용
+								<input type="checkbox" name="category" value="u_bcontent" class="MS_input_checkbox used_category"> 내용
 							</label> 
 							<span class="key-wrap"> 
 								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_ca1"><img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>
@@ -97,7 +97,7 @@
 					<div class="viewtab-menu">
 		
 						<!-- 중고거래, 중고양도 체크  -->
-						<input type="hidden" name="session_id" id="session_id" value="${session_id}">
+						<input type="hidden" name="session_id" id="sid" value="${session_id}">
 						<input type="radio" name="tabview" id="tabview1" value="trade1" class="trade1" checked>
 						<label for="tabview1">중고거래</label> 
 						<input type="radio" name="tabview" id="tabview2" value="transfer2" class="transfer2"> 
@@ -109,7 +109,7 @@
 								
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="shname" class="MS_input_checkbox" id="showCompleted" >거래가능만보기
+									<input type="checkbox" name="u_bstatus_ca1" class="MS_input_checkbox" id="showCompleted" >거래가능만보기
 									</label>
 								</div>
 
@@ -153,8 +153,6 @@
 											<p>HITS :${udto.u_bhit}</p>
 										</li><!--li  -->
 										</c:forEach>
-										
-										
 									</ul>
 
 								</div>
@@ -169,7 +167,7 @@
 
 				<!-- 하단 페이징 & 버튼 -->
 				<div class="bbs-btm">
-					<div class="bbs-link">
+					<div class="bbs-link ">
 						<a class="CSSbuttonWhite">글쓰기</a>
 					</div>
 
@@ -202,7 +200,7 @@
 					      <c:if test="${map.page>=map.maxPage}">
 					       <li class="next-num"></li>
 					     </c:if>
-					     	<a href="used_ca1?page=${map.endPage}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="last-num"></li></a>
+					     	<a href="used_ca1?page=${map.maxPage}&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="last-num"></li></a>
 					    </ul>
 					</div><!-- //PageNum    -->
 					</c:if>

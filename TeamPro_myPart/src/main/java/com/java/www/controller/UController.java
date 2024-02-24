@@ -35,7 +35,7 @@ public class UController {
 		
 		u_btype = "trade1";
 		
-			
+		System.out.println("종고거래(trade1) 입니다.");
 		Map<String, Object> map =  uService.selectAll(page,category,searchWord,u_bstatus,u_btype);
 		model.addAttribute("map",map);
 		
@@ -50,6 +50,7 @@ public class UController {
 		
 		u_btype = "transfer2";
 		
+		System.out.println("캠핑장양도(transfer2) 입니다.");
 		Map<String, Object> map =  uService.selectAll(page,category,searchWord,u_bstatus,u_btype);
 		model.addAttribute("map",map);
 		
@@ -59,12 +60,11 @@ public class UController {
 	
 
 
-	//중고거래 거래가능 checked-true일때 하단넘버링
+	//중고거래&양도 거래가능 checked-true일때 하단넘버링
 	@RequestMapping("possible_t")
 	@ResponseBody
-	public Map<String, Object> page_ca1(@RequestParam(defaultValue = "1")int page,String category, String searchWord,@RequestParam(defaultValue = "2")int u_bstatus,@RequestParam(required = false) String u_btype){
-		System.out.println("UController page_ca1 u_bstatus :"+u_bstatus);
-		System.out.println("UController page_ca1 u_btype :"+u_btype);
+	public Map<String, Object> possible_t(@RequestParam(defaultValue = "1")int page,String category, String searchWord
+			,@RequestParam(defaultValue = "2")int u_bstatus,@RequestParam(required = false) String u_btype){
 		
 		Map<String, Object> map = uService.selectP_num(u_bstatus,page,u_btype,category,searchWord);
 		
@@ -72,7 +72,7 @@ public class UController {
 	}
 	
 	
-	//중고거래 거래가능 checked- false일때(ajax)
+	//중고거래&양도 거래가능 checked- false일때(ajax)
 	@PostMapping("used_trade1")
 	@ResponseBody
 	public Map<String, Object> used_trade1(@RequestParam(defaultValue = "1")int page ,Model model,@RequestParam(defaultValue = "2")int u_bstatus,@RequestParam(required = false) String u_btype,

@@ -75,13 +75,7 @@
 						<dl class="prd-tinfo">
 				
 							<dt>
-								<c:if test="${map.udto.u_mimg != 'nImage.jpg' }">
 								<a class="tinfo_img"><img src="/upload/${map.udto.u_mimg}" /></a>
-								</c:if>
-								
-								<c:if test="${map.udto.u_mimg == 'nImage.jpg' }">
-								<a class="tinfo_img"><img src="/assets/img/nView/noImage.png" /></a>
-								</c:if>
 							</dt>
 							<dd>
 								<ul>
@@ -154,13 +148,12 @@
 										    <div class="u_images-container">
 										    	
 										        <div class="u_image">
-										        <c:if test="${map.udto.u_mimg != 'nImage.jpg' }">
-										            <img src="/upload/${map.udto.u_mimg}" class="modal-u_trigger">
+									            <img src="/upload/${map.udto.u_mimg}" class="modal-u_trigger">
+										        <c:if test="${map.udto.u_mimg != 'noPhoto_b.jpg' }">
 										            <span id="u_image_mimg">${map.udto.u_mimg}</span>
 										        </c:if>
 										        
-										        <c:if test="${map.udto.u_mimg == 'nImage.jpg' }">
-										            <img src="/assets/img/nView/noImage.png" class="modal-u_trigger">
+										        <c:if test="${map.udto.u_mimg == 'noPhoto_b.jpg' }">
 										            <span id="u_image_mimg">이미지가 없습니다.</span>
 										        </c:if>
 										        </div>
@@ -171,9 +164,11 @@
 										            </div>
 										        </c:forEach>
 										    </div>
+										    
 										    <div class="image_show">
 										    <h9 class="image_show_text">이미지를 클릭하면 크게 보실 수 있습니다.</h9>
 										    </div>
+										
 										</div>
 									</tr>
 								</div>
@@ -209,20 +204,20 @@
 								<table
 									style="margin-top: -150px; position: relative; top: 120px; font-size: 14px; width: 1100px;">
 									<tr>
-										<td colspan="4"><strong>다음글</strong> <span class="separator">|</span>
-										<c:if test="${map.nextudto!=null}">
-											<a href="usedcontent?u_bno=${map.nextudto.u_bno}">${map.nextudto.u_bno} || ${map.nextudto.u_btitle}</a></td>
+										<td colspan="4"><strong>이전글</strong> <span class="separator">|</span>
+											<c:if test="${map.preudto!=null}">
+											<a href="usedcontent?u_bno=${map.nextudto.u_bno}&u_btype=${map.nextudto.u_btype}">${map.preudto.u_bno} || ${map.preudto.u_btitle}</a></td>
 										</c:if>
-										<c:if test="${map.nextudto==null }">
+										<c:if test="${map.preudto==null }">
 											다음글 없습니다.
 										</c:if>
 									</tr>
 									<tr>
-										<td colspan="4"><strong>이전글</strong> <span class="separator">|</span>
-											<c:if test="${map.preudto!=null}">
-											<a href="usedcontent?u_bno=${map.preudto.u_bno}">${map.preudto.u_bno} || ${map.preudto.u_btitle}</a></td>
+										<td colspan="4"><strong>다음글</strong> <span class="separator">|</span>
+										<c:if test="${map.nextudto!=null}">
+											<a href="usedcontent?u_bno=${map.nextudto.u_bno}&u_btype=${map.nextudto.u_btype}">${map.nextudto.u_bno} || ${map.nextudto.u_btitle}</a></td>
 										</c:if>
-										<c:if test="${map.preudto==null }">
+										<c:if test="${map.nextudto==null }">
 											다음글 없습니다.
 										</c:if>
 									</tr>

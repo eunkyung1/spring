@@ -69,7 +69,7 @@
 								<input type="checkbox" name="category" value="u_btitle" class="MS_input_checkbox used_category"> 제목
 							</label> 
 							<label> 
-								<input type="checkbox" name="category" value="n_bcontent" class="MS_input_checkbox used_category"> 내용
+								<input type="checkbox" name="category" value="u_bcontent" class="MS_input_checkbox used_category"> 내용
 							</label> 
 							<span class="key-wrap"> 
 								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_sh2"><img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>
@@ -87,7 +87,7 @@
 					<div class="viewtab-menu">
 		
 						<!-- 중고거래, 중고양도 체크  -->
-						<input type="hidden" name="session_id" id="session_id" value="${session_id}">
+						<input type="hidden" name="session_id" id="sid" value="${session_id}">
 						<input type="radio" name="tabview" id="tabview1" value="trade1" class="trade1">
 						<label for="tabview1">중고거래</label> 
 						<input type="radio" name="tabview" id="tabview2" value="transfer2" class="transfer2" checked> 
@@ -99,7 +99,7 @@
 							<div class="bbs-table-list">
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="shname" class="MS_input_checkbox possible" id="showCompleted2" >거래가능내역보기
+									<input type="checkbox" name="u_bstatus_sh2" class="MS_input_checkbox possible" id="showCompleted2" >거래가능내역보기
 									</label>
 								</div><!-- End view-complete -->
 								<table summary="제목, 작성일, 조회수, 동영상">
@@ -159,7 +159,7 @@
 					</div>
 
 					<!-- 하단 넘버링  -->
-					<c:if test="${map.u_bstatus ==2 }">
+					<c:if test="${map.u_bstatus==2 }">
 					<div class="PageNum">
 						<ul class="page-num-used">
 							<a href="used_sh2?page=1&u_btype=${map.u_btype}&category=${map.category}&searchWord=${map.searchWord}"><li class="first-num"></li></a>
@@ -193,7 +193,7 @@
 					</c:if>
 					
 					
-					<c:if test="${map.u_bstatus ==0 }">
+					<c:if test="${map.u_bstatus ==0}">
 					<div class="PageNum">
 						<ul class="page-num-used">
 							<a href="used_sh2?page=1&category=${map.category}&searchWord=${map.searchWord}&u_bstatus=${map.u_bstatus}&u_btype=${map.u_btype}"><li class="first-num"></li></a>

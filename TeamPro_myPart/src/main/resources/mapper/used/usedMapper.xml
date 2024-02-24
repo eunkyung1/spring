@@ -7,7 +7,7 @@
 <!-- MemberMapper.java 연결  (인터페이스)-->
 <mapper namespace="com.java.www.mapper.UsedMapper">
 
-	<!-- 게시글 trade1 가져오기 -->
+<!-- 게시글 가져오기 -->
 	<select id="selectAll" resultType="com.java.www.dto.UsedDto">
 	select * from(
 	select row_number() over(order by u_bno desc)rnum, a.*from 
@@ -20,6 +20,7 @@
 		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
 	</if>
 	order by u_bno desc)a
+	
 	<if test="u_bstatus == 2">
 	where u_btype = #{u_btype}) 
 	</if>
@@ -30,54 +31,50 @@
 	where rnum between ${startRow} and ${endRow}
 	</select>
 	
-	<!-- trade1 게시글 총 갯수(u_bstatus 있을때) -->
-	<select id="selectCountAll" resultType="int">
-		select count(*) from u_board 
-		<if test="u_bstatus == 2">
-		<if test="category == 'u_btitle' or category == 'u_bcontent'">
-			where ${category} like '%'||#{searchWord}||'%' and u_btype=#{u_btype} 
-		</if>
-		<if test="category == 'all'">
-			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype=#{u_btype}
-		</if>
-		
-		</if>
-		
-		<if test="u_bstatus != 2">
-		<if test="category == 'u_btitle' or category == 'u_bcontent'">
-			where ${category} like '%'||#{searchWord}||'%' and u_btype=#{u_btype} and u_bstatus= #{u_bstatus}
-		</if>
-		<if test="category == 'all'">
-			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype=#{u_btype}and u_bstatus= #{u_bstatus}
-		</if>
-		</if>
-		
-	</select>
+
 	
-	<!-- transfer2 게시글 총 갯수 -->
-	<select id="selectCountAll2" resultType="int">
-		select count(*) from u_board 
-		<if test="category == 'u_btitle' or category == 'u_bcontent'">
-			where ${category} like '%'||#{searchWord}||'%' and u_btype='transfer2'
-		</if>
-		<if test="category == 'all'">
-			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and u_btype='transfer2'
-		</if>
-	</select>
-	
-	<!-- 중고거래&캠핑장양도 거래가능 게시글 총 갯수  -->
+<!-- trade1 게시글 총 갯수(u_bstatus 있을때) -->
+
+		<select id="selectCountAll" resultType="int">
+		    select count(*) from (select * from u_board 
+		    <if test="u_bstatus != 2 ">
+		        <if test="category == 'all'">
+		            where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
+		        </if>
+		        <if test="category == 'u_btitle' or category == 'u_bcontent'">
+		            where ${category} like '%'||#{searchWord}||'%'
+		        </if>
+		        ) a where a.u_btype=#{u_btype} and a.u_bstatus=#{u_bstatus}
+		    </if>
+		    
+		    <if test="u_bstatus == 2 ">
+		        <if test="category == 'all'">
+		            where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
+		        </if>
+		        <if test="category == 'u_btitle' or category == 'u_bcontent'">
+		            where ${category} like '%'||#{searchWord}||'%'
+		        </if>
+		        ) a where a.u_btype=#{u_btype}
+		    </if>
+		</select>
+
+
+<!-- 중고거래&캠핑장양도 거래가능 게시글 총 갯수  -->
 	<select id="selectP_count" resultType="int">
-		select count(*) from u_board 
-		<if test="category == 'u_btitle' or category == 'u_bcontent'">
-			where ${category} like '%'||#{searchWord}||'%' and
-		</if>
-		<if test="category == 'all'">
-			where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' and
-		</if>
-		where u_bstatus=#{u_bstatus} and u_btype= #{u_btype}
+		select count(*) from (select * from u_board 
+		
+			<if test="category == 'u_btitle' or category == 'u_bcontent'">
+				where ${category} like '%'||#{searchWord}||'%' 
+			</if>
+			
+			<if test="category == 'all'">
+				where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%' 
+			</if>
+				)a where a.u_btype=#{u_btype} and a.u_bstatus=#{u_bstatus}
 	</select>
 
-	<!-- 중고거래&캠핑장양도 거래가능 하단넘버링 -->
+
+<!-- 중고거래&캠핑장양도 거래가능 -->
 	<select id="used_PerNum" resultType="com.java.www.dto.UsedDto">
 	select * from(
 	select row_number() over(order by u_bno desc)rnum, a.*from 
@@ -92,42 +89,13 @@
 	where rnum between ${startRow} and ${endRow}
 	</select>
 	
-	<!-- 게시글 transfer2 가져오기 -->
-	<select id="selectAll2" resultType="com.java.www.dto.UsedDto">
-select * from(
-	select row_number() over(order by u_bno desc)rnum, a.*from 
-	(select * from u_board 
-	<if test="category == 'u_btitle' or category == 'u_bcontent'">
-		where ${category} like '%'||#{searchWord}||'%'
-	</if>
-	<if test="category == 'all'">
-		where u_btitle like '%'||#{searchWord}||'%' or u_bcontent like '%'||#{searchWord}||'%'
-	</if>
-	order by u_bno desc)a where u_btype = 'transfer2') 
-	where rnum between ${startRow} and ${endRow}
-	</select>
-	
-	<!-- 게시글 trade1 거래가능 가져오기 -->
-	<select id="selectPossible" resultType="com.java.www.dto.UsedDto">
-		select * from(
-		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_bstatus=#{u_bstatus} and u_btype = #{u_btype})
-		where rnum between 1 and 8
-	</select>
-	
-	<!-- 게시글 transfer2 거래가능 가져오기 -->
-	<select id="selectPossible2" resultType="com.java.www.dto.UsedDto">
-		select * from(
-		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_bstatus=#{u_bstatus} and u_btype = 'transfer2')
-		where rnum between 1 and 8
-	</select>
-	
-	<!-- 게시 현재글 가져오기  -->
+<!-- 게시 현재글 가져오기  -->
 	<select id="selectOne" resultType="com.java.www.dto.UsedDto">
 		select * from u_board where u_bno=#{u_bno} and u_btype=#{u_btype}
 	</select>
 	
-	<!-- 이전글 가져오기 -->
-	<select id="selectOneprev" resultType="com.java.www.dto.UsedDto">
+<!-- 다음글 가져오기 -->
+	<select id="selectOnenext" resultType="com.java.www.dto.UsedDto">
 		select * from (
 		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_btype=#{u_btype})
 		where rnum = 
@@ -136,8 +104,8 @@ select * from(
 		where u_bno = #{u_bno})+1
 	</select>
 	
-	<!-- 다음글 가져오기 -->
-	<select id="selectOnenext" resultType="com.java.www.dto.UsedDto">
+<!-- 이전글 가져오기 -->
+	<select id="selectOneprev" resultType="com.java.www.dto.UsedDto">
 		select * from (
 		select row_number() over(order by u_bno desc)rnum, a.* from u_board a where u_btype=#{u_btype})
 		where rnum = 
@@ -146,29 +114,29 @@ select * from(
 		where u_bno = #{u_bno})-1
 	</select>
 	
-	<!-- 중고거래 글쓰기 -->
+<!-- 중고거래 글쓰기 -->
 	<insert id="usedWrite">
 		insert into u_board values(u_board_seq.nextval,#{id},#{u_btype},#{u_btitle},#{u_bcontent},#{u_bprice},#{u_blocal},sysdate,0,0,#{u_bfile},#{u_mimg})
 	</insert>
 	
 	
-	<!-- 글 삭제  -->
+<!-- 글 삭제  -->
 	<delete id="usedDelete">
 		delete u_board where u_bno = #{u_bno}
 	</delete>
 	
-	<!-- 거래 완료  -->
+<!-- 거래 완료  -->
 	<update id="usedComplete">
 		update u_board set u_bstatus = 1 where u_bno=#{u_bno}
 	</update>
 	
-	<!-- 글 수정 저장  -->
+<!-- 글 수정 저장  -->
 	<update id="usedDoUpdate">
 		update u_board set u_btype=#{u_btype},u_btitle = #{u_btitle}, u_bcontent=#{u_bcontent},u_bprice=#{u_bprice},
 		u_blocal=#{u_blocal},u_bdate=sysdate,u_bfile=#{u_bfile},u_mimg=#{u_mimg} where u_bno=#{u_bno}
 	</update>
 	
-	<!-- 조회수 증가 -->
+<!-- 조회수 증가 -->
 	<update id="ubhitUp">
 		update u_board set u_bhit = u_bhit+1 where u_bno = #{u_bno}
 	</update>
