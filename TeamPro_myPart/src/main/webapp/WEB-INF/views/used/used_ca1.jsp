@@ -66,6 +66,7 @@
 						alt="중고거래이미지">
 					<h1 style="text-align: center;">중고거래</h1>
 				</div>
+				
 				<div class="bbs-sch">
 					<form action="used_ca1" name="used_ca1Frm" method="get">
 		
@@ -82,7 +83,9 @@
 								<input type="checkbox" name="category" value="u_bcontent" class="MS_input_checkbox used_category"> 내용
 							</label> 
 							<span class="key-wrap"> 
-								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_ca1"><img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색"></a>
+								<input type="text" name="searchWord" class="MS_input_txt searchWord"> <a id="searchBtn_ca1">
+								<img src="https://image.makeshop.co.kr/makeshop/d3/basic_simple/bbs/btn_bbs_sch.gif" alt="검색" title="검색">
+								</a>
 							</span>
 							<input type="hidden" name="u_bstatus" value="">
 						</fieldset>
@@ -109,7 +112,7 @@
 								
 								<div class="view-complete">
 									<label> 
-									<input type="checkbox" name="u_bstatus_ca1" class="MS_input_checkbox" id="showCompleted" >거래가능만보기
+									<input type="checkbox" name="u_bstatus_ca1" class="MS_input_checkbox" id="showCompleted">거래가능만보기
 									</label>
 								</div>
 

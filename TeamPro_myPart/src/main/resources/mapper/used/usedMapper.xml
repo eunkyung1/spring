@@ -73,7 +73,7 @@
 			)a where a.u_btype=#{u_btype} and a.u_bstatus=#{u_bstatus}
 	</select>
 
-
+ 
 <!-- 중고거래&캠핑장양도 거래가능 -->
 	<select id="used_PerNum" resultType="com.java.www.dto.UsedDto">
 	select * from(

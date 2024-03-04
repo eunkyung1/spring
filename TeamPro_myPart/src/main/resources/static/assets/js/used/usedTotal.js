@@ -15,7 +15,8 @@ $(function(){
 	
 	$(".u_delBtn").click(function(){
 		var u_bno =  $(this).parent().parent().find('.tb-center').attr('class').split(' ')[1];
-		window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;
+		var u_btype = $("#u_btype").val();
+		console.log("삭제");
 		window.location.href = '/used/usedDelete?u_bno='+u_bno+'&u_btype='+u_btype;
 	});
 	
