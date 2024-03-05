@@ -26,5 +26,9 @@ public class FController {
 	public String mInsert() {
 		return "mInsert";
 	}
+	@GetMapping("mailList")
+	public String mailList() {
+		return "mailList";
+	}
 
 }// FController(컨트롤러)

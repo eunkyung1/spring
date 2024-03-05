@@ -11,6 +11,7 @@
 	</head>
 	<!-- ♣♣♣ CSS ♣♣♣ -->
 	<link href="../css/index.css" rel="stylesheet">
+	<link href="../css/mailList.css" rel="stylesheet">
 	
 	<!-- ♣♣♣ font ♣♣♣ -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -49,15 +50,15 @@
 	
 	<!--▼▼▼ 회원정보 리스트 전체테두리 ▼▼▼ -->
 	<div class="table-container">
-	<h1 style="font-size: 70px; font-weight: 700;">회원정보 리스트</h1>
+	<h1 style="font-size: 70px; font-weight: 700;">전체 메일</h1>
 	
 	<!--검색어 찾기 -->
 	<div id="search-container">
 	
 	<div id="seletBox" style="width: 250px; padding-top: 50px;">
 		<input type="button" id="SelectAll" value="전체선택" style="font-weight: 700; margin-right: 10px;">
-		<input type="radio" value="male" style="display: inline-block; vertical-align: middle;"><label for="male">남자</label>
-		<input type="radio" value="female" style="display: inline-block; vertical-align: middle;"><label for="female" >여자</label>
+		<input type="checkbox" value="male" style="display: inline-block; vertical-align: middle;"><label for="male">읽음</label>
+		<input type="checkbox" value="female" style="display: inline-block; vertical-align: middle;"><label for="female">안읽음</label>
 	</div>
 		<form action="" method="get">
 			<div id="searchSection">
@@ -79,101 +80,68 @@
 	<!--검색어 찾기 끝 -->
 	
 	<hr style="border: 2px solid #14213d; margin-bottom: 20px;">
+	<div class="mail_toolbar">
+	 <div class="mail_check">
+		<button type="button" class="button_read" disabled>
+			<span class="text">읽음</span>
+		</button>	 	
+	 </div><!--mail_check  -->
+	 <div class="mail_check">
+	 	<button type="button" class="button_del" disabled>
+	 		<span class="text">삭제</span>
+	 	</button>
+	 </div>
+	</div>
 	  <table style="border-top: 3px solid #14213d;">
+	  	<tr>200/200</tr>
 	    <thead>
 	    <colgroup>
 		    <col width="4%">
-		    <col width="6%">
-		    <col width="6%">
-		    <col width="6%">
-		    <col width="4%">
 		    <col width="10%">
-		    <col width="23%">
-		    <col width="12%">
-		    <col width="10%">
-		    <col width="6%">
-		    <col width="12%">
+		    <col width="71%">
+		    <col width="15%">
 	    </colgroup>
+	    
 	      <tr>
 	        <th>번 호</th>
-	        <th>아이디</th>
-	        <th>비밀번호</th>
-	        <th>성 명</th>
-	        <th>성 별</th>
-	        <th>연락처</th>
-	        <th>주&nbsp;&nbsp;소</th>
-	        <th>E-mail</th>
-	        <th>주민번호</th>
-	        <th>접속횟수</th>
-	        <th>최근접속</th>
+	        <th>보낸사람</th>
+	        <th>제목</th>
+	        <th>보낸날짜</th>
 	      </tr>
 	    </thead>
 	    <tbody style="border-bottom: 2px solid #14213d;">
+	     
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
 	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
+	        <td class="Btitle">메일 제목입니다.</td>
 	        <td class="Bdate">2024-02-07 12:17:11</td>
 	      </tr>
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
 	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
+	        <td class="Btitle">메일 제목입니다.</td>
 	        <td class="Bdate">2024-02-07 12:17:11</td>
 	      </tr>
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
 	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
+	        <td class="Btitle">메일 제목입니다.</td>
 	        <td class="Bdate">2024-02-07 12:17:11</td>
 	      </tr>
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
 	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
+	        <td class="Btitle">메일 제목입니다.</td>
 	        <td class="Bdate">2024-02-07 12:17:11</td>
 	      </tr>
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
 	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
+	        <td class="Btitle">메일 제목입니다.</td>
 	        <td class="Bdate">2024-02-07 12:17:11</td>
 	      </tr>
+	     
 	    </tbody>
 	  </table>
 	  

@@ -29,7 +29,7 @@
 							<li class="nav"><a class="headerNav" href="#">로그아웃</a></li>
 							<li class="nav"><a class="headerNav" href="#">회원정보</a></li>
 						</c:if>
-						<li class="nav"><a class="headerNav" href="#">게시판</a></li>
+						<li class="nav"><a class="headerNav" href="mailList">게시판</a></li>
 						<li class="nav"><a class="headerNav" href="#">다음지도</a></li>
 						<li class="nav"><a class="headerNav" href="#">공공데이터</a></li>
 					</ul>

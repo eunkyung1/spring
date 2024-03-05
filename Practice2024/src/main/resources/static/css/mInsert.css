@@ -18,6 +18,27 @@ body {
 	margin-top: 230px;
 }
 
+input {
+	height: 28px;
+	font-size: 13px;
+}
+
+input[type=radio] {
+	height: 30%;
+	border-radius: 5px; 
+}
+
+input[type=button]{
+	width: 15%;
+	background: navy;
+	border: 1px solid navy;
+	color: yellow;
+	font-size: 80%;
+	font-weight: 700;
+	border-radius: 5px; 
+	cursor: pointer;
+}
+
 div.container {
 	
 }
@@ -27,17 +48,17 @@ div.insert {
 }
 
 div.create {
-	width: 800px;
+	width: 100%;
 	text-align: center;
 	padding: 30px;
-	border-bottom: 1px solid black;
+	border-bottom: 3px solid navy;
 	margin: auto;
 }
 
 table {
-	height: 300px;
-	width: 900px;
-	border-top: 3px solid black;
+	height: 700px;
+	width: 1000px;
+	border-top: 3px solid navy;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -53,68 +74,16 @@ caption {
 .col1 {
 	background-color: #e8e8e8;
 	padding: 10px;
-	text-align: right;
+	text-align: center;
 	font-weight: bold;
 	font-size: 0.8em;
+	width: 11%;
+	height: 10%
 }
 
 .col2 {
 	text-align: left;
 	padding: 5px;
-}
-
-.but1 {
-	height: 25px;
-	width: 80px;
-	color: white;
-	background-color: black;
-	border-color: black;
-}
-
-.but2 {
-	height: 27px;
-	width: 120px;
-	color: white;
-	background-color: black;
-	border-color: black;
-}
-
-.but3 {
-	height: 35px;
-	width: 150px;
-	background-color: white;
-	border: 2px solid black;
-}
-
-.but4 {
-	height: 35px;
-	width: 150px;
-	background-color: white;
-	border: 2px solid black;
-}
-
-.but1:hover {
-	background-color: #b9b9b9;
-	color: black;
-	border: 2px solid black;
-}
-
-.but2:hover {
-	background-color: #b9b9b9;
-	color: black;
-	border: 2px solid black;
-}
-
-.but3:hover {
-	background-color: black;
-	color: white;
-	border: 2px solid black;
-}
-
-.but4:hover {
-	background-color: black;
-	color: white;
-	border: 2px solid black;
 }
 
 p {
@@ -129,10 +98,24 @@ p {
 	font-size: 0.7em;
 }
 
-.a {
-	font-size: 0.7em;
-}
-
 .num {
 	color: red;
+}
+
+.addressTxt {
+	margin-top: 3px;
+}
+
+ .bdate{width: 50px; text-align: right;}
+
+#profileImg {
+	border: 1px solid gray;
+	width: 85px;
+	height: 30px;
+	cursor: pointer;
+	background: navy;
+	color: yellow;
+	display: flex;
+	align-items: center;
+	justify-content: center
 }
