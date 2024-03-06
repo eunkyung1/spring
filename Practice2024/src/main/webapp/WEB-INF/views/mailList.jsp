@@ -43,6 +43,14 @@
 				alert("검색어 test");
 			});//#searchBtn(검색어)
 			
+			$("#mail_read").click(function(){
+				alert("읽음 test");
+			});//#searchBtn(검색어)
+			
+			$("#mail_del").click(function(){
+				alert("삭제 test");
+			});//#searchBtn(검색어)
+			
 		});//제이쿼리 최신
 	</script>
 	
@@ -56,9 +64,11 @@
 	<div id="search-container">
 	
 	<div id="seletBox" style="width: 250px; padding-top: 50px;">
-		<input type="button" id="SelectAll" value="전체선택" style="font-weight: 700; margin-right: 10px;">
-		<input type="checkbox" value="male" style="display: inline-block; vertical-align: middle;"><label for="male">읽음</label>
-		<input type="checkbox" value="female" style="display: inline-block; vertical-align: middle;"><label for="female">안읽음</label>
+		<input type="button" class="mail_toolbar" id="SelectAll" value="전체선택" style="font-weight: 700; margin-right: 10px;">
+		<input type="button" class="mail_toolbar" id="mail_read" value="읽음" style="font-weight: 700; margin-right: 10px;">
+		<input type="button" class="mail_toolbar" id="mail_del" value="삭제" style="font-weight: 700; margin-right: 10px;">
+		<!--  <input type="checkbox" value="male" style="display: inline-block; vertical-align: middle;"><label for="male">읽음</label>
+		<input type="checkbox" value="female" style="display: inline-block; vertical-align: middle;"><label for="female">안읽음</label>-->
 	</div>
 		<form action="" method="get">
 			<div id="searchSection">
@@ -79,20 +89,9 @@
 	</div>
 	<!--검색어 찾기 끝 -->
 	
-	<hr style="border: 2px solid #14213d; margin-bottom: 20px;">
-	<div class="mail_toolbar">
-	 <div class="mail_check">
-		<button type="button" class="button_read" disabled>
-			<span class="text">읽음</span>
-		</button>	 	
-	 </div><!--mail_check  -->
-	 <div class="mail_check">
-	 	<button type="button" class="button_del" disabled>
-	 		<span class="text">삭제</span>
-	 	</button>
-	 </div>
-	</div>
-	  <table style="border-top: 3px solid #14213d;">
+	<hr style="border: 2px solid #14213d;">
+	
+	  <table class="mail_table" style="border-top: 3px solid #14213d;">
 	  	<tr>200/200</tr>
 	    <thead>
 	    <colgroup>
