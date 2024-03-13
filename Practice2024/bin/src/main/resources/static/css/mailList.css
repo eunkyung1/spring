@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.mail_toolbar{
+	width:90px;
+	font-weight:700;
+	color:yellow;
+	background:#14213d;
+	border-radius:5px;
+	border:0.5px solid #14213d;
+	
+}
+#seletBox{
+	display:flex;
+}

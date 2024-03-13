@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+/*index.jsp (리스트형 게시판 표준 CSS -- ★★★★변경시 원제작자 상의 후 변경바랍니다.★★★★)*/
+
+/* body 요소를 기준으로 표와 버튼을 가운데 정렬합니다. */
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column; /* 요소를 세로로 배치합니다. */
+	justify-content: center; /* 요소를 세로로 가운데 정렬합니다. */
+	align-items: center; /* 요소를 가로로 가운데 정렬합니다. */
+	height: 100%; /* 화면 전체 높이 설정 */
+	margin: 0; /* body의 margin을 0으로 설정하여 페이지의 여백을 제거합니다. */
+	margin-top: 230px;
+}
+
+input {
+	height: 28px;
+	font-size: 13px;
+}
+
+input[type=radio] {
+	height: 30%;
+	border-radius: 5px; 
+}
+
+input[type=button]{
+	width: 15%;
+	background: navy;
+	border: 1px solid navy;
+	color: yellow;
+	font-size: 80%;
+	font-weight: 700;
+	border-radius: 5px; 
+	cursor: pointer;
+}
+
+div.container {
+	
+}
+
+div.insert {
+	
+}
+
+div.create {
+	width: 100%;
+	text-align: center;
+	padding: 30px;
+	border-bottom: 3px solid navy;
+	margin: auto;
+}
+
+table {
+	height: 700px;
+	width: 1000px;
+	border-top: 3px solid navy;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+td {
+	border-bottom: 1px dotted black;
+}
+
+caption {
+	text-align: left;
+}
+
+.col1 {
+	background-color: #e8e8e8;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.8em;
+	width: 11%;
+	height: 10%
+}
+
+.col2 {
+	text-align: left;
+	padding: 5px;
+}
+
+p {
+	font-size: 0.7em;
+}
+
+.g {
+	font-size: 0.7em;
+}
+
+.c {
+	font-size: 0.7em;
+}
+
+.num {
+	color: red;
+}
+
+.addressTxt {
+	margin-top: 3px;
+}
+
+ .bdate{width: 50px; text-align: right;}
+
+#profileImg {
+	border: 1px solid gray;
+	width: 85px;
+	height: 30px;
+	cursor: pointer;
+	background: navy;
+	color: yellow;
+	display: flex;
+	align-items: center;
+	justify-content: center
+}

@@ -1,11 +1,10 @@
 package com.java.www.service;
 
+import com.java.www.dto.YmemberDto;
+
 public interface BService {
 
-	static int logincheck(String id, String pw) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	YmemberDto loginCheck(String id, String pw);
 
 
 }//BService

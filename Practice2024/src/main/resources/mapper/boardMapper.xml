@@ -4,6 +4,8 @@
 <!-- BoardMapper.java 연결 -->
 <mapper namespace="com.java.www.mapper.BoardMapper">
 
-
-
+	<select id="loginCheck" resultType="com.java.www.dto.YmemberDto">
+		select * from ymember where id=#{id} and pw=#{pw}	
+		
+	</select>
 </mapper>

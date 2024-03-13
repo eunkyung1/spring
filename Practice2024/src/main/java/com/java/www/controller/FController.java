@@ -2,15 +2,20 @@ package com.java.www.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.java.www.dto.YmemberDto;
 import com.java.www.service.BService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class FController {
 	@Autowired BService bService;
+	@Autowired HttpSession session;
 	
 	@GetMapping("/")
 	public String index() {
@@ -21,13 +26,21 @@ public class FController {
 	public String login() {
 		return "login";
 	}//login
-	@PostMapping("login")
-	public String login(String id, String pw) {
-		 int result = BService.logincheck(id,pw);
-		
-		return "/doLogin";
-	}
 	
+	@PostMapping("login")
+	public String login(String id, String pw, Model model ) {
+		int result = 0;
+		YmemberDto ymemberdto = bService.loginCheck(id,pw);
+		if(ymemberdto != null) {
+			session.setAttribute("session_id", ymemberdto.getId() );
+			session.setAttribute("session_name", ymemberdto.getName() );
+			result = 1;
+		}
+		
+		model.addAttribute("result", result);
+		return "doLogin";
+	}
+
 	
 	@GetMapping("memInfo")
 	public String memInfo() {
