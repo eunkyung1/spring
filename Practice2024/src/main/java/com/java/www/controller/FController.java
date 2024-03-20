@@ -1,5 +1,7 @@
 package com.java.www.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,11 @@ public class FController {
 	@Autowired HttpSession session;
 	
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		
+		List<YmemberDto> list = bService.selectAll();
+		model.addAttribute("lsit",list);
+		
 		return "index";
 	}// index
 	
