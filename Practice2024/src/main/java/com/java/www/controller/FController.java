@@ -23,7 +23,7 @@ public class FController {
 	public String index(Model model) {
 		
 		List<YmemberDto> list = bService.selectAll();
-		model.addAttribute("lsit",list);
+		model.addAttribute("list",list);
 		
 		return "index";
 	}// index

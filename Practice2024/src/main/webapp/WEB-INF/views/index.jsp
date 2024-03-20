@@ -109,9 +109,10 @@
 	      </tr>
 	    </thead>
 	    <tbody style="border-bottom: 2px solid #14213d;">
+	    	<c:forEach var="list" items="${list}">
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
-	        <td class="ID">jskarat123</td>
+	        <td class="ID">${list. }</td>
 	        <td class="Bdate">11111</td>
 	        <td class="Btitle">홍길동남</td>
 	        <td class="Bdate">남자</td>
@@ -122,6 +123,7 @@
 	        <td class="Bdate">12345</td>
 	        <td class="Bdate">2024-02-07 12:17:11</td>
 	      </tr>
+	    	</c:forEach>
 	      <tr>
 	        <td class="Bno"><input type="checkbox"> </td>
 	        <td class="ID">jskarat123</td>
