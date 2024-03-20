@@ -26,7 +26,6 @@
 	      <a class="btn-book-a-table" href="/rent/cpRent">용품대여</a>
 	      </div>
 	    </div>
-		  	
 		<div id="nav_bottom" class="nav_bottom d-flex">
 	      <nav id="navbar" class="navbar">
 	        <ul>
@@ -66,9 +65,6 @@
 			<input name="input_search" type="text" class="input_search" placeholder="검색어를 입력하세요.">
 			<input type="button" value="검색" class="button_search">
 		  	</div>
-		
-	
-	
 	    </div>
 	    </div>
 	  </header><!-- End Header -->

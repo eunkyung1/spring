@@ -40,13 +40,7 @@
   <link href="assets/css/main2.css" rel="stylesheet">
   <link href="assets/css/header.css" rel="stylesheet">
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	0c74f5d01be449a3dcaa336db1cd0d99"></script>
-  <!-- =======================================================
-  * Template Name: Yummy
-  * Updated: Jan 09 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>

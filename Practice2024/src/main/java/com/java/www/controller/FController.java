@@ -40,6 +40,14 @@ public class FController {
 		model.addAttribute("result", result);
 		return "doLogin";
 	}
+	
+	@GetMapping("logout")
+	public String logout(Model model) {
+		String result = "success";
+		session.invalidate();
+		model.addAttribute("result",result);
+		return "doLogout";
+	}
 
 	
 	@GetMapping("memInfo")
