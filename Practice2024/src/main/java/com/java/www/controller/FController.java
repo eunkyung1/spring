@@ -1,6 +1,7 @@
 package com.java.www.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.www.dto.YmemberDto;
 import com.java.www.service.BService;
@@ -20,10 +22,11 @@ public class FController {
 	@Autowired HttpSession session;
 	
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(@RequestParam(defaultValue = "10")int searchCount,@RequestParam(defaultValue = "1")int page, Model model) {
+		System.out.println(searchCount);
 		
-		List<YmemberDto> list = bService.selectAll();
-		model.addAttribute("list",list);
+		Map<String, Object> map = bService.selectAll(searchCount,page);
+		model.addAttribute("map",map);
 		
 		return "index";
 	}// index

@@ -27,7 +27,7 @@ public class YmemberDto {
 	private int ypoint;
 	private int login_num;
 	private Timestamp tdate;
-	private Timestamp recont_time;
+	private Timestamp recent_time;
 	
 	
 	

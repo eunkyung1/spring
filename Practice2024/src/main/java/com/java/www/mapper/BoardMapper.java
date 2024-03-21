@@ -13,7 +13,10 @@ public interface BoardMapper {
 	YmemberDto loginCheck(String id, String pw);
 
 	//리스트 가져오기
-	List<YmemberDto> selectAll();
+	List<YmemberDto> selectAll(int startRow, int endRow);
+
+	//리스트 전체 갯수 가져오기
+	int selectCountAll();
 
 
 }//BoardMapper

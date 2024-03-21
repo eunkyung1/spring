@@ -10,7 +10,11 @@
 	
 	<select id="selectAll" resultType="com.java.www.dto.YmemberDto">
 		select * from(select row_number() over(order by ymno desc)rnum, a.* from ymember a 
-		orer by ymno desc)
-		where rnum 1 and 10
+		order by ymno desc)
+		where rnum between ${startRow} and ${endRow}
+	</select>
+	
+	<select id="selectCountAll" resultType="com.java.www.dto.YmemberDto">
+		select count(*) from ymember
 	</select>
 </mapper>
