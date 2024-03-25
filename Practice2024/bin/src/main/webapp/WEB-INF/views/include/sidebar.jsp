@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +15,9 @@
     <!-- Side navigation -->
 	<div class="sidenav">
 	  <div id="profileImg" style="border: 1px solid lightgray; width: 150px; height: 150px; background-image: url('../css/images/logo.jpg/'); background-size: cover; background-position: center;background-repeat: no-repeat;"></div>
-	  <strong style="font-size: 20px; color: #c9184a;">홍길동님</strong>
+		<c:if test="${session_id != null }">
+		<strong style="font-size: 20px; color: #c9184a;">${session_name}님</strong>
+		</c:if>
 	  <a class="sideMenu" href="#">My Page</a>
 	  <a class="sideMenu" href="mailList">메일 게시판</a>
 	  <a class="sideMenu" href="#">다음지도</a>

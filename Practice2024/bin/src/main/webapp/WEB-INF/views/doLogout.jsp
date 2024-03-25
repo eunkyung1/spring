@@ -11,15 +11,10 @@
 	</head>
 	<body>
 		<script>
-			if(${result} == 1){
-				alert("로그인이 되었습니다.");
+			if(${result == "success"}){
+				alert("로그아웃 되었습니다.");
 				location.href="/";
-			}else{
-				alert("아이디 또는 패스워드를 확인하시기 바랍니다.");
-				location.href="login";
-				
 			}
-			 
 		
 		</script>
 	

@@ -42,6 +42,11 @@
 				alert("검색어 test");
 			});//#searchBtn(검색어)
 			
+			$("#ViewCondition").change(function(){
+				$("#ViewCondition").val();
+				searchFrm.submit();
+			});
+			
 		});//제이쿼리 최신
 	</script>
 	
@@ -56,17 +61,21 @@
 	
 	<div id="seletBox" style="width: 250px; padding-top: 50px;">
 		<input type="button" id="SelectAll" value="전체선택" style="font-weight: 700; margin-right: 10px;">
-		<input type="radio" value="male" style="display: inline-block; vertical-align: middle;"><label for="male">남자</label>
-		<input type="radio" value="female" style="display: inline-block; vertical-align: middle;"><label for="female" >여자</label>
+		<input type="checkbox" class="ch_name" name="gender" value="male" style="display: inline-block; vertical-align: middle;"><label for="male">남자</label>
+		<input type="checkbox" class="ch_name" name="gender" value="female" style="display: inline-block; vertical-align: middle;"><label for="female" >여자</label>
 	</div>
-		<form action="" method="get">
+	
+	
+
+	
+		<form action="index" name="searchFrm" method="get">
 			<div id="searchSection">
-				<select id="ViewCondition">
+				<select id="ViewCondition" name="searchCount">
 					<option value="5">5 개</option>
 					<option value="10">10 개</option>
 					<option value="20">20 개</option>
 				</select>
-				<select id="searchCategory">
+				<select id="searchCategory" name="searchCategory">
 					<option value="all">전체</option>
 					<option value="bno">번호</option>
 					<option value="btitle">제목</option>
@@ -109,78 +118,33 @@
 	      </tr>
 	    </thead>
 	    <tbody style="border-bottom: 2px solid #14213d;">
-	      <tr>
-	        <td class="Bno"><input type="checkbox"> </td>
-	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
-	        <td class="Bdate">2024-02-07 12:17:11</td>
-	      </tr>
-	      <tr>
-	        <td class="Bno"><input type="checkbox"> </td>
-	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
-	        <td class="Bdate">2024-02-07 12:17:11</td>
-	      </tr>
-	      <tr>
-	        <td class="Bno"><input type="checkbox"> </td>
-	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
-	        <td class="Bdate">2024-02-07 12:17:11</td>
-	      </tr>
-	      <tr>
-	        <td class="Bno"><input type="checkbox"> </td>
-	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
-	        <td class="Bdate">2024-02-07 12:17:11</td>
-	      </tr>
-	      <tr>
-	        <td class="Bno"><input type="checkbox"> </td>
-	        <td class="ID">jskarat123</td>
-	        <td class="Bdate">11111</td>
-	        <td class="Btitle">홍길동남</td>
-	        <td class="Bdate">남자</td>
-	        <td class="Bgroup">010-7777-7777</td>
-	        <td class="Bfile">서울시 은평구 진관동 진관4로 현대 아파트</td>
-	        <td class="Bhit">hfds123@hanmail.net</td>
-	        <td class="Bhit">920207-1237777</td>
-	        <td class="Bdate">12345</td>
-	        <td class="Bdate">2024-02-07 12:17:11</td>
-	      </tr>
+	    	<c:forEach var="ymdto" items="${map.list}">
+		      <tr>
+		        <td class="Bno"><input type="checkbox"> </td>
+		        <td class="ID">${ymdto.id}</td>
+		        <td class="Bpw">${ymdto.pw}</td>
+		        <td class="Btitle">${ymdto.name}</td>
+		        <td class="Bdate">${ymdto.gender}</td>
+		        <td class="Bgroup">${ymdto.phone }</td>
+		        <td class="Bfile">${ymdto.address}</td>
+		        <td class="Bhit">${ymdto.email}</td>
+		        <td class="Bhit">${ymdto.pnumber }</td>
+		        <td class="Bdate">${ymdto.login_num}</td>
+		        <td class="Bdate">${ymdto.recent_time}</td>
+		      </tr>
+	    	</c:forEach>
+	   
 	    </tbody>
 	  </table>
 	  
 	  <!--페이지 넘버링 -->
 	  <ul id="PageNum" style="display: flex; list-style: none;">
-	  	<li class="num"><i class="fa fa-backward" aria-hidden="true"></i></li>
-	  	<li class="num"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></i></li>
+	  	<a href="index?page=1"><li class="num" ><i class="fa fa-backward" aria-hidden="true"></i></li></a>
+	  	<a href="#"><li class="num"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></li></a>
+	  	<c:forEach var="i" begin="${map.startPage}" end="${map.endPage}" >
+	  	
+	  	</c:forEach>
+	  	
 	  	<li class="num">1</li>
 	  	<li class="num">2</li>
 	  	<li class="num">3</li>

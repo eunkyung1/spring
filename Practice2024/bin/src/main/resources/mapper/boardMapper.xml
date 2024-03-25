@@ -4,6 +4,17 @@
 <!-- BoardMapper.java 연결 -->
 <mapper namespace="com.java.www.mapper.BoardMapper">
 
-
-
+	<select id="loginCheck" resultType="com.java.www.dto.YmemberDto">
+		select * from ymember where id=#{id} and pw=#{pw}		
+	</select>
+	
+	<select id="selectAll" resultType="com.java.www.dto.YmemberDto">
+		select * from(select row_number() over(order by ymno desc)rnum, a.* from ymember a 
+		order by ymno desc)
+		where rnum between ${startRow} and ${endRow}
+	</select>
+	
+	<select id="selectCountAll" resultType="com.java.www.dto.YmemberDto">
+		select count(*) from ymember
+	</select>
 </mapper>

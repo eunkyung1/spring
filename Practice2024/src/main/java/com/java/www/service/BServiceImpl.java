@@ -32,6 +32,7 @@ public class BServiceImpl implements BService {
 		if(page<=0) page =1;
 		int countPerPage = searchCount;
 		int bottomPerNum = 10;
+		System.out.println(searchCount);
 		int countAll = boardMapper.selectCountAll();
 		
 		int maxPage = (int)Math.ceil((double)countAll/countPerPage);

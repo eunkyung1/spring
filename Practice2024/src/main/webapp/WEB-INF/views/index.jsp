@@ -68,10 +68,10 @@
 	
 
 	
-		<form action="index" name="searchFrm" method="get">
+		<form action="/	" name="searchFrm" method="get">
 			<div id="searchSection">
 				<select id="ViewCondition" name="searchCount">
-					<option value="5">5 개</option>
+					<option value="5"<c:if test="${searchCount == 5}"></c:if>>5 개</option>
 					<option value="10">10 개</option>
 					<option value="20">20 개</option>
 				</select>
@@ -139,17 +139,11 @@
 	  
 	  <!--페이지 넘버링 -->
 	  <ul id="PageNum" style="display: flex; list-style: none;">
-	  	<a href="index?page=1"><li class="num" ><i class="fa fa-backward" aria-hidden="true"></i></li></a>
-	  	<a href="#"><li class="num"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></li></a>
+	  	<a href="/?page=1&searchCount=${map.searchCount}"><li class="num" ><i class="fa fa-backward" aria-hidden="true"></i></li></a>
+	  	<a href="/?page=${map.endPage}"><li class="num"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></li></a>
 	  	<c:forEach var="i" begin="${map.startPage}" end="${map.endPage}" >
-	  	
+	  	<a href=""><li class="num">${i}</li></a>
 	  	</c:forEach>
-	  	
-	  	<li class="num">1</li>
-	  	<li class="num">2</li>
-	  	<li class="num">3</li>
-	  	<li class="num">4</li>
-	  	<li class="num">5</li>
 	  	<li class="num"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li>
 	  	<li class="num"><i class="fa fa-forward" aria-hidden="true"></i></li>
 	  </ul>

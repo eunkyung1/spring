@@ -22,7 +22,7 @@ public class FController {
 	@Autowired HttpSession session;
 	
 	@GetMapping("/")
-	public String index(@RequestParam(defaultValue = "10")int searchCount,@RequestParam(defaultValue = "1")int page, Model model) {
+	public String index(@RequestParam(defaultValue = "5")int searchCount,@RequestParam(defaultValue = "1")int page, Model model) {
 		System.out.println(searchCount);
 		
 		Map<String, Object> map = bService.selectAll(searchCount,page);
